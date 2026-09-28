@@ -21,15 +21,15 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
   return (
     <div className="w-full">
       {/* Section Subhead */}
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-jitto-navy/5 border border-jitto-navy/15 text-jitto-navy text-xs font-semibold tracking-wide mb-3">
+      <div className="text-center max-w-3xl mx-auto mb-8">
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-jitto-navy/5 border border-jitto-navy/15 text-jitto-navy text-xs font-semibold tracking-wide mb-2.5">
           <Sparkles className="w-3.5 h-3.5 text-jitto-cyan-600" />
           <span>Tailored Pathways</span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-serif font-bold text-slate-900 tracking-tight leading-tight">
+        <h2 className="text-2xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight leading-tight">
           Who Are You Booking For Today?
         </h2>
-        <p className="text-slate-600 text-sm sm:text-base mt-3 max-w-xl mx-auto leading-relaxed">
+        <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-xl mx-auto leading-relaxed">
           Dedicated checklists, specialized equipment, and zero guesswork for every environment. Select your path below:
         </p>
       </div>
