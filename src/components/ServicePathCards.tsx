@@ -1,15 +1,11 @@
 import React from 'react';
-import { PageRoute } from '../types';
+import type { PageRoute } from '../types';
 import { 
+  ArrowUpRight, 
+  Check, 
   Home as HomeIcon, 
   Building2, 
-  HardHat, 
-  ArrowRight, 
-  Check, 
-  Sparkles, 
-  ShieldCheck, 
-  Clock, 
-  FileCheck2 
+  HardHat 
 } from 'lucide-react';
 
 interface ServicePathCardsProps {
@@ -23,278 +19,261 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
 }) => {
   return (
     <div className="w-full">
-      {/* Header introducing the 3 paths */}
-      <div className="text-center max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-jitto-cyan-50 border border-jitto-cyan-200 text-jitto-navy text-xs font-bold uppercase tracking-wider mb-3">
-          <Sparkles className="w-3.5 h-3.5 text-jitto-cyan-600" />
-          Choose Your Tailored Cleaning Path
+      {/* Section Subhead */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+        <div>
+          <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
+            Tailored Pathways
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 mt-1">
+            Choose Your Specialized Service
+          </h2>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-serif">
-          Who Are You Booking For Today?
-        </h2>
-        <p className="mt-3 text-slate-600 text-base sm:text-lg">
-          We speak directly to your unique needs with dedicated checklists, specialized equipment, and zero guesswork. Select your path below:
+        <p className="text-slate-500 text-xs sm:text-sm max-w-md mt-2 md:mt-0">
+          Dedicated checklists, specialized equipment, and zero guesswork for every environment.
         </p>
       </div>
 
       {/* The 3 Big Boxes Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* BOX 1: RESIDENTIAL */}
-        <div className="group relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col transform hover:-translate-y-1">
-          {/* Top Image with Badge */}
-          <div className="relative h-64 overflow-hidden bg-slate-100">
-            <img 
-              src="/images/residential-hero.jpg" 
-              alt="Jitto Residential Housekeeper smoothing clean bed" 
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/20 to-transparent" />
-            
-            {/* Top Pill */}
-            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-jitto-navy flex items-center gap-1.5 shadow-sm">
-              <HomeIcon className="w-3.5 h-3.5 text-jitto-cyan-600" />
-              <span>For Homeowners & Families</span>
-            </div>
+        <div className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:border-jitto-navy/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+          <div>
+            {/* Image */}
+            <div className="relative h-60 overflow-hidden bg-slate-100">
+              <img 
+                src="/images/residential-hero.jpg" 
+                alt="Jitto Residential Housekeeper in official uniform making bed" 
+                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+              
+              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-jitto-navy tracking-wide flex items-center gap-1.5 shadow-sm">
+                <HomeIcon className="w-3.5 h-3.5 text-jitto-cyan-600" />
+                <span>01 / Homeowners</span>
+              </div>
 
-            {/* Title Overlay */}
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-xs font-bold tracking-wider uppercase text-jitto-cyan">Sanctuary & Comfort</span>
-              <h3 className="text-2xl font-bold font-serif leading-tight">Residential Cleaning</h3>
-            </div>
-          </div>
-
-          {/* Content Body */}
-          <div className="p-6 flex-1 flex flex-col justify-between">
-            <div>
-              <p className="text-slate-600 text-sm leading-relaxed mb-5">
-                Warm, trustworthy care for your private sanctuary. Founded on 16 years of hands-on housekeeping in private homes, we treat every space like our own.
-              </p>
-
-              {/* Specific features */}
-              <div className="space-y-2.5 mb-6">
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Regular Maintenance:</strong> Weekly, Bi-weekly, Monthly</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Detailed Deep Cleans:</strong> Baseboards, vents, grout</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Move-In / Move-Out:</strong> Guaranteed deposit ready</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Consistent Crew:</strong> Familiar, trusted faces every visit</span>
-                </div>
+              <div className="absolute bottom-4 left-4 right-4 text-white">
+                <h3 className="text-xl font-bold font-serif">Residential Cleaning</h3>
+                <span className="text-xs text-slate-200 font-light">Sanctuary & Estate Housekeeping</span>
               </div>
             </div>
 
-            {/* Buttons */}
-            <div className="space-y-2 pt-4 border-t border-slate-100">
-              <button
-                onClick={() => onNavigate('residential')}
-                className="w-full flex items-center justify-center gap-2 bg-jitto-navy hover:bg-jitto-navy-800 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-colors text-sm"
-              >
-                <span>Explore Residential Care</span>
-                <ArrowRight className="w-4 h-4 text-jitto-cyan group-hover:translate-x-1 transition-transform" />
-              </button>
-              
-              <button
-                onClick={() => {
-                  if (onSelectQuoteService) onSelectQuoteService('residential');
-                  onNavigate('quote');
-                }}
-                className="w-full text-center py-2 text-xs font-semibold text-jitto-navy hover:text-jitto-cyan-600 transition-colors"
-              >
-                Get Instant Residential Quote →
-              </button>
+            {/* Content */}
+            <div className="p-6">
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5">
+                Warm, trustworthy care for your private residence. Founded on 16 years of hands-on housekeeping in private homes, we treat every space like our own.
+              </p>
+
+              <div className="space-y-2 text-xs text-slate-700 mb-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Regular Maintenance:</strong> Weekly, Bi-weekly, Monthly</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Detailed Deep Cleans:</strong> Baseboards, vents, grout</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Move-In / Move-Out:</strong> Real estate deposit ready</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Consistent Crew:</strong> Familiar, trusted faces each visit</span>
+                </div>
+              </div>
             </div>
+          </div>
+
+          {/* Action Links */}
+          <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between">
+            <button
+              onClick={() => onNavigate('residential')}
+              className="text-xs font-bold text-jitto-navy hover:text-jitto-cyan-600 transition-colors flex items-center gap-1 group/link"
+            >
+              <span>Explore Residential</span>
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+            </button>
+
+            <button
+              onClick={() => {
+                if (onSelectQuoteService) onSelectQuoteService('residential');
+                onNavigate('quote');
+              }}
+              className="text-xs font-medium text-slate-500 hover:text-jitto-navy transition-colors"
+            >
+              Request Quote
+            </button>
           </div>
         </div>
 
         {/* BOX 2: COMMERCIAL */}
-        <div className="group relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col transform hover:-translate-y-1">
-          {/* Top Image with Badge */}
-          <div className="relative h-64 overflow-hidden bg-slate-100">
-            <img 
-              src="/images/commercial-hero.jpg" 
-              alt="Jitto Commercial Cleaning Team in office" 
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/20 to-transparent" />
-            
-            {/* Top Pill */}
-            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-jitto-navy flex items-center gap-1.5 shadow-sm">
-              <Building2 className="w-3.5 h-3.5 text-jitto-navy" />
-              <span>For Offices, Clinics & Retail</span>
-            </div>
+        <div className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:border-jitto-navy/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+          <div>
+            {/* Image */}
+            <div className="relative h-60 overflow-hidden bg-slate-100">
+              <img 
+                src="/images/commercial-hero.jpg" 
+                alt="Jitto Commercial Cleaning Team in office uniform" 
+                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+              
+              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-jitto-navy tracking-wide flex items-center gap-1.5 shadow-sm">
+                <Building2 className="w-3.5 h-3.5 text-jitto-cyan-600" />
+                <span>02 / Commercial</span>
+              </div>
 
-            {/* Title Overlay */}
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-xs font-bold tracking-wider uppercase text-jitto-cyan">Hygiene & Professionalism</span>
-              <h3 className="text-2xl font-bold font-serif leading-tight">Commercial Cleaning</h3>
-            </div>
-          </div>
-
-          {/* Content Body */}
-          <div className="p-6 flex-1 flex flex-col justify-between">
-            <div>
-              <p className="text-slate-600 text-sm leading-relaxed mb-5">
-                Flawless corporate presentation and dependable janitorial programs. Flexible hours that never disrupt your business, backed by full WSIB and liability insurance.
-              </p>
-
-              {/* Specific features */}
-              <div className="space-y-2.5 mb-6">
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Flexible Hours:</strong> After-hours, daytime porter & weekends</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>High-Touch Disinfection:</strong> Desks, clinics, restrooms</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Custom Contracts:</strong> Tailored frequency & zero lock-in</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Direct Oversight:</strong> Speak to the owners, not a call center</span>
-                </div>
+              <div className="absolute bottom-4 left-4 right-4 text-white">
+                <h3 className="text-xl font-bold font-serif">Commercial & Offices</h3>
+                <span className="text-xs text-slate-200 font-light">Facilities & Janitorial Programs</span>
               </div>
             </div>
 
-            {/* Buttons */}
-            <div className="space-y-2 pt-4 border-t border-slate-100">
-              <button
-                onClick={() => onNavigate('commercial')}
-                className="w-full flex items-center justify-center gap-2 bg-jitto-navy hover:bg-jitto-navy-800 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-colors text-sm"
-              >
-                <span>Explore Commercial Solutions</span>
-                <ArrowRight className="w-4 h-4 text-jitto-cyan group-hover:translate-x-1 transition-transform" />
-              </button>
-              
-              <button
-                onClick={() => {
-                  if (onSelectQuoteService) onSelectQuoteService('commercial');
-                  onNavigate('quote');
-                }}
-                className="w-full text-center py-2 text-xs font-semibold text-jitto-navy hover:text-jitto-cyan-600 transition-colors"
-              >
-                Request Commercial Proposal →
-              </button>
+            {/* Content */}
+            <div className="p-6">
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5">
+                Immaculate presentation and hygiene for offices, medical clinics, retail, and managed properties. Flexible after-hours schedules that never disrupt your business.
+              </p>
+
+              <div className="space-y-2 text-xs text-slate-700 mb-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Flexible Hours:</strong> After-hours, daytime porter & weekends</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Clinical Sanitation:</strong> High-touch surfaces & restrooms</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Tailored Agreements:</strong> Custom SOW without rigid lock-in</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Direct Oversight:</strong> Speak to owners directly (24/7)</span>
+                </div>
+              </div>
             </div>
+          </div>
+
+          {/* Action Links */}
+          <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between">
+            <button
+              onClick={() => onNavigate('commercial')}
+              className="text-xs font-bold text-jitto-navy hover:text-jitto-cyan-600 transition-colors flex items-center gap-1 group/link"
+            >
+              <span>Explore Commercial</span>
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+            </button>
+
+            <button
+              onClick={() => {
+                if (onSelectQuoteService) onSelectQuoteService('commercial');
+                onNavigate('quote');
+              }}
+              className="text-xs font-medium text-slate-500 hover:text-jitto-navy transition-colors"
+            >
+              Request Proposal
+            </button>
           </div>
         </div>
 
         {/* BOX 3: POST-CONSTRUCTION */}
-        <div className="group relative bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col transform hover:-translate-y-1">
-          {/* Top Image with Badge */}
-          <div className="relative h-64 overflow-hidden bg-slate-100">
-            <img 
-              src="/images/post-construction-home.jpg" 
-              alt="Post-construction handover ready luxury room with sunlight" 
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/20 to-transparent" />
-            
-            {/* Top Pill */}
-            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-jitto-navy flex items-center gap-1.5 shadow-sm">
-              <HardHat className="w-3.5 h-3.5 text-amber-600" />
-              <span>For Builders, Contractors & Renovators</span>
-            </div>
+        <div className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:border-jitto-navy/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+          <div>
+            {/* Image */}
+            <div className="relative h-60 overflow-hidden bg-slate-100">
+              <img 
+                src="/images/post-construction-architecture.jpg" 
+                alt="Post-construction handover ready luxury modern home" 
+                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+              
+              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-jitto-navy tracking-wide flex items-center gap-1.5 shadow-sm">
+                <HardHat className="w-3.5 h-3.5 text-jitto-cyan-600" />
+                <span>03 / Contractors</span>
+              </div>
 
-            {/* Title Overlay */}
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-xs font-bold tracking-wider uppercase text-jitto-cyan">Handover & Inspection Ready</span>
-              <h3 className="text-2xl font-bold font-serif leading-tight">Post-Construction</h3>
-            </div>
-          </div>
-
-          {/* Content Body */}
-          <div className="p-6 flex-1 flex flex-col justify-between">
-            <div>
-              <p className="text-slate-600 text-sm leading-relaxed mb-5">
-                Micro-dust elimination, paint/adhesive scraping, and white-glove turnaround. We ensure your new build or renovation passes client walkthroughs and occupancy inspections.
-              </p>
-
-              {/* Specific features */}
-              <div className="space-y-2.5 mb-6">
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Dust & Debris Eradication:</strong> HEPA air filtration & ducts</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Multi-Stage Cleaning:</strong> Rough, Final & Touch-Up Handover</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Proof, Not Promises:</strong> Before/after photos sent to PMs</span>
-                </div>
-
-                <div className="flex items-center gap-2.5 text-sm text-slate-700">
-                  <div className="w-5 h-5 rounded-full bg-jitto-cyan-50 flex items-center justify-center text-jitto-cyan-600 shrink-0">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                  </div>
-                  <span><strong>Rapid Turnaround:</strong> Meet firm closing and occupancy dates</span>
-                </div>
+              <div className="absolute bottom-4 left-4 right-4 text-white">
+                <h3 className="text-xl font-bold font-serif">Post-Construction</h3>
+                <span className="text-xs text-slate-200 font-light">Fine Dust & Handover Detailing</span>
               </div>
             </div>
 
-            {/* Buttons */}
-            <div className="space-y-2 pt-4 border-t border-slate-100">
-              <button
-                onClick={() => onNavigate('post-construction')}
-                className="w-full flex items-center justify-center gap-2 bg-jitto-navy hover:bg-jitto-navy-800 text-white font-bold py-3 px-4 rounded-xl shadow-md transition-colors text-sm"
-              >
-                <span>Explore Post-Construction</span>
-                <ArrowRight className="w-4 h-4 text-jitto-cyan group-hover:translate-x-1 transition-transform" />
-              </button>
-              
-              <button
-                onClick={() => {
-                  if (onSelectQuoteService) onSelectQuoteService('post-construction');
-                  onNavigate('quote');
-                }}
-                className="w-full text-center py-2 text-xs font-semibold text-jitto-navy hover:text-jitto-cyan-600 transition-colors"
-              >
-                Upload Project Specs & Quote →
-              </button>
+            {/* Content */}
+            <div className="p-6">
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5">
+                Fine drywall dust eradication, paint/sticker scraping, and white-glove turnaround. We ensure your new build or renovation passes client walkthroughs and building inspections.
+              </p>
+
+              <div className="space-y-2 text-xs text-slate-700 mb-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Dust Eradication:</strong> HEPA air filtration & duct vents</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Multi-Stage Scope:</strong> Rough, Final & Touch-Up Handover</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Proof, Not Promises:</strong> Photos sent directly to PMs</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                    <Check className="w-3 h-3 stroke-[2.5]" />
+                  </div>
+                  <span><strong>Rapid Turnaround:</strong> Meet tight closing deadlines</span>
+                </div>
+              </div>
             </div>
+          </div>
+
+          {/* Action Links */}
+          <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between">
+            <button
+              onClick={() => onNavigate('post-construction')}
+              className="text-xs font-bold text-jitto-navy hover:text-jitto-cyan-600 transition-colors flex items-center gap-1 group/link"
+            >
+              <span>Explore Post-Construction</span>
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+            </button>
+
+            <button
+              onClick={() => {
+                if (onSelectQuoteService) onSelectQuoteService('post-construction');
+                onNavigate('quote');
+              }}
+              className="text-xs font-medium text-slate-500 hover:text-jitto-navy transition-colors"
+            >
+              Upload Specs
+            </button>
           </div>
         </div>
 

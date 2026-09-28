@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PageRoute, ServiceCategory } from '../types';
+import type { PageRoute, ServiceCategory } from '../types';
 import { COMPANY_INFO } from '../data/content';
 import confetti from 'canvas-confetti';
 import { 
@@ -8,19 +8,13 @@ import {
   Building2, 
   HardHat, 
   CheckCircle2, 
-  Sparkles, 
   Upload, 
-  Image as ImageIcon, 
-  Calendar, 
-  Clock, 
-  ShieldCheck, 
   Phone, 
-  Mail, 
   ArrowRight, 
   RotateCcw, 
-  FileText,
-  DollarSign,
-  AlertCircle
+  ShieldCheck,
+  Check,
+  FileCheck
 } from 'lucide-react';
 
 interface QuotationPageProps {
@@ -43,11 +37,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
   const [resAddons, setResAddons] = useState<string[]>(['baseboards']);
 
   // Commercial State
-  const [businessType, setBusinessType] = useState<string>('Office');
+  const [businessType, setBusinessType] = useState<string>('Corporate Office');
   const [commSqFt, setCommSqFt] = useState<string>('1500-3500');
   const [preferredHours, setPreferredHours] = useState<string>('After Hours (Evenings)');
   const [commFrequency, setCommFrequency] = useState<string>('3x-week');
-  const [commAddons, setCommAddons] = useState<string[]>(['restrooms', 'trash']);
 
   // Post-Construction State
   const [projectType, setProjectType] = useState<string>('Custom Single-Family Home');
@@ -56,9 +49,8 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
   const [finishDate, setFinishDate] = useState<string>(
     new Date(Date.now() + 5 * 86400000).toISOString().split('T')[0]
   );
-  const [dustLevel, setDustLevel] = useState<string>('Moderate Drywall & Sawdust');
   const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([
-    '/images/post-construction-home.jpg'
+    '/images/post-construction-architecture.jpg'
   ]);
 
   // Contact Details
@@ -82,12 +74,6 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
     );
   };
 
-  const toggleCommAddon = (id: string) => {
-    setCommAddons(prev => 
-      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
-    );
-  };
-
   // Simulated Photo Upload
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -100,275 +86,198 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
     }
   };
 
-  // Estimate Calculation Logic
-  const calculateEstimate = () => {
-    if (selectedService === 'residential') {
-      let base = 135;
-      const bedNum = parseInt(bedrooms) || 1;
-      const bathNum = parseFloat(bathrooms) || 1;
-      base += (bedNum - 1) * 25;
-      base += (bathNum - 1) * 35;
-
-      if (homeSqFt === '2200-3200') base += 45;
-      if (homeSqFt === '3200+') base += 90;
-
-      // Add-ons
-      base += resAddons.length * 35;
-
-      // Frequency discount
-      let discount = 1;
-      let label = 'per visit';
-      if (resFrequency === 'weekly') { discount = 0.80; label = 'per week (20% off)'; }
-      else if (resFrequency === 'bi-weekly') { discount = 0.85; label = 'per visit (15% off)'; }
-      else if (resFrequency === 'monthly') { discount = 0.90; label = 'per visit (10% off)'; }
-      else if (resFrequency === 'move-in-out') { base += 95; label = 'one-time turnover'; }
-      else if (resFrequency === 'deep-clean') { base += 75; label = 'one-time deep clean'; }
-
-      const finalLow = Math.round((base * discount) * 0.95);
-      const finalHigh = Math.round((base * discount) * 1.15);
-      return { low: finalLow, high: finalHigh, unit: label };
-    } 
-    else if (selectedService === 'commercial') {
-      let base = 280;
-      if (commSqFt === '1500-3500') base = 420;
-      if (commSqFt === '3501-7000') base = 750;
-      if (commSqFt === '7001+') base = 1200;
-
-      if (commFrequency === 'daily') base *= 3.8;
-      else if (commFrequency === '3x-week') base *= 2.4;
-      else if (commFrequency === 'weekly') base *= 1.0;
-
-      const low = Math.round(base * 0.9);
-      const high = Math.round(base * 1.2);
-      return { low, high, unit: 'per month estimate' };
-    } 
-    else {
-      // Post construction: based on sqft
-      const sqft = parseInt(projectSqFt) || 2000;
-      let ratePerSqFt = 0.35;
-      if (constructionStage === 'Rough Clean') ratePerSqFt = 0.22;
-      if (constructionStage === 'Touch-Up Handover') ratePerSqFt = 0.20;
-      if (constructionStage === 'Full 3-Phase Package') ratePerSqFt = 0.55;
-
-      const total = Math.round(sqft * ratePerSqFt);
-      const low = Math.round(total * 0.9);
-      const high = Math.round(total * 1.15);
-      return { low, high, unit: 'total project estimate' };
-    }
-  };
-
-  const estimate = calculateEstimate();
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     setTimeout(() => {
-      const refNum = `JITTO-${Math.floor(100000 + Math.random() * 900000)}`;
+      const refNum = `JITTO-PR-${Math.floor(100000 + Math.random() * 900000)}`;
       setQuoteReference(refNum);
       setIsSubmitting(false);
       setIsSubmitted(true);
-      window.scrollTo({ top: 120, behavior: 'smooth' });
+      window.scrollTo({ top: 80, behavior: 'smooth' });
 
-      // Celebrate
       confetti({
-        particleCount: 120,
-        spread: 70,
+        particleCount: 80,
+        spread: 60,
         origin: { y: 0.6 },
-        colors: ['#00c2cb', '#012d6c', '#38bdf8', '#ffffff']
+        colors: ['#012d6c', '#00c2cb', '#94a3b8']
       });
     }, 600);
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen py-10 sm:py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#fafbfc] min-h-screen py-12 sm:py-20">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-jitto-cyan-50 border border-jitto-cyan-200 text-jitto-navy text-xs font-bold uppercase tracking-wider mb-3">
-            <Calculator className="w-3.5 h-3.5 text-jitto-cyan-600" />
-            Fast & Transparent Pricing
-          </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight font-serif">
-            Get Your Instant Customized Quote
+        {/* Minimalist Page Header */}
+        <div className="max-w-2xl mb-12">
+          <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
+            Proposal & Scope Generator
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-serif font-bold text-slate-900 tracking-tight mt-2">
+            Request A Tailored Proposal
           </h1>
-          <p className="mt-3 text-slate-600 text-base sm:text-lg">
-            One smart form that asks the exact questions for your space. No generic guesswork, no hidden fees.
+          <p className="mt-3 text-slate-500 text-sm sm:text-base leading-relaxed">
+            Every property has distinct architectural finishes and requirements. Complete the scope below to receive a customized room-by-room proposal from our founders.
           </p>
         </div>
 
-        {/* SUCCESS STATE */}
+        {/* SUCCESS CONFIRMATION STATE */}
         {isSubmitted ? (
-          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-xl text-center max-w-2xl mx-auto animate-in fade-in zoom-in-95 duration-300">
-            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center mb-6">
-              <CheckCircle2 className="w-10 h-10" />
+          <div className="bg-white rounded-2xl p-8 sm:p-12 border border-slate-200/80 shadow-sm max-w-2xl mx-auto text-left animate-in fade-in duration-300">
+            <div className="flex items-center justify-between pb-6 border-b border-slate-100">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-jitto-navy">Proposal Request Confirmed</span>
+                <h2 className="text-2xl font-serif font-bold text-slate-900 mt-1">Thank you, {contactName || 'Valued Client'}.</h2>
+              </div>
+              <span className="font-mono text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
+                {quoteReference}
+              </span>
             </div>
 
-            <div className="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-700 font-mono text-xs font-bold mb-3">
-              REFERENCE #{quoteReference}
-            </div>
-
-            <h2 className="text-2xl sm:text-3xl font-bold font-serif text-slate-900 mb-2">
-              Thank You, {contactName || 'Valued Client'}!
-            </h2>
-            <p className="text-slate-600 mb-6">
-              We've received your <strong className="capitalize">{selectedService}</strong> quote request. A member of our local Barrie team will review your specifications and confirm your customized rate within <strong>2 hours</strong>.
-            </p>
-
-            {/* Estimated range card */}
-            <div className="bg-jitto-navy-50 rounded-2xl p-6 border border-jitto-navy-100 text-left mb-8">
-              <div className="text-xs font-bold text-jitto-navy uppercase tracking-wider mb-1">
-                Estimated Price Guidance
-              </div>
-              <div className="text-3xl font-extrabold text-jitto-navy font-serif">
-                ${estimate.low} - ${estimate.high} <span className="text-sm font-sans font-normal text-slate-600">CAD ({estimate.unit})</span>
-              </div>
-              <p className="text-xs text-slate-500 mt-2">
-                *Final rate is confirmed by Jitto management based on exact room-by-room checklist and walkthrough details.
+            <div className="py-6 space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p>
+                We have received your detailed specifications for <strong className="capitalize text-slate-900">{selectedService}</strong> cleaning in <strong>{selectedCity}</strong>.
+              </p>
+              <p>
+                Our founders review each request personally. You will receive a comprehensive Scope of Work (SOW) and personalized proposal within <strong>2 hours</strong>.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            {/* Scope Summary Box */}
+            <div className="bg-slate-50 rounded-xl p-5 border border-slate-200/80 mb-6 space-y-2 text-xs text-slate-700">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Submitted Scope Summary</div>
+              <div className="flex justify-between">
+                <span className="text-slate-500">Service:</span>
+                <span className="font-semibold text-slate-900 capitalize">{selectedService}</span>
+              </div>
+              {selectedService === 'residential' && (
+                <>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Configuration:</span>
+                    <span className="font-semibold text-slate-900">{bedrooms} Bedrooms • {bathrooms} Bathrooms</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Schedule Cadence:</span>
+                    <span className="font-semibold text-slate-900 capitalize">{resFrequency.replace('-', ' ')}</span>
+                  </div>
+                </>
+              )}
+              {selectedService === 'commercial' && (
+                <>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Facility Type:</span>
+                    <span className="font-semibold text-slate-900">{businessType}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Preferred Hours:</span>
+                    <span className="font-semibold text-slate-900">{preferredHours}</span>
+                  </div>
+                </>
+              )}
+              {selectedService === 'post-construction' && (
+                <>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Project Type:</span>
+                    <span className="font-semibold text-slate-900">{projectType}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Construction Phase:</span>
+                    <span className="font-semibold text-slate-900">{constructionStage}</span>
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={() => onNavigate('booking')}
-                className="bg-jitto-navy hover:bg-jitto-navy-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2"
+                className="bg-jitto-navy hover:bg-jitto-navy-800 text-white font-semibold py-3 px-6 rounded-xl transition-colors text-xs flex items-center justify-center gap-2"
               >
-                <span>Lock In Date on Booking Form</span>
-                <ArrowRight className="w-4 h-4 text-jitto-cyan" />
+                <span>Reserve Preferred Appointment Date</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
 
               <button
-                onClick={() => {
-                  setIsSubmitted(false);
-                }}
-                className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3.5 px-6 rounded-xl transition-colors flex items-center justify-center gap-2"
+                onClick={() => setIsSubmitted(false)}
+                className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-5 rounded-xl transition-colors text-xs flex items-center justify-center gap-1.5"
               >
-                <RotateCcw className="w-4 h-4" />
-                <span>Calculate Another Quote</span>
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Submit Another Inquiry</span>
               </button>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-slate-100 text-xs text-slate-500 flex items-center justify-center gap-2">
-              <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
-              <span>Need immediate assistance? Call the owners directly at <strong>(249) 800-0127</strong> (24/7).</span>
+            <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-slate-400">
+              Direct founder line: <strong className="text-slate-700">(249) 800-0127</strong> (24/7 available).
             </div>
           </div>
         ) : (
 
-          /* MAIN QUOTE FORM CONTAINER */
+          /* FORM GRID */
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            {/* LEFT / MAIN COLUMN: Form inputs */}
-            <div className="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-md">
+            {/* MAIN FORM */}
+            <div className="lg:col-span-8 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
               <form onSubmit={handleSubmit} className="space-y-8">
 
-                {/* STEP 1: SERVICE TYPE SELECTOR */}
+                {/* STEP 1: SERVICE TYPE */}
                 <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <label className="block text-sm font-bold text-slate-900 uppercase tracking-wider">
-                      Step 1: Which Service Do You Need?
-                    </label>
-                    <span className="text-xs text-jitto-cyan-600 font-semibold">Required</span>
-                  </div>
+                  <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">
+                    01 / Select Cleaning Category
+                  </label>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {/* Residential Option */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedService('residential')}
-                      className={`p-4 rounded-2xl border-2 text-left transition-all flex flex-col justify-between ${
-                        selectedService === 'residential'
-                          ? 'border-jitto-navy bg-jitto-navy-50/50 shadow-sm ring-1 ring-jitto-navy'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className={`p-2 rounded-xl ${selectedService === 'residential' ? 'bg-jitto-navy text-white' : 'bg-slate-100 text-slate-600'}`}>
-                          <HomeIcon className="w-5 h-5" />
-                        </div>
-                        {selectedService === 'residential' && (
-                          <CheckCircle2 className="w-5 h-5 text-jitto-navy" />
-                        )}
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-base">Residential</div>
-                        <div className="text-xs text-slate-500 mt-0.5">Homes, condos, deep cleans & move-ins</div>
-                      </div>
-                    </button>
-
-                    {/* Commercial Option */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedService('commercial')}
-                      className={`p-4 rounded-2xl border-2 text-left transition-all flex flex-col justify-between ${
-                        selectedService === 'commercial'
-                          ? 'border-jitto-navy bg-jitto-navy-50/50 shadow-sm ring-1 ring-jitto-navy'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className={`p-2 rounded-xl ${selectedService === 'commercial' ? 'bg-jitto-navy text-white' : 'bg-slate-100 text-slate-600'}`}>
-                          <Building2 className="w-5 h-5" />
-                        </div>
-                        {selectedService === 'commercial' && (
-                          <CheckCircle2 className="w-5 h-5 text-jitto-navy" />
-                        )}
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-base">Commercial</div>
-                        <div className="text-xs text-slate-500 mt-0.5">Offices, clinics, retail & facilities</div>
-                      </div>
-                    </button>
-
-                    {/* Post-Construction Option */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedService('post-construction')}
-                      className={`p-4 rounded-2xl border-2 text-left transition-all flex flex-col justify-between ${
-                        selectedService === 'post-construction'
-                          ? 'border-jitto-navy bg-jitto-navy-50/50 shadow-sm ring-1 ring-jitto-navy'
-                          : 'border-slate-200 hover:border-slate-300 bg-white'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className={`p-2 rounded-xl ${selectedService === 'post-construction' ? 'bg-jitto-navy text-white' : 'bg-slate-100 text-slate-600'}`}>
-                          <HardHat className="w-5 h-5" />
-                        </div>
-                        {selectedService === 'post-construction' && (
-                          <CheckCircle2 className="w-5 h-5 text-jitto-navy" />
-                        )}
-                      </div>
-                      <div>
-                        <div className="font-bold text-slate-900 text-base">Post-Construction</div>
-                        <div className="text-xs text-slate-500 mt-0.5">Renovations, new builds & handovers</div>
-                      </div>
-                    </button>
+                    {[
+                      { id: 'residential', label: 'Residential', icon: HomeIcon, sub: 'Homes & Condos' },
+                      { id: 'commercial', label: 'Commercial', icon: Building2, sub: 'Offices & Facilities' },
+                      { id: 'post-construction', label: 'Post-Construction', icon: HardHat, sub: 'New Builds & Renos' },
+                    ].map((item) => {
+                      const Icon = item.icon;
+                      const active = selectedService === item.id;
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => setSelectedService(item.id as ServiceCategory)}
+                          className={`p-4 rounded-xl border text-left transition-all ${
+                            active
+                              ? 'border-jitto-navy bg-slate-50 ring-1 ring-jitto-navy'
+                              : 'border-slate-200 hover:border-slate-300 bg-white'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <Icon className={`w-4 h-4 ${active ? 'text-jitto-navy' : 'text-slate-400'}`} />
+                            {active && <Check className="w-3.5 h-3.5 text-jitto-navy stroke-[3]" />}
+                          </div>
+                          <div className="font-semibold text-slate-900 text-xs sm:text-sm">{item.label}</div>
+                          <div className="text-[11px] text-slate-500 mt-0.5">{item.sub}</div>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 
                 <div className="border-t border-slate-100" />
 
-                {/* STEP 2: DYNAMIC QUESTIONS BASED ON SERVICE */}
+                {/* STEP 2: TAILORED QUESTIONS */}
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <label className="block text-sm font-bold text-slate-900 uppercase tracking-wider">
-                      Step 2: Tell Us About Your Space & Requirements
+                    <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider">
+                      02 / Property Specifications
                     </label>
-                    <span className="text-xs bg-jitto-cyan-50 text-jitto-navy font-semibold px-2 py-0.5 rounded">
-                      Tailored to {selectedService}
+                    <span className="text-[11px] text-slate-400 capitalize">
+                      {selectedService} scope
                     </span>
                   </div>
 
-                  {/* BRANCH A: RESIDENTIAL QUESTIONS */}
+                  {/* RESIDENTIAL QUESTIONS */}
                   {selectedService === 'residential' && (
-                    <div className="space-y-6 animate-in fade-in duration-200">
-                      
-                      {/* Bedrooms & Bathrooms */}
+                    <div className="space-y-5">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                            Number of Bedrooms
+                          <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                            Bedrooms
                           </label>
                           <div className="grid grid-cols-5 gap-1.5">
                             {['1', '2', '3', '4', '5+'].map((num) => (
@@ -376,10 +285,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                                 key={num}
                                 type="button"
                                 onClick={() => setBedrooms(num)}
-                                className={`py-2 rounded-xl text-sm font-semibold border transition-all ${
+                                className={`py-2 rounded-lg text-xs font-semibold border transition-all ${
                                   bedrooms === num
-                                    ? 'bg-jitto-navy text-white border-jitto-navy shadow-sm'
-                                    : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
+                                    ? 'bg-jitto-navy text-white border-jitto-navy'
+                                    : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                                 }`}
                               >
                                 {num}
@@ -389,8 +298,8 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         </div>
 
                         <div>
-                          <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                            Number of Bathrooms
+                          <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                            Bathrooms
                           </label>
                           <div className="grid grid-cols-5 gap-1.5">
                             {['1', '1.5', '2', '2.5', '3+'].map((num) => (
@@ -398,10 +307,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                                 key={num}
                                 type="button"
                                 onClick={() => setBathrooms(num)}
-                                className={`py-2 rounded-xl text-sm font-semibold border transition-all ${
+                                className={`py-2 rounded-lg text-xs font-semibold border transition-all ${
                                   bathrooms === num
-                                    ? 'bg-jitto-navy text-white border-jitto-navy shadow-sm'
-                                    : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
+                                    ? 'bg-jitto-navy text-white border-jitto-navy'
+                                    : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                                 }`}
                               >
                                 {num}
@@ -411,25 +320,24 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         </div>
                       </div>
 
-                      {/* Home Square Footage */}
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                          Approximate Home Square Footage
+                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                          Approximate Square Footage
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                           {[
                             { id: 'under-1000', label: 'Under 1,000 sq ft' },
                             { id: '1000-1500', label: '1,000 - 1,500 sq ft' },
                             { id: '1500-2200', label: '1,500 - 2,200 sq ft' },
-                            { id: '2200-3200', label: '2,200 - 3,200 sq ft' },
+                            { id: '2200-3200', label: '2,200+ sq ft' },
                           ].map((item) => (
                             <button
                               key={item.id}
                               type="button"
                               onClick={() => setHomeSqFt(item.id)}
-                              className={`py-2.5 px-3 rounded-xl text-xs font-semibold border text-center transition-all ${
+                              className={`py-2 px-3 rounded-lg text-xs font-medium border text-center transition-all ${
                                 homeSqFt === item.id
-                                  ? 'bg-jitto-navy-50 border-jitto-navy text-jitto-navy font-bold'
+                                  ? 'bg-slate-100 border-jitto-navy text-jitto-navy font-semibold'
                                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                               }`}
                             >
@@ -439,106 +347,94 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         </div>
                       </div>
 
-                      {/* How Often / Cadence */}
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                          How Often Do You Need Cleaning?
+                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                          Cleaning Cadence
                         </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                           {[
-                            { id: 'bi-weekly', title: 'Bi-Weekly', badge: '15% Off • Most Popular', desc: 'Every 2 weeks' },
-                            { id: 'weekly', title: 'Weekly', badge: '20% Off • Best Value', desc: 'Always spotless' },
-                            { id: 'monthly', title: 'Monthly', badge: '10% Off', desc: 'Monthly upkeep' },
-                            { id: 'deep-clean', title: 'One-Time Deep Clean', badge: 'Seasonal Reset', desc: 'Top to bottom' },
-                            { id: 'move-in-out', title: 'Move-In / Move-Out', badge: 'Turnover Ready', desc: 'Empty home detail' },
+                            { id: 'weekly', label: 'Weekly Maintenance' },
+                            { id: 'bi-weekly', label: 'Bi-Weekly (Every 2 Wks)' },
+                            { id: 'monthly', label: 'Monthly Maintenance' },
+                            { id: 'deep-clean', label: 'Detailed Deep Clean' },
+                            { id: 'move-in-out', label: 'Move-In / Move-Out' },
                           ].map((cad) => (
                             <button
                               key={cad.id}
                               type="button"
                               onClick={() => setResFrequency(cad.id)}
-                              className={`p-3 rounded-xl border text-left transition-all ${
+                              className={`p-2.5 rounded-lg border text-left text-xs font-medium transition-all ${
                                 resFrequency === cad.id
-                                  ? 'border-jitto-navy bg-jitto-navy-50/50 shadow-sm'
-                                  : 'border-slate-200 hover:border-slate-300 bg-white'
+                                  ? 'border-jitto-navy bg-slate-50 text-jitto-navy font-semibold'
+                                  : 'border-slate-200 hover:border-slate-300 text-slate-600 bg-white'
                               }`}
                             >
-                              <div className="flex items-center justify-between">
-                                <span className="font-bold text-slate-900 text-sm">{cad.title}</span>
-                                {resFrequency === cad.id && <CheckCircle2 className="w-4 h-4 text-jitto-navy" />}
-                              </div>
-                              <span className="inline-block mt-1 text-[10px] font-bold text-jitto-cyan-700 bg-jitto-cyan-50 px-2 py-0.5 rounded">
-                                {cad.badge}
-                              </span>
-                              <div className="text-xs text-slate-500 mt-1">{cad.desc}</div>
+                              {cad.label}
                             </button>
                           ))}
                         </div>
                       </div>
 
-                      {/* Optional Add-Ons */}
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                          Special Add-Ons (Optional)
+                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                          Special Focus Areas (Optional)
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                           {[
                             { id: 'baseboards', name: 'Baseboards Hand-Wash' },
-                            { id: 'oven', name: 'Inside Oven Deep Scrub' },
-                            { id: 'fridge', name: 'Inside Fridge Sanitization' },
+                            { id: 'oven', name: 'Inside Oven Detailing' },
+                            { id: 'fridge', name: 'Inside Refrigerator' },
                             { id: 'windows', name: 'Interior Glass Detailing' },
                             { id: 'cabinets', name: 'Inside Kitchen Cabinets' },
                             { id: 'pets', name: 'Pet Fur & Dander Focus' },
-                          ].map((item) => {
-                            const active = resAddons.includes(item.id);
+                          ].map((addon) => {
+                            const active = resAddons.includes(addon.id);
                             return (
                               <button
-                                key={item.id}
+                                key={addon.id}
                                 type="button"
-                                onClick={() => toggleResAddon(item.id)}
-                                className={`flex items-center gap-2 p-2.5 rounded-xl border text-xs text-left transition-all ${
+                                onClick={() => toggleResAddon(addon.id)}
+                                className={`flex items-center gap-2 p-2 rounded-lg border text-xs text-left transition-all ${
                                   active
-                                    ? 'bg-jitto-cyan-50/60 border-jitto-cyan-300 text-jitto-navy font-semibold'
+                                    ? 'bg-slate-100 border-slate-400 text-slate-900 font-medium'
                                     : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                                 }`}
                               >
-                                <div className={`w-4 h-4 rounded flex items-center justify-center border ${active ? 'bg-jitto-cyan text-jitto-navy-950 border-jitto-cyan' : 'border-slate-300'}`}>
-                                  {active && <CheckCircle2 className="w-3.5 h-3.5" />}
+                                <div className={`w-3.5 h-3.5 rounded flex items-center justify-center border ${active ? 'bg-jitto-navy text-white border-jitto-navy' : 'border-slate-300'}`}>
+                                  {active && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                                 </div>
-                                <span>{item.name}</span>
+                                <span>{addon.name}</span>
                               </button>
                             );
                           })}
                         </div>
                       </div>
-
                     </div>
                   )}
 
-                  {/* BRANCH B: COMMERCIAL QUESTIONS */}
+                  {/* COMMERCIAL QUESTIONS */}
                   {selectedService === 'commercial' && (
-                    <div className="space-y-6 animate-in fade-in duration-200">
-                      
-                      {/* Business Type */}
+                    <div className="space-y-5">
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                          Business Type / Facility
+                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                          Business / Facility Classification
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                           {[
-                            'Corporate Office', 
-                            'Medical / Dental Clinic', 
-                            'Retail Store / Showroom', 
-                            'Daycare / Education', 
-                            'Fitness Center / Gym', 
-                            'Property Management / Lobby'
+                            'Corporate Office',
+                            'Medical / Dental Clinic',
+                            'Retail Store / Showroom',
+                            'Daycare / Education',
+                            'Fitness Center / Gym',
+                            'Property Management Lobby'
                           ].map((type) => (
                             <button
                               key={type}
                               type="button"
                               onClick={() => setBusinessType(type)}
-                              className={`p-3 rounded-xl border text-xs font-semibold text-left transition-all ${
+                              className={`p-2.5 rounded-lg border text-xs font-medium text-left transition-all ${
                                 businessType === type
-                                  ? 'bg-jitto-navy-50 border-jitto-navy text-jitto-navy font-bold shadow-sm'
+                                  ? 'bg-slate-100 border-jitto-navy text-jitto-navy font-semibold'
                                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                               }`}
                             >
@@ -548,65 +444,42 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         </div>
                       </div>
 
-                      {/* Square Footage */}
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                          Commercial Square Footage
-                        </label>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                          {[
-                            { id: 'under-1500', label: 'Under 1,500 sq ft' },
-                            { id: '1500-3500', label: '1,500 - 3,500 sq ft' },
-                            { id: '3501-7000', label: '3,500 - 7,000 sq ft' },
-                            { id: '7001+', label: '7,000+ sq ft (Custom)' },
-                          ].map((sq) => (
-                            <button
-                              key={sq.id}
-                              type="button"
-                              onClick={() => setCommSqFt(sq.id)}
-                              className={`p-2.5 rounded-xl border text-xs text-center transition-all ${
-                                commSqFt === sq.id
-                                  ? 'bg-jitto-navy-50 border-jitto-navy text-jitto-navy font-bold'
-                                  : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
-                              }`}
-                            >
-                              {sq.label}
-                            </button>
-                          ))}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                            Approximate Square Footage
+                          </label>
+                          <select
+                            value={commSqFt}
+                            onChange={(e) => setCommSqFt(e.target.value)}
+                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
+                          >
+                            <option value="under-1500">Under 1,500 sq ft</option>
+                            <option value="1500-3500">1,500 - 3,500 sq ft</option>
+                            <option value="3501-7000">3,500 - 7,000 sq ft</option>
+                            <option value="7001+">7,000+ sq ft (Custom SOW)</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                            Preferred Cleaning Window (24/7)
+                          </label>
+                          <select
+                            value={preferredHours}
+                            onChange={(e) => setPreferredHours(e.target.value)}
+                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
+                          >
+                            <option value="After Hours (Evenings)">After Hours (Evenings / Closed)</option>
+                            <option value="Daytime Porter">Daytime Custodial / Porter</option>
+                            <option value="Weekends Only">Weekends Only</option>
+                            <option value="Overnight Custom">24/7 Overnight Window</option>
+                          </select>
                         </div>
                       </div>
 
-                      {/* Preferred Hours */}
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                          Preferred Cleaning Hours (24/7 Flexible)
-                        </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                          {[
-                            { label: 'After Hours (Evenings/Nights)', desc: 'Clean while facility is closed' },
-                            { label: 'Daytime Porter', desc: 'During operating hours' },
-                            { label: 'Weekends Only', desc: 'Saturday / Sunday deep cleans' },
-                          ].map((hr) => (
-                            <button
-                              key={hr.label}
-                              type="button"
-                              onClick={() => setPreferredHours(hr.label)}
-                              className={`p-3 rounded-xl border text-left transition-all ${
-                                preferredHours === hr.label
-                                  ? 'bg-jitto-navy-50 border-jitto-navy text-jitto-navy font-bold shadow-sm'
-                                  : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
-                              }`}
-                            >
-                              <div className="text-xs font-bold text-slate-900">{hr.label}</div>
-                              <div className="text-[11px] text-slate-500 mt-0.5">{hr.desc}</div>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Frequency */}
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
+                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
                           Schedule Frequency
                         </label>
                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -620,9 +493,9 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                               key={fq.id}
                               type="button"
                               onClick={() => setCommFrequency(fq.id)}
-                              className={`p-2.5 rounded-xl border text-xs text-center transition-all ${
+                              className={`p-2 rounded-lg border text-xs text-center transition-all ${
                                 commFrequency === fq.id
-                                  ? 'bg-jitto-navy-50 border-jitto-navy text-jitto-navy font-bold'
+                                  ? 'bg-slate-100 border-jitto-navy text-jitto-navy font-semibold'
                                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                               }`}
                             >
@@ -631,20 +504,17 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                           ))}
                         </div>
                       </div>
-
                     </div>
                   )}
 
-                  {/* BRANCH C: POST-CONSTRUCTION QUESTIONS */}
+                  {/* POST-CONSTRUCTION QUESTIONS */}
                   {selectedService === 'post-construction' && (
-                    <div className="space-y-6 animate-in fade-in duration-200">
-                      
-                      {/* Project Type */}
+                    <div className="space-y-5">
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
+                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
                           Project Type
                         </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                           {[
                             'Custom Single-Family Home',
                             'Multi-Unit Townhouse / Condo',
@@ -657,9 +527,9 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                               key={pt}
                               type="button"
                               onClick={() => setProjectType(pt)}
-                              className={`p-3 rounded-xl border text-xs text-left transition-all ${
+                              className={`p-2.5 rounded-lg border text-xs font-medium text-left transition-all ${
                                 projectType === pt
-                                  ? 'bg-jitto-navy-50 border-jitto-navy text-jitto-navy font-bold shadow-sm'
+                                  ? 'bg-slate-100 border-jitto-navy text-jitto-navy font-semibold'
                                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                               }`}
                             >
@@ -669,11 +539,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         </div>
                       </div>
 
-                      {/* Project Size & Target Finish Date */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                            Total Project Size (Approx. Sq Ft)
+                          <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                            Total Project Area (Approx. Sq Ft)
                           </label>
                           <input
                             type="number"
@@ -682,96 +551,84 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                             value={projectSqFt}
                             onChange={(e) => setProjectSqFt(e.target.value)}
                             placeholder="e.g. 2800"
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-jitto-cyan focus:border-transparent"
+                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                            Target Finish / Handover Date
+                          <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                            Target Handover / Closing Date
                           </label>
                           <input
                             type="date"
                             value={finishDate}
                             onChange={(e) => setFinishDate(e.target.value)}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-jitto-cyan focus:border-transparent"
+                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
                           />
                         </div>
                       </div>
 
-                      {/* Construction Stage */}
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-2">
-                          Required Cleaning Phase
+                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                          Required Phase
                         </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                           {[
-                            { name: 'Phase 1: Rough Clean', desc: 'Debris & drywall splatter sweep' },
+                            { name: 'Phase 1: Rough Clean', desc: 'Debris & splatter sweep' },
                             { name: 'Phase 2: Final Detail Clean', desc: 'HEPA vac, glass & millwork' },
-                            { name: 'Full 3-Phase Package', desc: 'Rough, Final & Touch-Up Handover' },
+                            { name: 'Full 3-Phase Package', desc: 'Rough, Final & Inspection Touch' },
                           ].map((stg) => (
                             <button
                               key={stg.name}
                               type="button"
                               onClick={() => setConstructionStage(stg.name)}
-                              className={`p-3 rounded-xl border text-left transition-all ${
+                              className={`p-2.5 rounded-lg border text-left transition-all ${
                                 constructionStage === stg.name
-                                  ? 'bg-jitto-navy-50 border-jitto-navy text-jitto-navy font-bold shadow-sm'
+                                  ? 'bg-slate-100 border-jitto-navy text-jitto-navy font-semibold'
                                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                               }`}
                             >
-                              <div className="text-xs font-bold text-slate-900">{stg.name}</div>
-                              <div className="text-[11px] text-slate-500 mt-1">{stg.desc}</div>
+                              <div className="text-xs font-semibold text-slate-900">{stg.name}</div>
+                              <div className="text-[11px] text-slate-500 mt-0.5">{stg.desc}</div>
                             </button>
                           ))}
                         </div>
                       </div>
 
-                      {/* Before-and-After Photo Upload (Requested by user) */}
+                      {/* Photo Upload Zone */}
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                          Upload Job Site Photos / Blueprints (Optional)
+                        <label className="block text-xs font-medium text-slate-600 mb-1">
+                          Upload Job Site Photos or Blueprints (Optional)
                         </label>
-                        <p className="text-xs text-slate-500 mb-2">
-                          Help us assess trade debris levels and glass surface square footage for a razor-accurate quote.
-                        </p>
-
-                        <div className="border-2 border-dashed border-slate-300 hover:border-jitto-cyan rounded-2xl p-4 text-center transition-colors bg-slate-50">
+                        <div className="border border-dashed border-slate-300 rounded-xl p-4 text-center bg-slate-50/50 hover:bg-slate-50 transition-colors">
                           <input
                             type="file"
                             multiple
                             accept="image/*"
-                            id="photo-upload"
+                            id="photo-upload-input"
                             onChange={handlePhotoUpload}
                             className="hidden"
                           />
-                          <label htmlFor="photo-upload" className="cursor-pointer flex flex-col items-center justify-center">
-                            <Upload className="w-8 h-8 text-jitto-cyan mb-2" />
-                            <span className="text-xs font-bold text-jitto-navy hover:underline">
-                              Click to select photos or drag and drop
+                          <label htmlFor="photo-upload-input" className="cursor-pointer flex flex-col items-center">
+                            <Upload className="w-5 h-5 text-slate-400 mb-1" />
+                            <span className="text-xs font-semibold text-jitto-navy hover:underline">
+                              Click to attach site photos
                             </span>
-                            <span className="text-[11px] text-slate-400 mt-0.5">PNG, JPG, HEIC up to 25MB</span>
+                            <span className="text-[10px] text-slate-400 mt-0.5">Helps assess dust levels & glass detailing</span>
                           </label>
                         </div>
 
-                        {/* Uploaded Thumbnails Preview */}
                         {uploadedPhotos.length > 0 && (
-                          <div className="mt-3 flex items-center gap-3 overflow-x-auto pb-2">
-                            {uploadedPhotos.map((url, idx) => (
-                              <div key={idx} className="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 shrink-0 group">
-                                <img src={url} alt={`Upload ${idx+1}`} className="w-full h-full object-cover" />
-                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                  <span className="text-[9px] text-white font-bold">Uploaded</span>
-                                </div>
+                          <div className="mt-2 flex items-center gap-2 overflow-x-auto">
+                            {uploadedPhotos.map((url, i) => (
+                              <div key={i} className="relative w-12 h-12 rounded-lg overflow-hidden border border-slate-200 shrink-0">
+                                <img src={url} alt="Site" className="w-full h-full object-cover" />
                               </div>
                             ))}
-                            <div className="text-xs text-slate-500 pl-1 font-medium">
-                              {uploadedPhotos.length} site photo(s) attached
-                            </div>
+                            <span className="text-[11px] text-slate-500">{uploadedPhotos.length} photo(s) attached</span>
                           </div>
                         )}
                       </div>
-
                     </div>
                   )}
                 </div>
@@ -780,91 +637,53 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
 
                 {/* STEP 3: CONTACT INFORMATION */}
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <label className="block text-sm font-bold text-slate-900 uppercase tracking-wider">
-                      Step 3: Where Should We Send Your Detailed Proposal?
-                    </label>
-                  </div>
+                  <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-4">
+                    03 / Contact & Property Details
+                  </label>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                        Your Full Name *
-                      </label>
+                      <label className="block text-xs font-medium text-slate-600 mb-1">Full Name *</label>
                       <input
                         type="text"
                         required
                         value={contactName}
                         onChange={(e) => setContactName(e.target.value)}
                         placeholder="Elena Vance"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-jitto-cyan focus:border-transparent"
+                        className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
                       />
                     </div>
 
-                    {selectedService !== 'residential' && (
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                          Company / Contractor Name
-                        </label>
-                        <input
-                          type="text"
-                          value={companyName}
-                          onChange={(e) => setCompanyName(e.target.value)}
-                          placeholder="e.g. Vance Construction Ltd."
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-jitto-cyan focus:border-transparent"
-                        />
-                      </div>
-                    )}
-
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                        Phone Number *
-                      </label>
+                      <label className="block text-xs font-medium text-slate-600 mb-1">Phone Number *</label>
                       <input
                         type="tel"
                         required
                         value={contactPhone}
                         onChange={(e) => setContactPhone(e.target.value)}
                         placeholder="(249) 000-0000"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-jitto-cyan focus:border-transparent"
+                        className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                        Email Address *
-                      </label>
+                      <label className="block text-xs font-medium text-slate-600 mb-1">Email Address *</label>
                       <input
                         type="email"
                         required
                         value={contactEmail}
                         onChange={(e) => setContactEmail(e.target.value)}
                         placeholder="elena@example.ca"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-jitto-cyan focus:border-transparent"
+                        className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                        Street Address or Job Site
-                      </label>
-                      <input
-                        type="text"
-                        value={propertyAddress}
-                        onChange={(e) => setPropertyAddress(e.target.value)}
-                        placeholder="123 Simcoe St"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-jitto-cyan focus:border-transparent"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                        City / Municipality
-                      </label>
+                      <label className="block text-xs font-medium text-slate-600 mb-1">Municipality</label>
                       <select
                         value={selectedCity}
                         onChange={(e) => setSelectedCity(e.target.value)}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-jitto-cyan focus:border-transparent"
+                        className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
                       >
                         {COMPANY_INFO.serviceAreas.map((city) => (
                           <option key={city} value={city}>{city}</option>
@@ -874,177 +693,100 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                   </div>
 
                   <div className="mt-4">
-                    <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                      Special Instructions, Access Notes, or Particular Requests
-                    </label>
+                    <label className="block text-xs font-medium text-slate-600 mb-1">Property Address or Site Location</label>
+                    <input
+                      type="text"
+                      value={propertyAddress}
+                      onChange={(e) => setPropertyAddress(e.target.value)}
+                      placeholder="e.g. 120 Lakeshore Dr, Unit 302"
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                    />
+                  </div>
+
+                  <div className="mt-4">
+                    <label className="block text-xs font-medium text-slate-600 mb-1">Notes, Access or Particular Requests</label>
                     <textarea
                       rows={3}
                       value={clientNotes}
                       onChange={(e) => setClientNotes(e.target.value)}
-                      placeholder="e.g. Please focus on hardwood polishing, lockbox code will be sent, need proof photos before 4 PM..."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-jitto-cyan focus:border-transparent"
+                      placeholder="Special surfaces, lockbox instructions, or inspection deadlines..."
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
                     />
                   </div>
                 </div>
 
-                {/* SUBMIT BUTTON */}
-                <div className="pt-4">
+                {/* SUBMIT */}
+                <div className="pt-2">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-jitto-navy hover:bg-jitto-navy-800 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-glow-cyan transition-all text-base flex items-center justify-center gap-3 disabled:opacity-50"
+                    className="w-full bg-jitto-navy hover:bg-jitto-navy-800 text-white font-semibold py-3.5 px-6 rounded-xl transition-all text-sm flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        Generating Your Proposal...
-                      </span>
+                      <span>Preparing Proposal Request...</span>
                     ) : (
                       <>
-                        <Sparkles className="w-5 h-5 text-jitto-cyan" />
-                        <span>Submit for Guaranteed Price Proposal</span>
-                        <ArrowRight className="w-5 h-5 text-jitto-cyan" />
+                        <span>Submit For Custom Proposal</span>
+                        <ArrowRight className="w-4 h-4 text-jitto-cyan" />
                       </>
                     )}
                   </button>
-                  <p className="text-center text-xs text-slate-400 mt-2">
-                    🔒 No obligation. No spam. You deal directly with Jitto ownership.
+                  <p className="text-center text-[11px] text-slate-400 mt-2">
+                    Direct founder review. Complimentary walkthrough arranged upon request.
                   </p>
                 </div>
 
               </form>
             </div>
 
-            {/* RIGHT SIDEBAR: Live Quote Summary & Trust Card */}
-            <div className="lg:col-span-4 space-y-6">
+            {/* SIDEBAR: SCOPE & STANDARDS (NO PRICES) */}
+            <div className="lg:col-span-4 space-y-4">
               
-              {/* Dynamic Price Estimate Card */}
-              <div className="bg-jitto-navy-900 text-white rounded-3xl p-6 shadow-xl border border-jitto-navy-800 sticky top-28">
-                <div className="flex items-center justify-between pb-3 border-b border-jitto-navy-800">
-                  <div className="text-xs font-bold uppercase tracking-wider text-jitto-cyan flex items-center gap-1.5">
-                    <DollarSign className="w-4 h-4" />
-                    <span>Instant Price Estimate</span>
-                  </div>
-                  <span className="text-[10px] bg-jitto-cyan/20 text-jitto-cyan px-2 py-0.5 rounded font-bold capitalize">
+              <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm sticky top-24">
+                <div className="pb-3 border-b border-slate-100 flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-jitto-navy">
+                    Scope Inclusions
+                  </span>
+                  <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium capitalize">
                     {selectedService}
                   </span>
                 </div>
 
-                <div className="py-5 text-center">
-                  <div className="text-xs text-slate-400 font-medium">Estimated Range</div>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-white font-serif mt-1">
-                    ${estimate.low} - ${estimate.high}
+                <div className="py-4 space-y-3 text-xs text-slate-600 border-b border-slate-100">
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-jitto-navy mt-0.5 shrink-0 stroke-[2.5]" />
+                    <span>Standardized room-by-room quality checklist</span>
                   </div>
-                  <div className="text-xs text-jitto-cyan font-semibold mt-1">
-                    CAD ({estimate.unit})
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-jitto-navy mt-0.5 shrink-0 stroke-[2.5]" />
+                    <span>All commercial supplies & HEPA filtration equipment provided</span>
                   </div>
-                </div>
-
-                {/* Summary Details */}
-                <div className="bg-jitto-navy-950/60 rounded-2xl p-4 space-y-2 text-xs border border-jitto-navy-800/80">
-                  <div className="flex justify-between text-slate-300">
-                    <span>Service:</span>
-                    <strong className="capitalize text-white">{selectedService}</strong>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-jitto-navy mt-0.5 shrink-0 stroke-[2.5]" />
+                    <span>The same vetted, uniformed crew whenever possible</span>
                   </div>
-
-                  {selectedService === 'residential' && (
-                    <>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Config:</span>
-                        <span className="text-white">{bedrooms} Bed • {bathrooms} Bath</span>
-                      </div>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Frequency:</span>
-                        <span className="text-white capitalize">{resFrequency.replace('-', ' ')}</span>
-                      </div>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Add-ons:</span>
-                        <span className="text-white">{resAddons.length} selected</span>
-                      </div>
-                    </>
-                  )}
-
-                  {selectedService === 'commercial' && (
-                    <>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Type:</span>
-                        <span className="text-white">{businessType}</span>
-                      </div>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Area:</span>
-                        <span className="text-white">{commSqFt}</span>
-                      </div>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Hours:</span>
-                        <span className="text-white">{preferredHours}</span>
-                      </div>
-                    </>
-                  )}
-
-                  {selectedService === 'post-construction' && (
-                    <>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Project:</span>
-                        <span className="text-white">{projectType}</span>
-                      </div>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Phase:</span>
-                        <span className="text-white">{constructionStage}</span>
-                      </div>
-                      <div className="flex justify-between text-slate-300">
-                        <span>Target Date:</span>
-                        <span className="text-white">{finishDate}</span>
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                {/* Trust Points */}
-                <div className="mt-5 space-y-2 pt-4 border-t border-jitto-navy-800 text-xs text-slate-300">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-jitto-cyan shrink-0" />
-                    <span>Room-by-room verified checklist included</span>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-jitto-navy mt-0.5 shrink-0 stroke-[2.5]" />
+                    <span>Proof, not promises: before & after photo confirmation</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-jitto-cyan shrink-0" />
-                    <span>Proof, not promises (Photo verification)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-jitto-cyan shrink-0" />
-                    <span>Fully insured & WSIB registered crew</span>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-3.5 h-3.5 text-jitto-navy mt-0.5 shrink-0 stroke-[2.5]" />
+                    <span>Full commercial liability & Ontario WSIB coverage</span>
                   </div>
                 </div>
 
-                {/* Direct Dial Hotline */}
-                <div className="mt-6 pt-4 border-t border-jitto-navy-800 text-center">
-                  <div className="text-[11px] text-slate-400">Prefer speaking right now?</div>
+                <div className="pt-4">
+                  <div className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mb-1">
+                    Direct Founder Contact
+                  </div>
                   <a
                     href={`tel:${COMPANY_INFO.phoneRaw}`}
-                    className="inline-flex items-center gap-2 text-white font-bold text-sm mt-1 hover:text-jitto-cyan transition-colors"
+                    className="flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-jitto-cyan-600 transition-colors"
                   >
-                    <Phone className="w-4 h-4 text-jitto-cyan" />
-                    <span>Call Owners Directly: (249) 800-0127</span>
+                    <Phone className="w-3.5 h-3.5 text-jitto-cyan-600" />
+                    <span>(249) 800-0127 (24/7 Available)</span>
                   </a>
                 </div>
-
-              </div>
-
-              {/* Coming Soon Teaser */}
-              <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm text-xs text-slate-600">
-                <div className="font-bold text-slate-900 uppercase tracking-wide flex items-center gap-1.5 mb-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-jitto-cyan-600" />
-                  <span>Looking for HVAC or Junk Removal?</span>
-                </div>
-                <p className="text-slate-500 mb-2">
-                  We are launching dedicated HVAC duct cleaning and renovation debris hauling shortly. You can note these in your message!
-                </p>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('services')}
-                  className="text-jitto-navy font-bold hover:text-jitto-cyan-600"
-                >
-                  View Upcoming Services →
-                </button>
               </div>
 
             </div>

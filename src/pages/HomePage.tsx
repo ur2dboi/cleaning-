@@ -1,22 +1,16 @@
 import React from 'react';
-import { PageRoute, ServiceCategory } from '../types';
+import type { PageRoute, ServiceCategory } from '../types';
 import { COMPANY_INFO, TESTIMONIALS } from '../data/content';
 import { ServicePathCards } from '../components/ServicePathCards';
 import { 
-  Sparkles, 
+  ArrowUpRight, 
+  ArrowRight, 
+  Check, 
+  Phone, 
   ShieldCheck, 
   Clock, 
-  Phone, 
-  ArrowRight, 
-  CheckCircle2, 
-  Award, 
-  Star, 
-  Calendar, 
-  ListChecks, 
-  Camera, 
-  Users, 
-  MapPin,
-  HeartHandshake
+  Sparkles,
+  MapPin
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -29,97 +23,79 @@ export const HomePage: React.FC<HomePageProps> = ({
   onSelectQuoteService 
 }) => {
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <div className="bg-[#fafbfc] min-h-screen">
       
-      {/* HERO SECTION */}
-      <section className="relative bg-jitto-navy-950 text-white overflow-hidden pt-12 pb-20 sm:pt-16 sm:pb-28">
-        {/* Subtle background glows */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-jitto-cyan/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-80 h-80 bg-jitto-navy-700/40 rounded-full blur-2xl pointer-events-none" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* MINIMALIST EDITORIAL HERO */}
+      <section className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 border-b border-slate-200/80 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-4xl mx-auto space-y-6">
+          <div className="max-w-4xl space-y-8">
             
-            {/* Top Pill Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-jitto-cyan text-jitto-navy-950 font-bold text-xs uppercase tracking-wide shadow-sm">
-                <Sparkles className="w-3.5 h-3.5" />
+            {/* Minimalist Top Tags */}
+            <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-slate-500">
+              <span className="inline-flex items-center gap-1.5 text-jitto-navy font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-jitto-cyan" />
                 {COMPANY_INFO.status}
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-slate-200 border border-white/15 text-xs font-semibold backdrop-blur-sm">
-                <MapPin className="w-3.5 h-3.5 text-jitto-cyan" />
-                Barrie & Simcoe County
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold">
-                <Clock className="w-3.5 h-3.5" />
-                24/7 Available
-              </span>
+              <span>/</span>
+              <span>Barrie & Simcoe County</span>
+              <span>/</span>
+              <span className="text-slate-400">24/7 Operations</span>
             </div>
 
-            {/* Official Tagline Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-serif tracking-tight text-white leading-tight sm:leading-none">
-              A CLEANER SPACE. <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-jitto-cyan-300 via-jitto-cyan to-jitto-cyan-400">
-                MORE TIME FOR WHAT MATTERS.
-              </span>
+            {/* Confident Minimalist Headline */}
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif font-bold text-slate-900 tracking-tight leading-[1.08]">
+              A cleaner space. <br />
+              <span className="text-jitto-navy">More time for what matters.</span>
             </h1>
 
-            {/* Tagline Subtitle from flyer */}
-            <div className="text-xs sm:text-sm font-bold tracking-[0.25em] text-jitto-cyan-300 uppercase">
-              RESIDENTIAL • COMMERCIAL • POST-CONSTRUCTION
-            </div>
-
-            {/* Overview paragraph */}
-            <p className="text-base sm:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto font-normal">
-              Built on <strong>over 16 years of hands-on housekeeping experience</strong>. One dependable, local team for your home, your workplace, and your next construction project.
+            {/* Subtitle */}
+            <p className="text-base sm:text-xl text-slate-600 max-w-2xl font-normal leading-relaxed">
+              Founded on <strong>over 16 years of hands-on housekeeping experience</strong>. One dependable, accountable team for your home, your workplace, and your next construction handover.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            {/* CTAs */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
                 onClick={() => onNavigate('quote')}
-                className="bg-jitto-cyan hover:bg-jitto-cyan-400 text-jitto-navy-950 font-bold px-7 py-4 rounded-2xl shadow-glow-cyan transition-all text-sm sm:text-base flex items-center gap-2 group"
+                className="bg-jitto-navy hover:bg-jitto-navy-800 text-white font-medium px-6 py-3.5 rounded-xl transition-all text-xs sm:text-sm flex items-center gap-2 group shadow-sm"
               >
-                <Sparkles className="w-4 h-4" />
-                <span>Get Instant Free Quote</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span>Request Custom Proposal</span>
+                <ArrowRight className="w-4 h-4 text-jitto-cyan group-hover:translate-x-0.5 transition-transform" />
               </button>
 
               <button
                 onClick={() => onNavigate('booking')}
-                className="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-4 rounded-2xl border border-white/20 transition-all text-sm sm:text-base flex items-center gap-2"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium px-6 py-3.5 rounded-xl transition-colors text-xs sm:text-sm"
               >
-                <Calendar className="w-4 h-4 text-jitto-cyan" />
-                <span>Book A Cleaning Crew</span>
+                Reserve Appointment Slot
               </button>
 
               <a
                 href={`tel:${COMPANY_INFO.phoneRaw}`}
-                className="inline-flex items-center gap-2 text-slate-300 hover:text-white px-4 py-3 rounded-xl transition-colors text-sm font-semibold"
+                className="text-xs sm:text-sm font-semibold text-slate-700 hover:text-jitto-navy transition-colors px-2 py-3"
               >
-                <Phone className="w-4 h-4 text-jitto-cyan" />
-                <span>(249) 800-0127</span>
+                (249) 800-0127 (24/7)
               </a>
             </div>
 
-            {/* Trust Proof Bar */}
-            <div className="pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-semibold text-slate-300">
-              <div className="flex items-center justify-center gap-2">
-                <Award className="w-4 h-4 text-jitto-cyan shrink-0" />
-                <span>16+ Years Hands-On Experience</span>
+            {/* Quiet Minimalist Metrics */}
+            <div className="pt-8 border-t border-slate-100 grid grid-cols-2 md:grid-cols-4 gap-6 text-xs text-slate-600">
+              <div>
+                <div className="font-serif font-bold text-lg sm:text-xl text-slate-900">16+ Years</div>
+                <div className="text-[11px] text-slate-400 mt-0.5">Private Housekeeping Standards</div>
               </div>
-              <div className="flex items-center justify-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-jitto-cyan shrink-0" />
-                <span>Fully Insured & WSIB Covered</span>
+              <div>
+                <div className="font-serif font-bold text-lg sm:text-xl text-slate-900">100% Insured</div>
+                <div className="text-[11px] text-slate-400 mt-0.5">Commercial & WSIB Coverage</div>
               </div>
-              <div className="flex items-center justify-center gap-2">
-                <ListChecks className="w-4 h-4 text-jitto-cyan shrink-0" />
-                <span>Checklists, Not Guesswork</span>
+              <div>
+                <div className="font-serif font-bold text-lg sm:text-xl text-slate-900">Verified Crew</div>
+                <div className="text-[11px] text-slate-400 mt-0.5">Same Staff Whenever Possible</div>
               </div>
-              <div className="flex items-center justify-center gap-2">
-                <Camera className="w-4 h-4 text-jitto-cyan shrink-0" />
-                <span>Proof, Not Promises (Photos)</span>
+              <div>
+                <div className="font-serif font-bold text-lg sm:text-xl text-slate-900">Photo Proof</div>
+                <div className="text-[11px] text-slate-400 mt-0.5">Checklist & Time-Stamped Signoff</div>
               </div>
             </div>
 
@@ -128,201 +104,191 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* THE THREE BIG BOXES NEAR THE TOP (Explicit User Requirement) */}
-      <section className="relative -mt-10 sm:-mt-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20 mb-20">
+      {/* THE THREE BIG BOXES (Primary Navigation Path) */}
+      <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ServicePathCards 
           onNavigate={onNavigate}
           onSelectQuoteService={onSelectQuoteService}
         />
       </section>
 
-      {/* WHY CHOOSE JITTO (The 7 Pillars from user prompt) */}
-      <section className="py-16 sm:py-24 bg-white border-y border-slate-200">
+      {/* WHY CHOOSE JITTO (Minimalist Editorial Layout) */}
+      <section className="py-16 sm:py-24 bg-white border-y border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-jitto-cyan-700 bg-jitto-cyan-50 px-3 py-1 rounded-full uppercase tracking-wider">
+          <div className="max-w-3xl mb-16">
+            <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
               The Jitto Standard
             </span>
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-serif text-slate-900 mt-3">
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 mt-2">
               Why Choose Jitto
             </h2>
-            <p className="mt-3 text-slate-600 text-base">
-              Cleaning should be done right the first time, every time. Here is how we make that standard a reality:
+            <p className="mt-3 text-slate-500 text-sm sm:text-base leading-relaxed">
+              Cleaning should be done right the first time, every time. Seven uncompromising principles that set our work apart.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12">
             
-            {/* Pillar 1 */}
-            <div className="bg-slate-50 rounded-3xl p-7 border border-slate-200/80 hover:border-jitto-navy/30 transition-all hover:shadow-md">
-              <div className="w-12 h-12 rounded-2xl bg-jitto-navy text-white flex items-center justify-center font-bold text-lg mb-5 font-serif shadow-sm">
-                1
-              </div>
-              <h3 className="text-xl font-bold font-serif text-slate-900 mb-2">
+            {/* 01 */}
+            <div className="space-y-2.5">
+              <div className="font-mono text-xs font-bold text-slate-400">01 / EXPERIENCE</div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">
                 Built on 16 Years of Hands-On Housekeeping
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Jitto was founded by a professional housekeeper with over 16 years of experience in private homes. Our standards come from real experience, not a training manual.
               </p>
             </div>
 
-            {/* Pillar 2 */}
-            <div className="bg-slate-50 rounded-3xl p-7 border border-slate-200/80 hover:border-jitto-navy/30 transition-all hover:shadow-md">
-              <div className="w-12 h-12 rounded-2xl bg-jitto-navy text-white flex items-center justify-center font-bold text-lg mb-5 font-serif shadow-sm">
-                2
-              </div>
-              <h3 className="text-xl font-bold font-serif text-slate-900 mb-2">
+            {/* 02 */}
+            <div className="space-y-2.5">
+              <div className="font-mono text-xs font-bold text-slate-400">02 / INTEGRATION</div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">
                 One Team For Your Home, Business & Renovation
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Whether you need weekly home cleaning, an office program, or a post-construction handover, you work with one company and one point of contact.
               </p>
             </div>
 
-            {/* Pillar 3 */}
-            <div className="bg-slate-50 rounded-3xl p-7 border border-slate-200/80 hover:border-jitto-navy/30 transition-all hover:shadow-md">
-              <div className="w-12 h-12 rounded-2xl bg-jitto-navy text-white flex items-center justify-center font-bold text-lg mb-5 font-serif shadow-sm">
-                3
-              </div>
-              <h3 className="text-xl font-bold font-serif text-slate-900 mb-2">
+            {/* 03 */}
+            <div className="space-y-2.5">
+              <div className="font-mono text-xs font-bold text-slate-400">03 / PRECISION</div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">
                 Checklists, Not Guesswork
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Every package follows a room-by-room checklist, so nothing is skipped and you know exactly what you're getting.
               </p>
             </div>
 
-            {/* Pillar 4 */}
-            <div className="bg-slate-50 rounded-3xl p-7 border border-slate-200/80 hover:border-jitto-navy/30 transition-all hover:shadow-md">
-              <div className="w-12 h-12 rounded-2xl bg-jitto-navy text-white flex items-center justify-center font-bold text-lg mb-5 font-serif shadow-sm">
-                4
-              </div>
-              <h3 className="text-xl font-bold font-serif text-slate-900 mb-2">
+            {/* 04 */}
+            <div className="space-y-2.5">
+              <div className="font-mono text-xs font-bold text-slate-400">04 / VERIFICATION</div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">
                 Proof, Not Promises
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 For post-construction and listing cleans, we send before-and-after photos and a completed checklist, so you can see the job is done before you arrive.
               </p>
             </div>
 
-            {/* Pillar 5 */}
-            <div className="bg-slate-50 rounded-3xl p-7 border border-slate-200/80 hover:border-jitto-navy/30 transition-all hover:shadow-md">
-              <div className="w-12 h-12 rounded-2xl bg-jitto-navy text-white flex items-center justify-center font-bold text-lg mb-5 font-serif shadow-sm">
-                5
-              </div>
-              <h3 className="text-xl font-bold font-serif text-slate-900 mb-2">
+            {/* 05 */}
+            <div className="space-y-2.5">
+              <div className="font-mono text-xs font-bold text-slate-400">05 / FAMILIARITY</div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">
                 The Same Crew Whenever Possible
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Consistent crews learn your space, your preferences, and what matters to you. No new strangers every visit.
               </p>
             </div>
 
-            {/* Pillar 6 */}
-            <div className="bg-slate-50 rounded-3xl p-7 border border-slate-200/80 hover:border-jitto-navy/30 transition-all hover:shadow-md">
-              <div className="w-12 h-12 rounded-2xl bg-jitto-navy text-white flex items-center justify-center font-bold text-lg mb-5 font-serif shadow-sm">
-                6
-              </div>
-              <h3 className="text-xl font-bold font-serif text-slate-900 mb-2">
+            {/* 06 */}
+            <div className="space-y-2.5">
+              <div className="font-mono text-xs font-bold text-slate-400">06 / ACCOUNTABILITY</div>
+              <h3 className="font-serif font-bold text-lg text-slate-900">
                 You Can Reach The Owners Directly
               </h3>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Questions or concerns go straight to the people who run Jitto at (249) 800-0127, not an anonymous call centre.
               </p>
             </div>
 
           </div>
 
-          {/* Pillar 7 Banner */}
-          <div className="mt-8 bg-gradient-to-r from-jitto-navy to-jitto-navy-900 text-white rounded-3xl p-8 sm:p-10 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-jitto-cyan/20 border border-jitto-cyan/40 flex items-center justify-center text-jitto-cyan shrink-0">
-                <HeartHandshake className="w-8 h-8" />
-              </div>
-              <div>
-                <div className="text-xs font-bold text-jitto-cyan uppercase tracking-wider">Pillar 7</div>
-                <h4 className="text-2xl font-bold font-serif">Local and Accountable</h4>
-                <p className="text-slate-300 text-xs sm:text-sm max-w-2xl mt-1">
-                  Our crews live and work in the communities we serve across Barrie and Simcoe County, and we proudly stand behind every clean.
-                </p>
-              </div>
+          {/* 07 Banner */}
+          <div className="mt-14 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+              <div className="font-mono text-xs font-bold text-slate-400 mb-1">07 / COMMUNITY</div>
+              <h4 className="font-serif font-bold text-xl text-slate-900">Local and Accountable Across Simcoe County</h4>
+              <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mt-1">
+                Our crews live and work in the communities we serve, and we stand behind every clean with full insurance, WSIB, and personal oversight.
+              </p>
             </div>
 
-            <div className="shrink-0 flex items-center gap-3">
-              <button
-                onClick={() => onNavigate('quote')}
-                className="bg-jitto-cyan hover:bg-jitto-cyan-400 text-jitto-navy-950 font-bold px-6 py-3 rounded-xl text-xs sm:text-sm transition-all shadow-glow-cyan"
-              >
-                Experience The Jitto Clean
-              </button>
-            </div>
+            <button
+              onClick={() => onNavigate('quote')}
+              className="text-xs font-bold text-jitto-navy hover:text-jitto-cyan-600 transition-colors flex items-center gap-1 shrink-0"
+            >
+              <span>Request Custom Proposal</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
 
         </div>
       </section>
 
-      {/* REAL UNIFORM & STAFF GALLERY */}
+      {/* UNIQUE VISUAL SHOWCASE: RESIDENTIAL & COMMERCIAL REAL SPACES */}
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div className="lg:col-span-5 space-y-6">
-            <span className="text-xs font-bold text-jitto-cyan-700 bg-jitto-cyan-50 px-3 py-1 rounded-full uppercase tracking-wider">
-              Branded Professionalism
+            <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
+              Immaculate Standards
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900">
-              You Will Always Recognize Our Team
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900">
+              Cleaners You Can Be Proud To Welcome Into Your Space
             </h2>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              Every Jitto professional arrives on time in our official dark navy polo uniform with our embroidered cyan chevron emblem. We bring hospital-grade disinfectants, commercial HEPA vacuums, and color-coded microfiber tools to eliminate cross-contamination.
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              Every technician wears our official dark navy polo uniform with embroidered insignia, arrives equipped with commercial HEPA vacuums and color-coded microfiber supplies, and brings a discreet, respectful presence.
             </p>
 
-            <div className="space-y-3 text-xs sm:text-sm text-slate-700">
+            <div className="space-y-2.5 text-xs text-slate-700">
               <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-jitto-cyan-600" />
+                <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                  <Check className="w-3 h-3 stroke-[2.5]" />
+                </div>
                 <span>100% Criminal Background Checked & Vetted</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-jitto-cyan-600" />
-                <span>Covered by Ontario WSIB & $5M Liability Insurance</span>
+                <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                  <Check className="w-3 h-3 stroke-[2.5]" />
+                </div>
+                <span>Ontario WSIB & $5M Comprehensive Commercial Liability</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-jitto-cyan-600" />
-                <span>Trained in delicate surfaces (marble, quartz, hardwood, commercial glass)</span>
+                <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-jitto-navy shrink-0">
+                  <Check className="w-3 h-3 stroke-[2.5]" />
+                </div>
+                <span>Careful treatment of custom cabinetry, luxury stone, and hardwood</span>
               </div>
             </div>
 
             <div className="pt-2">
               <button
                 onClick={() => onNavigate('about')}
-                className="text-jitto-navy font-bold text-xs sm:text-sm flex items-center gap-1.5 hover:text-jitto-cyan-600 transition-colors"
+                className="text-xs font-bold text-jitto-navy hover:text-jitto-cyan-600 transition-colors flex items-center gap-1.5"
               >
-                <span>Read Our Full Story & Background</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Read Our Heritage & Story</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md group">
+            {/* Unique image 1: cleaner uniform detail */}
+            <div className="rounded-2xl overflow-hidden border border-slate-200/80 bg-white shadow-sm">
               <img 
-                src="/images/residential-hero.jpg" 
-                alt="Jitto cleaner in navy polo making bed" 
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                src="/images/cleaner-uniform-detail.jpg" 
+                alt="Jitto professional cleaner in dark navy polo uniform" 
+                className="w-full h-64 object-cover"
               />
-              <div className="p-3 bg-white text-xs font-bold text-slate-800">
-                Residential Estate Housekeeping
+              <div className="p-4 border-t border-slate-100 text-xs font-medium text-slate-800">
+                Official Navy Uniform & Vetted Staff
               </div>
             </div>
 
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-md group">
+            {/* Unique image 2: commercial boardroom */}
+            <div className="rounded-2xl overflow-hidden border border-slate-200/80 bg-white shadow-sm">
               <img 
-                src="/images/commercial-hero.jpg" 
-                alt="Jitto cleaners in navy polo cleaning office" 
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                src="/images/commercial-boardroom.jpg" 
+                alt="Immaculate corporate boardroom" 
+                className="w-full h-64 object-cover"
               />
-              <div className="p-3 bg-white text-xs font-bold text-slate-800">
-                Commercial Office & Glass Detailing
+              <div className="p-4 border-t border-slate-100 text-xs font-medium text-slate-800">
+                Executive Commercial Detailing
               </div>
             </div>
           </div>
@@ -330,15 +296,16 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="bg-slate-100/70 py-16 sm:py-24 border-t border-slate-200">
+      {/* MINIMALIST TESTIMONIALS */}
+      <section className="py-16 sm:py-24 bg-white border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-xs font-bold text-jitto-cyan-700 bg-jitto-cyan-50 px-3 py-1 rounded-full uppercase tracking-wider">
-              Client Reviews
+          
+          <div className="max-w-2xl mb-12">
+            <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
+              Client Experiences
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 mt-2">
-              Trusted Across Barrie & Simcoe County
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900 mt-2">
+              Feedback Across Simcoe County
             </h2>
           </div>
 
@@ -346,66 +313,57 @@ export const HomePage: React.FC<HomePageProps> = ({
             {TESTIMONIALS.map((t) => (
               <div 
                 key={t.id}
-                className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between"
+                className="p-6 rounded-2xl border border-slate-200/80 bg-slate-50/50 flex flex-col justify-between space-y-6"
               >
-                <div>
-                  <div className="flex items-center gap-1 text-amber-400 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400" />
-                    ))}
-                  </div>
-                  <p className="text-slate-700 text-xs sm:text-sm leading-relaxed mb-6 italic">
-                    "{t.content}"
-                  </p>
-                </div>
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+                  "{t.content}"
+                </p>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="pt-4 border-t border-slate-200/60 flex items-center justify-between text-xs">
                   <div>
-                    <div className="font-bold text-slate-900 text-xs sm:text-sm">{t.author}</div>
+                    <div className="font-semibold text-slate-900">{t.author}</div>
                     <div className="text-[11px] text-slate-500">{t.role} • {t.location}</div>
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-jitto-cyan-50 text-jitto-navy">
+                  <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400">
                     {t.category}
                   </span>
                 </div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* FINAL 24/7 CTA BANNER */}
-      <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-jitto-navy-900 rounded-3xl p-8 sm:p-14 text-white text-center shadow-2xl border border-jitto-navy-800 relative overflow-hidden">
-          <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            <span className="inline-block px-3.5 py-1 rounded-full bg-jitto-cyan text-jitto-navy-950 text-xs font-bold uppercase tracking-wider">
-              {COMPANY_INFO.status}
+      {/* MINIMALIST 24/7 FOOTER CTA */}
+      <section className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-jitto-navy rounded-2xl p-8 sm:p-14 text-white text-center">
+          <div className="max-w-2xl mx-auto space-y-6">
+            <span className="text-[11px] font-mono tracking-widest text-jitto-cyan uppercase">
+              24/7 Service • Simcoe County
             </span>
 
-            <h2 className="text-3xl sm:text-5xl font-extrabold font-serif">
-              Ready For A Cleaner Space And More Free Time?
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold">
+              Ready for a cleaner space?
             </h2>
 
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Get an instant customized quote in under 60 seconds, or call our direct hotline to book a walkthrough.
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-lg mx-auto">
+              Request a custom proposal with zero obligation, or speak directly to company leadership today.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
               <button
                 onClick={() => onNavigate('quote')}
-                className="bg-jitto-cyan hover:bg-jitto-cyan-400 text-jitto-navy-950 font-bold px-8 py-4 rounded-xl shadow-glow-cyan transition-all text-sm sm:text-base flex items-center gap-2"
+                className="bg-white hover:bg-slate-100 text-jitto-navy font-semibold px-6 py-3 rounded-xl transition-all text-xs sm:text-sm"
               >
-                <Sparkles className="w-4 h-4" />
-                <span>Calculate Your Free Quote</span>
-                <ArrowRight className="w-4 h-4" />
+                Request Custom Proposal
               </button>
 
               <a
                 href={`tel:${COMPANY_INFO.phoneRaw}`}
-                className="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-4 rounded-xl border border-white/20 transition-all text-sm sm:text-base flex items-center gap-2"
+                className="border border-white/20 hover:border-white/40 text-white font-medium px-6 py-3 rounded-xl transition-colors text-xs sm:text-sm"
               >
-                <Phone className="w-4 h-4 text-jitto-cyan" />
-                <span>(249) 800-0127 (24/7)</span>
+                Call: (249) 800-0127 (24/7)
               </a>
             </div>
           </div>

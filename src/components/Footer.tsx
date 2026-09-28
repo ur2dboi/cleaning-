@@ -1,17 +1,12 @@
 import React from 'react';
 import { Logo } from './Logo';
 import { COMPANY_INFO } from '../data/content';
-import { PageRoute } from '../types';
+import type { PageRoute } from '../types';
 import { 
   Phone, 
   Mail, 
   MapPin, 
-  Clock, 
-  ShieldCheck, 
-  CheckCircle, 
-  ArrowUpRight,
-  Sparkles,
-  Heart
+  ArrowUpRight 
 } from 'lucide-react';
 
 interface FooterProps {
@@ -25,37 +20,34 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="bg-jitto-navy-950 text-slate-300 border-t border-jitto-navy-800">
-      {/* Top Banner inside Footer */}
-      <div className="bg-jitto-navy-900 border-b border-jitto-navy-800/80 py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-jitto-cyan/20 border border-jitto-cyan/40 flex items-center justify-center text-jitto-cyan shrink-0">
-              <ShieldCheck className="w-7 h-7" />
-            </div>
-            <div>
-              <div className="text-white font-bold text-lg">Fully Insured & WSIB Registered</div>
-              <p className="text-slate-400 text-sm">Founded on 16 years of hands-on housekeeping. Proudly serving Barrie & Simcoe County.</p>
-            </div>
-          </div>
+    <footer className="bg-[#0b1528] text-slate-400 border-t border-slate-800">
+      
+      {/* Upper Subtle Footer Callout */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-b border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div>
+          <span className="text-[10px] font-mono tracking-widest text-jitto-cyan uppercase">
+            Founded on 16 Years Hands-On Experience
+          </span>
+          <h3 className="font-serif font-bold text-xl text-white mt-0.5">
+            Jitto Cleaning Services
+          </h3>
+        </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <a
-              href={`tel:${COMPANY_INFO.phoneRaw}`}
-              className="flex items-center gap-2 bg-jitto-navy-800 hover:bg-jitto-navy-700 text-white font-semibold text-sm px-4 py-2.5 rounded-xl border border-jitto-navy-700 transition-colors"
-            >
-              <Phone className="w-4 h-4 text-jitto-cyan" />
-              <span>(249) 800-0127</span>
-            </a>
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            href={`tel:${COMPANY_INFO.phoneRaw}`}
+            className="text-xs font-semibold text-white hover:text-jitto-cyan transition-colors px-3 py-2 rounded-lg bg-slate-800/60 border border-slate-700/60"
+          >
+            (249) 800-0127 (24/7)
+          </a>
 
-            <button
-              onClick={() => handleNav('quote')}
-              className="flex items-center gap-2 bg-jitto-cyan hover:bg-jitto-cyan-400 text-jitto-navy-950 font-bold text-sm px-5 py-2.5 rounded-xl shadow-glow-cyan transition-all"
-            >
-              <span>Get Free Quote</span>
-              <ArrowUpRight className="w-4 h-4" />
-            </button>
-          </div>
+          <button
+            onClick={() => handleNav('quote')}
+            className="bg-white hover:bg-slate-100 text-slate-900 font-medium text-xs px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5"
+          >
+            <span>Request Proposal</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
 
@@ -63,154 +55,133 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           
-          {/* Column 1: Brand & Story */}
+          {/* Column 1: Brand & Contact */}
           <div className="lg:col-span-2 space-y-4">
-            <Logo variant="dark" size="md" onClick={() => handleNav('home')} />
+            <Logo variant="dark" size="sm" onClick={() => handleNav('home')} />
             
-            <p className="text-sm text-slate-400 leading-relaxed pr-6 mt-3">
-              Jitto was built on one simple idea: cleaning should be done right the first time, every time. Our founders bring over 16 years of hands-on cleaning experience to homes, businesses, and construction sites across Barrie and Simcoe County.
+            <p className="text-xs text-slate-400 leading-relaxed pr-6 mt-2">
+              Jitto was built on one simple idea: cleaning should be done right the first time, every time. Founded by a professional housekeeper with over 16 years of hands-on experience in private homes, we serve residences, businesses, and construction sites across Barrie and Simcoe County.
             </p>
 
-            {/* Badges */}
-            <div className="flex flex-wrap gap-2 pt-2">
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-jitto-cyan/15 text-jitto-cyan border border-jitto-cyan/30">
-                <Sparkles className="w-3 h-3" />
-                {COMPANY_INFO.status}
-              </span>
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                <Clock className="w-3 h-3" />
-                24/7 Open & Available
-              </span>
-            </div>
-
-            {/* Direct Contact */}
-            <div className="pt-2 space-y-2 text-sm">
+            <div className="pt-2 space-y-2 text-xs">
               <div className="flex items-center gap-2 text-slate-300">
-                <Phone className="w-4 h-4 text-jitto-cyan shrink-0" />
-                <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="hover:text-jitto-cyan font-semibold">
-                  (249) 800-0127
+                <Phone className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
+                <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="hover:text-jitto-cyan">
+                  (249) 800-0127 (24/7 Available)
                 </a>
               </div>
               <div className="flex items-center gap-2 text-slate-300">
-                <Mail className="w-4 h-4 text-jitto-cyan shrink-0" />
+                <Mail className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
                 <a href={`mailto:${COMPANY_INFO.email}`} className="hover:text-jitto-cyan">
                   {COMPANY_INFO.email}
                 </a>
               </div>
               <div className="flex items-center gap-2 text-slate-300">
-                <MapPin className="w-4 h-4 text-jitto-cyan shrink-0" />
+                <MapPin className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
                 <span>Barrie & Simcoe County, Ontario</span>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Navigation (6 Core Pages) */}
+          {/* Column 2: Navigation */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Quick Navigation</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="text-[11px] font-bold text-white uppercase tracking-wider">Navigation</h4>
+            <ul className="space-y-2 text-xs">
               <li>
-                <button onClick={() => handleNav('home')} className="hover:text-jitto-cyan transition-colors text-left">
+                <button onClick={() => handleNav('home')} className="hover:text-white transition-colors">
                   Home
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('services')} className="hover:text-jitto-cyan transition-colors text-left">
+                <button onClick={() => handleNav('services')} className="hover:text-white transition-colors">
                   All Services
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('quote')} className="hover:text-jitto-cyan transition-colors text-left flex items-center gap-1">
-                  <span>Quotation Form</span>
-                  <span className="text-[10px] bg-jitto-cyan/20 text-jitto-cyan px-1.5 py-0.5 rounded font-bold">Fast</span>
+                <button onClick={() => handleNav('quote')} className="hover:text-white transition-colors">
+                  Quotation Form
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('booking')} className="hover:text-jitto-cyan transition-colors text-left">
+                <button onClick={() => handleNav('booking')} className="hover:text-white transition-colors">
                   Booking Form
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('about')} className="hover:text-jitto-cyan transition-colors text-left">
+                <button onClick={() => handleNav('about')} className="hover:text-white transition-colors">
                   About Us (16 Years)
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('contact')} className="hover:text-jitto-cyan transition-colors text-left">
+                <button onClick={() => handleNav('contact')} className="hover:text-white transition-colors">
                   Contact Us
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Dedicated Cleaning Paths */}
+          {/* Column 3: Specializations */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Our Services</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="text-[11px] font-bold text-white uppercase tracking-wider">Pathways</h4>
+            <ul className="space-y-2 text-xs">
               <li>
-                <button onClick={() => handleNav('residential')} className="hover:text-jitto-cyan transition-colors text-left">
-                  Residential Cleaning
+                <button onClick={() => handleNav('residential')} className="hover:text-white transition-colors">
+                  Residential Housekeeping
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('commercial')} className="hover:text-jitto-cyan transition-colors text-left">
+                <button onClick={() => handleNav('commercial')} className="hover:text-white transition-colors">
                   Commercial & Offices
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('post-construction')} className="hover:text-jitto-cyan transition-colors text-left">
-                  Post-Construction Clean
+                <button onClick={() => handleNav('post-construction')} className="hover:text-white transition-colors">
+                  Post-Construction Detailing
                 </button>
               </li>
-              <li className="pt-2 text-xs font-semibold text-slate-400">Coming Soon:</li>
+              <li className="pt-2 text-[10px] uppercase font-bold text-slate-500">Upcoming:</li>
               <li>
-                <button onClick={() => handleNav('services')} className="hover:text-jitto-cyan text-slate-400 transition-colors text-left flex items-center gap-1.5">
-                  <span>HVAC & Duct Cleaning</span>
-                  <span className="text-[9px] bg-amber-500/20 text-amber-300 px-1 py-0.5 rounded">Soon</span>
+                <button onClick={() => handleNav('services')} className="hover:text-white text-slate-400 transition-colors">
+                  HVAC & Duct Cleaning
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('services')} className="hover:text-jitto-cyan text-slate-400 transition-colors text-left flex items-center gap-1.5">
-                  <span>Junk & Debris Removal</span>
-                  <span className="text-[9px] bg-amber-500/20 text-amber-300 px-1 py-0.5 rounded">Soon</span>
+                <button onClick={() => handleNav('services')} className="hover:text-white text-slate-400 transition-colors">
+                  Junk & Debris Removal
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Service Areas */}
+          {/* Column 4: Service Area */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Service Areas</h4>
-            <p className="text-xs text-slate-400">Serving Barrie and surrounding Simcoe County communities:</p>
-            <div className="flex flex-wrap gap-1.5 text-xs">
+            <h4 className="text-[11px] font-bold text-white uppercase tracking-wider">Simcoe County</h4>
+            <div className="flex flex-wrap gap-1 text-[11px]">
               {COMPANY_INFO.serviceAreas.map((area) => (
-                <span key={area} className="px-2 py-1 rounded bg-jitto-navy-900 border border-jitto-navy-800 text-slate-300">
+                <span key={area} className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400">
                   {area}
                 </span>
               ))}
             </div>
-            <div className="pt-2">
-              <span className="text-xs text-jitto-cyan">Need service outside this zone? Call to check availability.</span>
+            <div className="pt-2 text-[11px] text-slate-500">
+              Fully insured & WSIB registered across Ontario.
             </div>
           </div>
 
         </div>
 
-        {/* Bottom Credits & Copyright */}
-        <div className="mt-12 pt-8 border-t border-jitto-navy-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        {/* Bottom Credits */}
+        <div className="mt-12 pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <div>
             © {new Date().getFullYear()} {COMPANY_INFO.name}. All Rights Reserved.
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <span>Checklists, Not Guesswork</span>
             <span>•</span>
             <span>Proof, Not Promises</span>
             <span>•</span>
-            <span>24/7 Service</span>
-          </div>
-
-          <div className="text-slate-400">
-            Proudly Built for Vercel, GitHub & Live Preview
+            <span>24/7 Operations</span>
           </div>
         </div>
       </div>
