@@ -7,10 +7,7 @@ import {
   ArrowRight, 
   Clock, 
   ShieldCheck, 
-  FileCheck2, 
-  Building, 
-  Stethoscope, 
-  Store 
+  FileCheck2 
 } from 'lucide-react';
 
 interface CommercialPageProps {
@@ -79,11 +76,12 @@ export const CommercialPage: React.FC<CommercialPageProps> = ({
               </div>
             </div>
 
+            {/* Unique Hero Photo: commercial-hero-office.jpg */}
             <div className="lg:col-span-5">
               <div className="rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm">
                 <img 
-                  src="/images/commercial-hero.jpg" 
-                  alt="Jitto Commercial Cleaners in uniform" 
+                  src="/images/commercial-hero-office.jpg" 
+                  alt="Jitto Commercial Cleaners in building lobby" 
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -93,7 +91,7 @@ export const CommercialPage: React.FC<CommercialPageProps> = ({
         </div>
       </section>
 
-      {/* Commercial Pillars (NO PRICES) */}
+      {/* Commercial Pillars */}
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mb-12">
           <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
@@ -121,11 +119,12 @@ export const CommercialPage: React.FC<CommercialPageProps> = ({
         </div>
       </section>
 
-      {/* Visual Showcase: Boardroom & Workstations */}
+      {/* Unique Images: Boardroom, Workstations, Clinic */}
       <section className="bg-white py-16 sm:py-24 border-y border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          {/* Unique Image 1: commercial-boardroom.jpg */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="rounded-2xl overflow-hidden border border-slate-200/80">
               <img 
                 src="/images/commercial-boardroom.jpg" 
@@ -146,6 +145,7 @@ export const CommercialPage: React.FC<CommercialPageProps> = ({
             </div>
           </div>
 
+          {/* Unique Image 2: commercial-office.jpg */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-4 order-2 lg:order-1">
               <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
@@ -164,6 +164,28 @@ export const CommercialPage: React.FC<CommercialPageProps> = ({
                 alt="Modern workstation office" 
                 className="w-full h-80 object-cover"
               />
+            </div>
+          </div>
+
+          {/* Unique Image 3: commercial-clinic-dental.jpg */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="rounded-2xl overflow-hidden border border-slate-200/80">
+              <img 
+                src="/images/commercial-clinic-dental.jpg" 
+                alt="Hygienic dental and wellness clinic treatment room" 
+                className="w-full h-80 object-cover"
+              />
+            </div>
+            <div className="space-y-4">
+              <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
+                Healthcare Standards
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
+                Medical & Dental Clinic Sanitization
+              </h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                Hospital-grade DIN-registered disinfectants, strict cross-contamination protocols, and meticulous care for operatory counters, waiting areas, and patient restrooms.
+              </p>
             </div>
           </div>
 

@@ -7,8 +7,7 @@ import {
   ArrowRight, 
   Camera, 
   Clock, 
-  ShieldCheck, 
-  Upload 
+  ShieldCheck 
 } from 'lucide-react';
 
 interface PostConstructionPageProps {
@@ -77,6 +76,7 @@ export const PostConstructionPage: React.FC<PostConstructionPageProps> = ({
               </div>
             </div>
 
+            {/* Unique Hero Photo: post-construction-architecture.jpg */}
             <div className="lg:col-span-5">
               <div className="rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm">
                 <img 
@@ -91,7 +91,7 @@ export const PostConstructionPage: React.FC<PostConstructionPageProps> = ({
         </div>
       </section>
 
-      {/* The 3 Construction Phases (NO PRICES) */}
+      {/* The 3 Construction Phases */}
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mb-12">
           <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
@@ -133,11 +133,12 @@ export const PostConstructionPage: React.FC<PostConstructionPageProps> = ({
         </div>
       </section>
 
-      {/* Unique Images: Team In Action & Handover Proof */}
+      {/* Unique Images: Team In Action, Handover Proof, Brand New Kitchen */}
       <section className="bg-white py-16 sm:py-24 border-y border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          {/* Unique Image 1: post-construction-team.jpg */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="rounded-2xl overflow-hidden border border-slate-200/80">
               <img 
                 src="/images/post-construction-team.jpg" 
@@ -158,6 +159,7 @@ export const PostConstructionPage: React.FC<PostConstructionPageProps> = ({
             </div>
           </div>
 
+          {/* Unique Image 2: post-construction-home.jpg */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-4 order-2 lg:order-1">
               <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
@@ -176,6 +178,28 @@ export const PostConstructionPage: React.FC<PostConstructionPageProps> = ({
                 alt="Handover inspection ready sunlit floor" 
                 className="w-full h-80 object-cover"
               />
+            </div>
+          </div>
+
+          {/* Unique Image 3: post-construction-kitchen-new.jpg */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="rounded-2xl overflow-hidden border border-slate-200/80">
+              <img 
+                src="/images/post-construction-kitchen-new.jpg" 
+                alt="Brand new custom modern kitchen after post-construction cleaning" 
+                className="w-full h-80 object-cover"
+              />
+            </div>
+            <div className="space-y-4">
+              <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
+                Turnkey Detailing
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
+                New Cabinetry, Stone & Appliance De-Stickering
+              </h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                Manufacturer protective films, adhesive residue, and fine sawdust extracted from inside every drawer and hinge. Turnkey move-in ready for high-end clients.
+              </p>
             </div>
           </div>
 

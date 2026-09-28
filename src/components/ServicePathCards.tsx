@@ -20,7 +20,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
   return (
     <div className="w-full">
       {/* Section Subhead */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-neutral-200">
         <div>
           <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
             Tailored Pathways
@@ -38,7 +38,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* BOX 1: RESIDENTIAL */}
-        <div className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:border-jitto-navy/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+        <div className="group bg-white rounded-2xl overflow-hidden border border-neutral-200/90 shadow-sm hover:border-jitto-navy/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
           <div>
             {/* Image */}
             <div className="relative h-60 overflow-hidden bg-slate-100">
@@ -112,13 +112,13 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
               }}
               className="text-xs font-medium text-slate-500 hover:text-jitto-navy transition-colors"
             >
-              Request Quote
+              Request Proposal
             </button>
           </div>
         </div>
 
         {/* BOX 2: COMMERCIAL */}
-        <div className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:border-jitto-navy/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+        <div className="group bg-white rounded-2xl overflow-hidden border border-neutral-200/90 shadow-sm hover:border-jitto-navy/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
           <div>
             {/* Image */}
             <div className="relative h-60 overflow-hidden bg-slate-100">
@@ -198,12 +198,12 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
         </div>
 
         {/* BOX 3: POST-CONSTRUCTION */}
-        <div className="group bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:border-jitto-navy/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+        <div className="group bg-white rounded-2xl overflow-hidden border border-neutral-200/90 shadow-sm hover:border-jitto-navy/40 hover:shadow-md transition-all duration-300 flex flex-col justify-between">
           <div>
-            {/* Image */}
+            {/* Image (UNIQUE: home-post-construction.jpg) */}
             <div className="relative h-60 overflow-hidden bg-slate-100">
               <img 
-                src="/images/post-construction-architecture.jpg" 
+                src="/images/home-post-construction.jpg" 
                 alt="Post-construction handover ready luxury modern home" 
                 className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
               />

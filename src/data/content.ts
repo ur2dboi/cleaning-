@@ -225,8 +225,8 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const FAQS = [
   {
-    q: "How do you determine custom pricing for a property?",
-    a: "Every home, commercial facility, and job site is unique. Rather than quoting generic flat rates that fail to reflect real requirements, we provide a customized proposal based on your exact square footage, room layout, condition, and cleaning frequency. We provide complimentary walkthrough consultations and transparent SOW agreements."
+    q: "How do you determine a custom proposal for a property?",
+    a: "Every home, commercial facility, and job site is unique. Rather than quoting generic flat estimates that fail to reflect real requirements, we provide a customized proposal based on your exact square footage, room layout, condition, and cleaning frequency. We provide complimentary walkthrough consultations and transparent SOW agreements."
   },
   {
     q: "Are you fully insured and covered by WSIB?",

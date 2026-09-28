@@ -271,7 +271,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             {/* Unique image 1: cleaner uniform detail */}
             <div className="rounded-2xl overflow-hidden border border-slate-200/80 bg-white shadow-sm">
               <img 
-                src="/images/cleaner-uniform-detail.jpg" 
+                src="/images/home-uniform-cleaner.jpg" 
                 alt="Jitto professional cleaner in dark navy polo uniform" 
                 className="w-full h-64 object-cover"
               />
@@ -280,11 +280,11 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
             </div>
 
-            {/* Unique image 2: commercial boardroom */}
+            {/* Unique image 2: commercial workspace */}
             <div className="rounded-2xl overflow-hidden border border-slate-200/80 bg-white shadow-sm">
               <img 
-                src="/images/commercial-boardroom.jpg" 
-                alt="Immaculate corporate boardroom" 
+                src="/images/home-commercial-workspace.jpg" 
+                alt="Pristine corporate office workspace" 
                 className="w-full h-64 object-cover"
               />
               <div className="p-4 border-t border-slate-100 text-xs font-medium text-slate-800">

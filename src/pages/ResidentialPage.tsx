@@ -76,11 +76,12 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
               </div>
             </div>
 
+            {/* Unique Hero Photo: residential-hero-bedroom.jpg */}
             <div className="lg:col-span-5">
               <div className="rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm">
                 <img 
-                  src="/images/residential-hero.jpg" 
-                  alt="Jitto cleaner in uniform making bed" 
+                  src="/images/residential-hero-bedroom.jpg" 
+                  alt="Minimalist luxury bedroom with crisp white linens" 
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -90,7 +91,7 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
         </div>
       </section>
 
-      {/* 3 Residential Service Packages (NO PRICES) */}
+      {/* 3 Residential Service Packages */}
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mb-12">
           <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
@@ -156,11 +157,12 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
         </div>
       </section>
 
-      {/* Unique Images: Living Room & Kitchen Detail */}
+      {/* Unique Images: Living Room, Kitchen Detail, Marble Bathroom */}
       <section className="bg-white py-16 sm:py-24 border-y border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          {/* Unique Image 1: residential-living.jpg */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="rounded-2xl overflow-hidden border border-slate-200/80">
               <img 
                 src="/images/residential-living.jpg" 
@@ -170,21 +172,22 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
             </div>
             <div className="space-y-4">
               <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
-                Sanctuary Care
+                Living Spaces
               </span>
               <h3 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
                 Pristine Living Areas & Restful Bedrooms
               </h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                We eliminate dust, allergens, and pet dander from upholstery, baseboards, and hardwood. Beds are neatened with crisp hotel-grade precision so your home feels serene from the moment you return.
+                We eliminate dust, allergens, and pet dander from upholstery, baseboards, and hardwood. Beds are dressed with crisp precision so your home feels serene from the moment you return.
               </p>
             </div>
           </div>
 
+          {/* Unique Image 2: residential-kitchen.jpg */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-4 order-2 lg:order-1">
               <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
-                Detail Scrubbing
+                Culinary Spaces
               </span>
               <h3 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
                 Sparkling Countertops, Sinks & Kitchen Islands
@@ -199,6 +202,28 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
                 alt="Immaculate kitchen island" 
                 className="w-full h-80 object-cover"
               />
+            </div>
+          </div>
+
+          {/* Unique Image 3: residential-bathroom-marble.jpg */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="rounded-2xl overflow-hidden border border-slate-200/80">
+              <img 
+                src="/images/residential-bathroom-marble.jpg" 
+                alt="Sparkling clean marble vanity and frameless glass shower" 
+                className="w-full h-80 object-cover"
+              />
+            </div>
+            <div className="space-y-4">
+              <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
+                Sanitary Hygiene
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-slate-900">
+                Spotless Marble Vanities & Frameless Glass
+              </h3>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                Streak-free glass enclosures, descaled chrome fixtures, polished stone countertops, and disinfected tile surfaces washed on hands and knees for immaculate cleanliness.
+              </p>
             </div>
           </div>
 

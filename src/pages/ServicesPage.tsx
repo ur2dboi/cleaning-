@@ -3,20 +3,14 @@ import type { PageRoute, ServiceCategory } from '../types';
 import { 
   RESIDENTIAL_DETAILS, 
   COMMERCIAL_DETAILS, 
-  POST_CONSTRUCTION_DETAILS, 
-  COMING_SOON_SERVICES 
+  POST_CONSTRUCTION_DETAILS 
 } from '../data/content';
 import { 
   Home as HomeIcon, 
   Building2, 
   HardHat, 
-  Wind, 
-  Truck, 
   Check, 
-  ArrowRight, 
-  ArrowUpRight,
-  ShieldCheck, 
-  Clock 
+  ArrowRight 
 } from 'lucide-react';
 
 interface ServicesPageProps {
@@ -82,7 +76,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           </div>
         </div>
 
-        {/* RESIDENTIAL SECTION */}
+        {/* RESIDENTIAL SECTION (UNIQUE: services-residential-home.jpg) */}
         {(activeTab === 'all' || activeTab === 'residential') && (
           <section className="mb-16">
             <div className="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200/80 shadow-sm">
@@ -116,11 +110,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 </div>
               </div>
 
-              {/* Unique Image Showcase for Residential */}
+              {/* Unique Image Showcase: services-residential-home.jpg */}
               <div className="my-8 rounded-xl overflow-hidden border border-slate-100 h-64 sm:h-80">
                 <img 
-                  src="/images/residential-living.jpg" 
-                  alt="Minimalist clean sunlit living room" 
+                  src="/images/services-residential-home.jpg" 
+                  alt="Minimalist clean Scandinavian residential interior" 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -161,7 +155,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           </section>
         )}
 
-        {/* COMMERCIAL SECTION */}
+        {/* COMMERCIAL SECTION (UNIQUE: services-commercial-lobby.jpg) */}
         {(activeTab === 'all' || activeTab === 'commercial') && (
           <section className="mb-16">
             <div className="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200/80 shadow-sm">
@@ -195,11 +189,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 </div>
               </div>
 
-              {/* Unique Image Showcase for Commercial */}
+              {/* Unique Image Showcase: services-commercial-lobby.jpg */}
               <div className="my-8 rounded-xl overflow-hidden border border-slate-100 h-64 sm:h-80">
                 <img 
-                  src="/images/commercial-boardroom.jpg" 
-                  alt="Minimalist executive boardroom" 
+                  src="/images/services-commercial-lobby.jpg" 
+                  alt="Modern executive corporate reception lobby with polished stone floor" 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -217,7 +211,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           </section>
         )}
 
-        {/* POST-CONSTRUCTION SECTION */}
+        {/* POST-CONSTRUCTION SECTION (UNIQUE: post-construction-home.jpg) */}
         {(activeTab === 'all' || activeTab === 'post-construction') && (
           <section className="mb-16">
             <div className="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200/80 shadow-sm">
@@ -251,11 +245,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 </div>
               </div>
 
-              {/* Unique Image Showcase for Post Construction */}
+              {/* Unique Image Showcase */}
               <div className="my-8 rounded-xl overflow-hidden border border-slate-100 h-64 sm:h-80">
                 <img 
-                  src="/images/post-construction-architecture.jpg" 
-                  alt="Spotless handover-ready architectural interior" 
+                  src="/images/post-construction-home.jpg" 
+                  alt="Spotless handover-ready architectural interior floor" 
                   className="w-full h-full object-cover"
                 />
               </div>
