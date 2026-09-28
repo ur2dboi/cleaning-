@@ -137,12 +137,12 @@ export const PostConstructionPage: React.FC<PostConstructionPageProps> = ({
       <section className="bg-white py-16 sm:py-24 border-y border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
           
-          {/* Unique Image 1: post-construction-team.jpg */}
+          {/* Unique Image 1: post-construction-detail-handover.jpg */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="rounded-2xl overflow-hidden border border-slate-200/80">
               <img 
-                src="/images/post-construction-team.jpg" 
-                alt="Jitto post construction clean in progress" 
+                src="/images/post-construction-detail-handover.jpg" 
+                alt="Jitto post construction clean in progress with spotless millwork and glass" 
                 className="w-full h-80 object-cover"
               />
             </div>

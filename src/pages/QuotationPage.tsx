@@ -53,9 +53,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
   const [finishDate, setFinishDate] = useState<string>(
     new Date(Date.now() + 5 * 86400000).toISOString().split('T')[0]
   );
-  const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([
-    '/images/post-construction-architecture.jpg'
-  ]);
+  const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
 
   // Contact Details
   const [contactName, setContactName] = useState<string>('');

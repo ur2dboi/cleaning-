@@ -513,12 +513,12 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {/* Unique image 1: home-uniform-cleaner.jpg */}
+            {/* Unique image 1: home-uniform-team.jpg */}
             <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card bg-white group">
               <div className="h-60 overflow-hidden">
                 <img 
-                  src="/images/home-uniform-cleaner.jpg" 
-                  alt="Jitto professional cleaner in dark navy polo uniform" 
+                  src="/images/home-uniform-team.jpg" 
+                  alt="Jitto professional cleaning crew in dark navy polo uniform" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>

@@ -161,11 +161,11 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
       <section className="bg-white py-16 sm:py-24 border-y border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
           
-          {/* Unique Image 1: residential-living.jpg */}
+          {/* Unique Image 1: residential-living-lounge.jpg */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="rounded-2xl overflow-hidden border border-slate-200/80">
               <img 
-                src="/images/residential-living.jpg" 
+                src="/images/residential-living-lounge.jpg" 
                 alt="Clean sunlit luxury living room" 
                 className="w-full h-80 object-cover"
               />
@@ -183,7 +183,7 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
             </div>
           </div>
 
-          {/* Unique Image 2: residential-kitchen.jpg */}
+          {/* Unique Image 2: residential-kitchen-scandi.jpg */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-4 order-2 lg:order-1">
               <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
@@ -198,19 +198,19 @@ export const ResidentialPage: React.FC<ResidentialPageProps> = ({
             </div>
             <div className="rounded-2xl overflow-hidden border border-slate-200/80 order-1 lg:order-2">
               <img 
-                src="/images/residential-kitchen.jpg" 
-                alt="Immaculate kitchen island" 
+                src="/images/residential-kitchen-scandi.jpg" 
+                alt="Immaculate Scandinavian kitchen island" 
                 className="w-full h-80 object-cover"
               />
             </div>
           </div>
 
-          {/* Unique Image 3: residential-bathroom-marble.jpg */}
+          {/* Unique Image 3: residential-bathroom-spa.jpg */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="rounded-2xl overflow-hidden border border-slate-200/80">
               <img 
-                src="/images/residential-bathroom-marble.jpg" 
-                alt="Sparkling clean marble vanity and frameless glass shower" 
+                src="/images/residential-bathroom-spa.jpg" 
+                alt="Sparkling clean spa bathroom vanity and soaking tub" 
                 className="w-full h-80 object-cover"
               />
             </div>

@@ -248,8 +248,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
               {/* Unique Image Showcase */}
               <div className="my-8 rounded-xl overflow-hidden border border-slate-100 h-64 sm:h-80">
                 <img 
-                  src="/images/post-construction-home.jpg" 
-                  alt="Spotless handover-ready architectural interior floor" 
+                  src="/images/services-post-construction.jpg" 
+                  alt="Spotless handover-ready architectural interior great room" 
                   className="w-full h-full object-cover"
                 />
               </div>

@@ -176,8 +176,7 @@ export const COMING_SOON_SERVICES = [
     badge: "Coming Soon",
     desc: "Complete interior duct sanitation, furnace fan cleaning, and allergen extraction to ensure crisp, clean indoor air quality for homes and offices.",
     eta: "Launching Soon in Simcoe County",
-    highlights: ["Negative air HEPA collection", "Mold & dust mite elimination", "Improves HVAC efficiency", "Recommended after renovations"],
-    image: "/images/hvac-cleaning.jpg"
+    highlights: ["Negative air HEPA collection", "Mold & dust mite elimination", "Improves HVAC efficiency", "Recommended after renovations"]
   },
   {
     id: "junk",
@@ -185,8 +184,7 @@ export const COMING_SOON_SERVICES = [
     badge: "Coming Soon",
     desc: "Professional hauling and eco-conscious disposal for renovation leftovers, estate cleanouts, bulky furniture, and yard clutter.",
     eta: "Launching Soon in Simcoe County",
-    highlights: ["Same-day & scheduled hauling", "Donation & recycling priority", "Heavy lifting included", "Broom-clean finish after haul"],
-    image: "/images/junk-removal-service.jpg"
+    highlights: ["Same-day & scheduled hauling", "Donation & recycling priority", "Heavy lifting included", "Broom-clean finish after haul"]
   }
 ];
 
