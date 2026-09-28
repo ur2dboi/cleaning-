@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { PageRoute, ServiceCategory } from './types';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { LoadingScreen } from './components/LoadingScreen';
 import { HomePage } from './pages/HomePage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ResidentialPage } from './pages/ResidentialPage';
@@ -18,6 +19,7 @@ export function App() {
   const [currentPage, setCurrentPage] = useState<PageRoute>('home');
   const [quoteService, setQuoteService] = useState<ServiceCategory>('residential');
   const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // Sync route with URL hash for Vercel, GitHub, and browser history
   useEffect(() => {
@@ -59,6 +61,13 @@ export function App() {
   return (
     <div className="min-h-screen flex flex-col bg-[#fafbfc] font-sans text-slate-800 selection:bg-jitto-cyan selection:text-jitto-navy-950">
       
+      {/* Welcome Splash & Loading Sequence */}
+      {isLoading && (
+        <LoadingScreen 
+          onComplete={() => setIsLoading(false)} 
+        />
+      )}
+
       {/* Top Navbar */}
       <Navbar 
         currentPage={currentPage} 
