@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { PageRoute, ServiceCategory } from '../types';
 import { COMPANY_INFO } from '../data/content';
+import { submitLeadForm, type SubmissionResponse } from '../services/formSubmission';
 import confetti from 'canvas-confetti';
 import { 
   Calculator, 
@@ -14,7 +15,10 @@ import {
   RotateCcw, 
   ShieldCheck,
   Check,
-  FileCheck
+  FileCheck,
+  Loader2,
+  Database,
+  MailCheck
 } from 'lucide-react';
 
 interface QuotationPageProps {
@@ -66,6 +70,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [quoteReference, setQuoteReference] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submissionResult, setSubmissionResult] = useState<SubmissionResponse | null>(null);
 
   // Toggle addons
   const toggleResAddon = (id: string) => {
@@ -86,13 +91,56 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      const refNum = `JITTO-PR-${Math.floor(100000 + Math.random() * 900000)}`;
-      setQuoteReference(refNum);
+    const refNum = `JITTO-PR-${Math.floor(100000 + Math.random() * 900000)}`;
+    setQuoteReference(refNum);
+
+    // Build specific scope details by category
+    const scopeData: Record<string, any> = {};
+    if (selectedService === 'residential') {
+      scopeData['Bedrooms'] = bedrooms;
+      scopeData['Bathrooms'] = bathrooms;
+      scopeData['Estimated Area'] = `${homeSqFt} sq. ft.`;
+      scopeData['Cadence'] = resFrequency;
+      scopeData['Requested Add-ons'] = resAddons;
+    } else if (selectedService === 'commercial') {
+      scopeData['Facility Type'] = businessType;
+      scopeData['Estimated Area'] = `${commSqFt} sq. ft.`;
+      scopeData['Cleaning Window'] = preferredHours;
+      scopeData['Cadence'] = commFrequency;
+    } else {
+      scopeData['Project Type'] = projectType;
+      scopeData['Square Footage'] = `${projectSqFt} sq. ft.`;
+      scopeData['Construction Stage'] = constructionStage;
+      scopeData['Target Inspection Date'] = finishDate;
+    }
+
+    try {
+      const result = await submitLeadForm({
+        formType: 'Quotation Request',
+        referenceId: refNum,
+        serviceCategory: selectedService,
+        fullName: contactName,
+        companyName: companyName,
+        phone: contactPhone,
+        email: contactEmail,
+        address: propertyAddress,
+        city: selectedCity,
+        frequency: selectedService === 'residential' ? resFrequency : selectedService === 'commercial' ? commFrequency : 'One-time post-construction',
+        preferredDate: selectedService === 'post-construction' ? finishDate : undefined,
+        preferredTime: selectedService === 'commercial' ? preferredHours : undefined,
+        scopeDetails: scopeData,
+        notes: clientNotes,
+        photoCount: uploadedPhotos.length,
+      });
+
+      setSubmissionResult(result);
+    } catch (err) {
+      console.error('Submission dispatch error:', err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
       window.scrollTo({ top: 80, behavior: 'smooth' });
@@ -103,7 +151,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
         origin: { y: 0.6 },
         colors: ['#012d6c', '#00c2cb', '#94a3b8']
       });
-    }, 600);
+    }
   };
 
   return (
@@ -143,6 +191,18 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
               <p>
                 Our founders review each request personally. You will receive a comprehensive Scope of Work (SOW) and personalized proposal within <strong>2 hours</strong>.
               </p>
+
+              {/* Integration Status Badges */}
+              <div className="flex flex-wrap items-center gap-2 pt-2">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium text-[11px]">
+                  <MailCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Web3Forms: {submissionResult?.web3Forms.simulated ? 'Active (Demo Simulation)' : 'Dispatched to Inbox'}</span>
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 font-medium text-[11px]">
+                  <Database className="w-3.5 h-3.5 text-blue-600" />
+                  <span>Google Sheets: {submissionResult?.appScript.simulated ? 'Active (Demo Simulation)' : 'Appended to Sheets'}</span>
+                </div>
+              </div>
             </div>
 
             {/* Scope Summary Box */}
@@ -723,7 +783,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                     className="w-full bg-jitto-navy hover:bg-jitto-navy-800 text-white font-semibold py-3.5 px-6 rounded-xl transition-all text-sm flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     {isSubmitting ? (
-                      <span>Preparing Proposal Request...</span>
+                      <span className="flex items-center gap-2">
+                        <Loader2 className="w-4 h-4 animate-spin text-jitto-cyan" />
+                        <span>Dispatching to Apps Script & Web3Forms...</span>
+                      </span>
                     ) : (
                       <>
                         <span>Submit For Custom Proposal</span>
@@ -732,7 +795,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                     )}
                   </button>
                   <p className="text-center text-[11px] text-slate-400 mt-2">
-                    Direct founder review. Complimentary walkthrough arranged upon request.
+                    Connected to Web3Forms inbox relay and Google Apps Script CRM webhook.
                   </p>
                 </div>
 

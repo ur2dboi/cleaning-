@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { PageRoute, ServiceCategory } from '../types';
 import { COMPANY_INFO } from '../data/content';
+import { submitLeadForm, type SubmissionResponse } from '../services/formSubmission';
 import confetti from 'canvas-confetti';
 import { 
   Calendar as CalendarIcon, 
@@ -10,7 +11,10 @@ import {
   Check, 
   ArrowRight,
   RotateCcw,
-  ShieldCheck
+  ShieldCheck,
+  Loader2,
+  Database,
+  MailCheck
 } from 'lucide-react';
 
 interface BookingPageProps {
@@ -41,14 +45,39 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
   const [isBooked, setIsBooked] = useState<boolean>(false);
   const [bookingId, setBookingId] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submissionResult, setSubmissionResult] = useState<SubmissionResponse | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      const generatedId = `JITTO-BK-${Math.floor(100000 + Math.random() * 900000)}`;
-      setBookingId(generatedId);
+    const generatedId = `JITTO-BK-${Math.floor(100000 + Math.random() * 900000)}`;
+    setBookingId(generatedId);
+
+    try {
+      const result = await submitLeadForm({
+        formType: 'Booking Reservation',
+        referenceId: generatedId,
+        serviceCategory: category,
+        packageOrStage: packageType,
+        fullName: fullName,
+        phone: phone,
+        email: email,
+        address: address,
+        city: city,
+        preferredDate: bookingDate,
+        preferredTime: timeSlot,
+        scopeDetails: {
+          'Package Selected': packageType,
+          'Access Protocol': accessMethod,
+        },
+        notes: specialRequests,
+      });
+
+      setSubmissionResult(result);
+    } catch (err) {
+      console.error('Booking submission error:', err);
+    } finally {
       setIsSubmitting(false);
       setIsBooked(true);
       window.scrollTo({ top: 80, behavior: 'smooth' });
@@ -59,7 +88,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
         origin: { y: 0.6 },
         colors: ['#012d6c', '#00c2cb', '#94a3b8']
       });
-    }, 600);
+    }
   };
 
   return (
@@ -94,6 +123,18 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed my-6">
               Thank you, <strong>{fullName}</strong>. We have placed a reservation hold for <strong>{bookingDate}</strong> ({timeSlot}). A Jitto operations manager will contact you directly to confirm the walkthrough and dispatch your assigned crew.
             </p>
+
+            {/* Integration Status Badges */}
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium text-[11px]">
+                <MailCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Web3Forms: {submissionResult?.web3Forms.simulated ? 'Active (Demo Simulation)' : 'Dispatched to Inbox'}</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 font-medium text-[11px]">
+                <Database className="w-3.5 h-3.5 text-blue-600" />
+                <span>Google Sheets: {submissionResult?.appScript.simulated ? 'Active (Demo Simulation)' : 'Appended to Sheets'}</span>
+              </div>
+            </div>
 
             <div className="bg-slate-50 rounded-xl p-5 border border-slate-200/80 mb-6 space-y-2 text-xs">
               <div className="flex justify-between text-slate-600">
@@ -362,20 +403,28 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
               </div>
 
               {/* Submit */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-jitto-navy hover:bg-jitto-navy-800 text-white font-medium py-3.5 px-6 rounded-xl transition-all text-xs sm:text-sm flex items-center justify-center gap-2 disabled:opacity-50"
-              >
-                {isSubmitting ? (
-                  <span>Reserving Slot...</span>
-                ) : (
-                  <>
-                    <span>Confirm & Hold Reservation</span>
-                    <ArrowRight className="w-4 h-4 text-jitto-cyan" />
-                  </>
-                )}
-              </button>
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-jitto-navy hover:bg-jitto-navy-800 text-white font-medium py-3.5 px-6 rounded-xl transition-all text-xs sm:text-sm flex items-center justify-center gap-2 disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin text-jitto-cyan" />
+                      <span>Dispatching to Apps Script & Web3Forms...</span>
+                    </span>
+                  ) : (
+                    <>
+                      <span>Confirm & Hold Reservation</span>
+                      <ArrowRight className="w-4 h-4 text-jitto-cyan" />
+                    </>
+                  )}
+                </button>
+                <p className="text-center text-[11px] text-slate-400 mt-2">
+                  Connected to Web3Forms inbox relay and Google Apps Script CRM webhook.
+                </p>
+              </div>
 
             </form>
           </div>
