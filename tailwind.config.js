@@ -18,8 +18,8 @@ export default {
             500: '#2F67BD',
             600: '#1D4EA1',
             700: '#012D6C',
-            800: '#09214D',
-            900: '#061735',
+            800: '#081D42',
+            900: '#061633',
             950: '#030C1C',
           },
           cyan: {
@@ -39,12 +39,14 @@ export default {
         }
       },
       fontFamily: {
-        serif: ['Georgia', 'Cambria', '"Times New Roman"', 'serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'Cambria', 'serif'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        'glow-cyan': '0 0 25px -5px rgba(0, 194, 203, 0.4)',
-        'glow-navy': '0 10px 30px -5px rgba(1, 45, 108, 0.3)',
+        'glow-cyan': '0 0 30px -5px rgba(0, 194, 203, 0.45)',
+        'glow-navy': '0 10px 40px -10px rgba(1, 45, 108, 0.4)',
+        'card': '0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 4px 6px -2px rgba(15, 23, 42, 0.04)',
+        'card-hover': '0 20px 40px -10px rgba(15, 23, 42, 0.12), 0 8px 10px -4px rgba(15, 23, 42, 0.06)',
       }
     },
   },
