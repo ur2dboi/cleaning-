@@ -514,13 +514,13 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {/* Dedicated image 1: home-uniform-team.jpg with top headroom */}
+            {/* Dedicated image 1: home-official-staff.jpg with top headroom */}
             <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card bg-white group flex flex-col justify-between">
               <div className="h-64 sm:h-72 overflow-hidden bg-slate-900">
                 <img 
-                  src="/images/home-uniform-team.jpg" 
-                  alt="Jitto professional cleaning technician in official dark navy polo uniform" 
-                  className="w-full h-full object-cover object-[center_12%] group-hover:scale-105 transition-transform duration-500"
+                  src="/images/home-official-staff.jpg" 
+                  alt="Official Jitto uniformed cleaning specialists in dark navy polo shirts" 
+                  className="w-full h-full object-cover object-[center_10%] group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-4 border-t border-slate-100 bg-white">
