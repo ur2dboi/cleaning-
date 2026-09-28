@@ -151,7 +151,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 2. THE THREE BIG BOXES (Core Homepage Pathway Selector) */}
-      <section className="relative -mt-10 sm:-mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20 mb-20">
+      <section className="relative py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20">
         <ServicePathCards 
           onNavigate={onNavigate}
           onSelectQuoteService={onSelectQuoteService}
