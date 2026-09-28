@@ -41,13 +41,13 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
         <div className="group bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-card hover:shadow-card-hover hover:border-jitto-navy/40 transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1">
           <div>
             {/* Image Container with Gradient & Badge */}
-            <div className="relative h-64 overflow-hidden bg-slate-900">
+            <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-900">
               <img 
                 src="/images/residential-hero.jpg" 
                 alt="Jitto Residential Housekeeper in official uniform making bed" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-full object-cover object-[25%_center] group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950 via-jitto-navy-950/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950/90 via-jitto-navy-950/25 to-transparent pointer-events-none" />
               
               {/* Floating Frosted Pill */}
               <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-jitto-navy tracking-wide flex items-center gap-1.5 shadow-sm">
@@ -126,13 +126,13 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
         <div className="group bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-card hover:shadow-card-hover hover:border-jitto-navy/40 transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1">
           <div>
             {/* Image Container with Gradient & Badge */}
-            <div className="relative h-64 overflow-hidden bg-slate-900">
+            <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-900">
               <img 
                 src="/images/commercial-hero.jpg" 
                 alt="Jitto Commercial Cleaning Team in office uniform" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-full object-cover object-[55%_center] group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950 via-jitto-navy-950/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950/90 via-jitto-navy-950/25 to-transparent pointer-events-none" />
               
               {/* Floating Frosted Pill */}
               <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-jitto-navy tracking-wide flex items-center gap-1.5 shadow-sm">
@@ -211,13 +211,13 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
         <div className="group bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-card hover:shadow-card-hover hover:border-jitto-navy/40 transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1">
           <div>
             {/* Image Container with Gradient & Badge */}
-            <div className="relative h-64 overflow-hidden bg-slate-900">
+            <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-900">
               <img 
                 src="/images/home-post-construction.jpg" 
                 alt="Post-construction handover ready luxury modern home" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950 via-jitto-navy-950/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950/90 via-jitto-navy-950/25 to-transparent pointer-events-none" />
               
               {/* Floating Frosted Pill */}
               <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-jitto-navy tracking-wide flex items-center gap-1.5 shadow-sm">

@@ -117,29 +117,30 @@ export const HomePage: React.FC<HomePageProps> = ({
 
             {/* Right Visual Floating Composition */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl group">
-                <img 
-                  src="/images/home-uniform-cleaner.jpg" 
-                  alt="Jitto cleaner in official uniform" 
-                  className="w-full h-auto object-cover group-hover:scale-102 transition-transform duration-700"
-                />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950/90 via-transparent to-transparent" />
+              <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-jitto-navy-900 group">
+                <div className="relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden bg-slate-900">
+                  <img 
+                    src="/images/home-uniform-cleaner.jpg" 
+                    alt="Jitto cleaner in official uniform" 
+                    className="w-full h-full object-cover object-[center_12%] group-hover:scale-102 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950/70 via-transparent to-transparent pointer-events-none" />
+                </div>
 
-                {/* Floating pill over image */}
-                <div className="absolute bottom-4 left-4 right-4 bg-jitto-navy-900/90 backdrop-blur-md p-3.5 rounded-xl border border-white/15 text-xs text-white">
+                {/* Sub-card below photo (unobstructed view of cleaner on all devices) */}
+                <div className="p-4 sm:p-5 bg-jitto-navy-900/95 backdrop-blur-md border-t border-white/10 text-xs text-white">
                   <div className="flex items-center gap-2 font-bold text-jitto-cyan mb-1">
-                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <ShieldCheck className="w-4 h-4 shrink-0 text-jitto-cyan" />
                     <span>Real Experience, Not a Manual</span>
                   </div>
-                  <p className="text-slate-300 text-[11px] leading-relaxed">
+                  <p className="text-slate-300 text-xs leading-relaxed font-normal">
                     "Consistent uniformed crews in official navy polos who learn your space, your preferences, and what matters to you."
                   </p>
                 </div>
               </div>
 
               {/* Floating 24/7 Badge */}
-              <div className="absolute -top-3 -right-3 bg-jitto-navy-900/95 backdrop-blur-md text-white border border-jitto-cyan/40 px-3.5 py-2 rounded-xl shadow-xl flex items-center gap-2 text-xs font-bold">
+              <div className="absolute -top-3 -right-3 bg-jitto-navy-900/95 backdrop-blur-md text-white border border-jitto-cyan/40 px-3.5 py-2 rounded-xl shadow-xl flex items-center gap-2 text-xs font-bold z-10">
                 <Clock className="w-3.5 h-3.5 text-jitto-cyan animate-pulse" />
                 <span>24/7 Barrie Operations</span>
               </div>
@@ -513,31 +514,31 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {/* Unique image 1: home-uniform-team.jpg */}
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card bg-white group">
-              <div className="h-60 overflow-hidden">
+            {/* Dedicated image 1: home-uniform-team.jpg with top headroom */}
+            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card bg-white group flex flex-col justify-between">
+              <div className="h-64 sm:h-72 overflow-hidden bg-slate-900">
                 <img 
                   src="/images/home-uniform-team.jpg" 
-                  alt="Jitto professional cleaning crew in dark navy polo uniform" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  alt="Jitto professional cleaning technician in official dark navy polo uniform" 
+                  className="w-full h-full object-cover object-[center_12%] group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-4 border-t border-slate-100">
+              <div className="p-4 border-t border-slate-100 bg-white">
                 <div className="text-xs font-bold text-slate-900">Official Uniformed Staff</div>
                 <div className="text-[11px] text-slate-500 mt-0.5">Vetted, discreet, and background-checked</div>
               </div>
             </div>
 
-            {/* Unique image 2: home-commercial-workspace.jpg */}
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card bg-white group">
-              <div className="h-60 overflow-hidden">
+            {/* Dedicated image 2: home-commercial-workspace.jpg */}
+            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card bg-white group flex flex-col justify-between">
+              <div className="h-64 sm:h-72 overflow-hidden bg-slate-900">
                 <img 
                   src="/images/home-commercial-workspace.jpg" 
                   alt="Pristine corporate office workspace" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-4 border-t border-slate-100">
+              <div className="p-4 border-t border-slate-100 bg-white">
                 <div className="text-xs font-bold text-slate-900">Corporate & Facility Upkeep</div>
                 <div className="text-[11px] text-slate-500 mt-0.5">High-touch sanitization and glass shine</div>
               </div>
