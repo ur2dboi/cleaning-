@@ -97,11 +97,24 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-bold text-slate-400 uppercase">Direct Owner Line</div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase">Operations & 24/7 Dispatch</div>
                     <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="font-semibold text-slate-900 hover:text-jitto-navy text-sm">
                       {COMPANY_INFO.phone}
                     </a>
-                    <div className="text-slate-500 mt-0.5">Reach founders directly (24/7 available)</div>
+                    <div className="text-slate-500 mt-0.5">Reach founders & operations directly (24/7 available)</div>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="p-2 rounded-lg bg-slate-100 text-jitto-navy shrink-0">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase">Client Line (OpenPhone)</div>
+                    <a href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`} className="font-semibold text-slate-900 hover:text-jitto-navy text-sm">
+                      {COMPANY_INFO.phoneSecondary}
+                    </a>
+                    <div className="text-slate-500 mt-0.5">Call or text client support directly</div>
                   </div>
                 </div>
 

@@ -1016,17 +1016,26 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                   </div>
                 </div>
 
-                <div className="pt-4">
-                  <div className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mb-1">
-                    Direct Founder Contact
+                <div className="pt-4 border-t border-slate-100">
+                  <div className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mb-1.5">
+                    Direct Founder & OpenPhone Lines
                   </div>
-                  <a
-                    href={`tel:${COMPANY_INFO.phoneRaw}`}
-                    className="flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-jitto-cyan-600 transition-colors"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-jitto-cyan-600" />
-                    <span>(249) 800-0127 (24/7 Available)</span>
-                  </a>
+                  <div className="space-y-1">
+                    <a
+                      href={`tel:${COMPANY_INFO.phoneRaw}`}
+                      className="flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-jitto-cyan-600 transition-colors"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-jitto-cyan-600" />
+                      <span>(249) 800-0127 (24/7 Operations)</span>
+                    </a>
+                    <a
+                      href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`}
+                      className="flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-jitto-cyan-600 transition-colors"
+                    >
+                      <Phone className="w-3.5 h-3.5 text-jitto-cyan-600" />
+                      <span>437-447-5020 (OpenPhone)</span>
+                    </a>
+                  </div>
                 </div>
               </div>
 

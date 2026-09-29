@@ -33,12 +33,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </h3>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
           <a
             href={`tel:${COMPANY_INFO.phoneRaw}`}
-            className="text-xs font-semibold text-white hover:text-jitto-cyan transition-colors px-3 py-2.5 min-h-[44px] flex items-center justify-center rounded-lg bg-slate-800/60 border border-slate-700/60"
+            className="text-xs font-semibold text-white hover:text-jitto-cyan transition-colors px-3.5 py-2.5 min-h-[44px] flex items-center justify-center gap-1.5 rounded-lg bg-slate-800/60 border border-slate-700/60"
           >
-            (249) 800-0127 (24/7)
+            <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
+            <span>(249) 800-0127 (24/7 Ops)</span>
+          </a>
+
+          <a
+            href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`}
+            className="text-xs font-semibold text-white hover:text-jitto-cyan transition-colors px-3.5 py-2.5 min-h-[44px] flex items-center justify-center gap-1.5 rounded-lg bg-slate-800/60 border border-slate-700/60"
+          >
+            <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
+            <span>437-447-5020 (OpenPhone)</span>
           </a>
 
           <button
@@ -71,9 +80,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <div className="pt-2 space-y-2 text-xs">
               <div className="flex items-center gap-2 text-slate-300">
                 <Phone className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
-                <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="hover:text-jitto-cyan">
-                  (249) 800-0127 (24/7 Available)
-                </a>
+                <div>
+                  <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="hover:text-jitto-cyan font-medium">
+                    (249) 800-0127
+                  </a>
+                  <span className="text-slate-500 text-[11px] ml-1.5">(Operations & 24/7)</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-slate-300">
+                <Phone className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
+                <div>
+                  <a href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`} className="hover:text-jitto-cyan font-medium">
+                    437-447-5020
+                  </a>
+                  <span className="text-slate-500 text-[11px] ml-1.5">(OpenPhone Client Line)</span>
+                </div>
               </div>
               <div className="flex items-center gap-2 text-slate-300">
                 <Mail className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
