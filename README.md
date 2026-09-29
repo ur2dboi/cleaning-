@@ -26,7 +26,7 @@ This website is custom-engineered for **Jitto Cleaning Services**, speaking dire
    - **Three Big Path-Picker Boxes near the top** directing visitors seamlessly to Residential, Commercial, or Post-Construction.
    - Quick interactive quote teaser.
    - The **7 Pillars of Why Choose Jitto** (16 years hands-on housekeeping, single team for all needs, room-by-room checklists, proof not promises, same crew, direct owner access, local and accountable).
-   - Uniformed team gallery with authentic photos in navy Jitto polos.
+   - Professional visual showcase highlighting meticulous residential and commercial standards.
    - Verified local reviews & testimonials.
    - Service area coverage across Simcoe County.
    - 24/7 call and booking CTA banner.
@@ -60,7 +60,7 @@ This website is custom-engineered for **Jitto Cleaning Services**, speaking dire
    - Why Jitto started: solving the problem of unreliable cleaning where clients had to chase, inspect, or manage rotating strangers.
    - The 7 core pillars written with authentic detail.
    - Trust signals: Fully insured, 100% background-checked team, local accountability.
-   - Official uniform standards (navy polo with embroidered Jitto emblem).
+   - Heritage of 16+ years in private estate housekeeping.
 
 7. **Contact Us (`#/contact`)**:
    - Direct founder phone line: `(249) 800-0127` (clickable).
@@ -75,7 +75,6 @@ This website is custom-engineered for **Jitto Cleaning Services**, speaking dire
 
 - **Primary Navy:** `#012D6C` (Navy 700), `#061735` (Navy 900), `#030C1C` (Navy 950)
 - **Primary Cyan:** `#00C2CB` (Cyan 500), `#039FA7` (Cyan 600), `#75E5EC` (Cyan 300)
-- **Official Uniform:** Dark navy polo shirt with official Jitto embroidered chest emblem.
 - **Typography:** Serif headings (`Playfair Display`, `Georgia`) combined with clean sans-serif UI (`Inter`, `system-ui`).
 
 ---

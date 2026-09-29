@@ -46,7 +46,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
             <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-900">
               <img 
                 src="/images/residential-hero.jpg?v=3" 
-                alt="Jitto Residential Housekeeper in official uniform making bed" 
+                alt="Jitto residential housekeeping specialist detailing luxury bedroom" 
                 className="w-full h-full object-cover object-[25%_center] group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950/90 via-jitto-navy-950/25 to-transparent pointer-events-none" />
@@ -131,7 +131,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
             <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-900">
               <img 
                 src="/images/commercial-hero.jpg?v=3" 
-                alt="Jitto Commercial Cleaning Team in office uniform" 
+                alt="Jitto commercial cleaning specialists in executive office" 
                 className="w-full h-full object-cover object-[55%_center] group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950/90 via-jitto-navy-950/25 to-transparent pointer-events-none" />

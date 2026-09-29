@@ -75,13 +75,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             <div className="lg:col-span-5">
               <div className="rounded-xl overflow-hidden border border-slate-200/80 shadow-sm">
                 <img 
-                  src="/images/cleaner-uniform-detail.jpg" 
-                  alt="Jitto professional housekeeper in official uniform" 
+                  src="/images/about-housekeeping-heritage.jpg" 
+                  alt="Spotless private residence dining room reflecting 16+ years of housekeeping heritage" 
                   className="w-full h-auto object-cover"
                 />
               </div>
               <div className="mt-2 text-center text-[11px] text-slate-400">
-                Official Jitto navy uniform with embroidered logo — worn on every visit.
+                Founded on 16+ years of meticulous private estate housekeeping in Barrie & Simcoe County.
               </div>
             </div>
 

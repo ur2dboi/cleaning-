@@ -1004,7 +1004,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="w-3.5 h-3.5 text-jitto-navy mt-0.5 shrink-0 stroke-[2.5]" />
-                    <span>The same vetted, uniformed crew whenever possible</span>
+                    <span>The same vetted, background-checked crew whenever possible</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="w-3.5 h-3.5 text-jitto-navy mt-0.5 shrink-0 stroke-[2.5]" />

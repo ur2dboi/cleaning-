@@ -120,21 +120,21 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-jitto-navy-900 group">
                 <div className="relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden bg-slate-900">
                   <img 
-                    src="/images/home-uniform-cleaner.jpg?v=3" 
-                    alt="Jitto cleaner in official uniform" 
-                    className="w-full h-full object-cover object-[center_12%] group-hover:scale-102 transition-transform duration-700"
+                    src="/images/home-hero-showcase.jpg" 
+                    alt="Pristine luxury home living room with double height windows" 
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-jitto-navy-950/70 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                {/* Sub-card below photo (unobstructed view of cleaner on all devices) */}
+                {/* Sub-card below photo (unobstructed view on all devices) */}
                 <div className="p-4 sm:p-5 bg-jitto-navy-900/95 backdrop-blur-md border-t border-white/10 text-xs text-white">
                   <div className="flex items-center gap-2 font-bold text-jitto-cyan mb-1">
                     <ShieldCheck className="w-4 h-4 shrink-0 text-jitto-cyan" />
                     <span>Real Experience, Not a Manual</span>
                   </div>
                   <p className="text-slate-300 text-xs leading-relaxed font-normal">
-                    "Consistent uniformed crews in official navy polos who learn your space, your preferences, and what matters to you."
+                    "Consistent, dedicated crews who learn your space, your preferences, and what matters to you."
                   </p>
                 </div>
               </div>
@@ -466,19 +466,19 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="h-px w-full bg-gradient-to-r from-transparent via-jitto-cyan/30 to-transparent" />
       </section>
 
-      {/* 5. BRANDED UNIFORMS & WORKPLACE VISUAL SHOWCASE */}
+      {/* 5. PROFESSIONAL STANDARDS & TRUSTED CARE SHOWCASE */}
       <section className="py-10 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           <div className="lg:col-span-5 space-y-5">
             <span className="text-xs font-bold text-jitto-navy uppercase tracking-widest">
-              Professional Presentation
+              Professional Standards & Integrity
             </span>
             <h2 className="text-2xl sm:text-4xl font-serif font-bold text-slate-900">
-              Cleaners You Can Be Proud To Welcome Into Your Space
+              Cleaners You Can Trust In Your Private Space
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
-              Every technician wears our official dark navy polo uniform with embroidered insignia, arrives equipped with commercial HEPA vacuums and color-coded microfiber supplies, and brings a discreet, respectful presence.
+              Every team member is rigorously background-checked, arrives equipped with commercial HEPA vacuums and specialized microfiber supplies, and brings a discreet, respectful presence to your home or facility.
             </p>
 
             <div className="space-y-2.5 text-xs sm:text-sm text-slate-700">
@@ -514,18 +514,18 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {/* Dedicated image 1: home-official-staff.jpg with top headroom */}
+            {/* Dedicated image 1: home-residential-detail.jpg */}
             <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card bg-white group flex flex-col justify-between">
               <div className="h-64 sm:h-72 overflow-hidden bg-slate-900">
                 <img 
-                  src="/images/home-official-staff.jpg?v=3" 
-                  alt="Official Jitto uniformed cleaning specialists in dark navy polo shirts" 
-                  className="w-full h-full object-cover object-[center_10%] group-hover:scale-105 transition-transform duration-500"
+                  src="/images/home-residential-detail.jpg" 
+                  alt="Spotless luxury modern residential kitchen detailing" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-4 border-t border-slate-100 bg-white">
-                <div className="text-xs font-bold text-slate-900">Official Uniformed Staff</div>
-                <div className="text-[11px] text-slate-500 mt-0.5">Vetted, discreet, and background-checked</div>
+                <div className="text-xs font-bold text-slate-900">Residential Housekeeping Detailing</div>
+                <div className="text-[11px] text-slate-500 mt-0.5">Trained in 16+ years of estate housekeeping standards</div>
               </div>
             </div>
 

@@ -152,7 +152,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
               </div>
               <div className="flex justify-between text-slate-600">
                 <span>Crew Standard:</span>
-                <span className="font-semibold text-jitto-navy">Vetted & Uniformed Crew with Checklist</span>
+                <span className="font-semibold text-jitto-navy">Vetted & Background-Checked Crew with Checklist</span>
               </div>
             </div>
 

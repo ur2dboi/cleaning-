@@ -27,7 +27,7 @@ export const COMPANY_INFO = {
   trustSignals: [
     { label: "16+ Years Hands-On Experience", description: "Founded by a professional housekeeper with over 16 years in private estate residences." },
     { label: "Fully Insured & Protected", description: "Comprehensive commercial and residential liability protection for total peace of mind." },
-    { label: "100% Background-Checked Staff", description: "Vetted, discreet, and uniformed professionals in official Jitto navy polos." },
+    { label: "100% Background-Checked Staff", description: "Vetted, discreet, and trustworthy professionals with verified background checks." },
     { label: "Checklists, Not Guesswork", description: "Every clean follows a standardized room-by-room quality checklist." },
     { label: "Proof, Not Promises", description: "Time-stamped before-and-after photos and completed checklists sent directly to your phone." },
     { label: "The Same Crew Whenever Possible", description: "Consistent team members who learn your space, priorities, and preferences." },
@@ -240,7 +240,7 @@ export const JUNK_REMOVAL_DETAILS = {
     "Pressurized propane tanks or explosives"
   ],
   benefits: [
-    { title: "Heavy Lifting & Labor Included", desc: "You just point to what needs to go. Our two-person uniformed crew handles all carrying, navigating stairs, and loading." },
+    { title: "Heavy Lifting & Labor Included", desc: "You just point to what needs to go. Our dedicated two-person crew handles all carrying, navigating stairs, and loading." },
     { title: "The Broom-Swept Guarantee", desc: "Unlike standard haulers who leave dirt and drywall dust behind, we sweep and detail the area clean after loading." },
     { title: "Eco-Friendly Donation & Diversion", desc: "We partner with local charities and transfer stations across Simcoe County to divert usable goods from landfills." },
     { title: "Upfront Transparent Proposals", desc: "Volume-based pricing with no hidden weight or disposal fees. What we quote is what you pay." }
