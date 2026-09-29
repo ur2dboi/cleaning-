@@ -25,8 +25,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       {/* Upper Subtle Footer Callout */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-b border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div>
-          <span className="text-[10px] font-mono tracking-widest text-jitto-cyan uppercase">
-            Founded on 16 Years Hands-On Experience
+          <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-widest text-jitto-cyan uppercase">
+            HOUSEKEEPING EXPERTISE MEETS REAL ESTATE EXPERIENCE
           </span>
           <h3 className="font-serif font-bold text-xl text-white mt-0.5">
             Jitto Cleaning Services
@@ -59,9 +59,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="lg:col-span-2 space-y-4">
             <Logo variant="dark" size="sm" onClick={() => handleNav('home')} />
             
-            <p className="text-xs text-slate-400 leading-relaxed pr-6 mt-2">
-              Jitto brings together two founders with very different backgrounds: 16+ years of private luxury housekeeping where every detail is noticed, paired with a professional engineer and seasoned real estate investor who understands what it takes to get a space ready for the next owner or tenant.
-            </p>
+            <div className="space-y-1.5 mt-2">
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold tracking-wider text-jitto-cyan uppercase block">
+                HOUSEKEEPING EXPERTISE MEETS REAL ESTATE EXPERIENCE
+              </span>
+              <p className="text-xs text-slate-400 leading-relaxed pr-6">
+                Jitto was built on one simple idea: cleaning should be done right the first time, every time. Founded by a professional housekeeper with over 16 years in private homes and an engineer and real estate investor who knows what properties need, we serve residences, businesses, and construction sites across Barrie and Simcoe County.
+              </p>
+            </div>
 
             <div className="pt-2 space-y-2 text-xs">
               <div className="flex items-center gap-2 text-slate-300">
@@ -109,7 +114,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <button onClick={() => handleNav('about')} className="hover:text-white transition-colors">
-                  About Us (16 Years)
+                  About Us
                 </button>
               </li>
               <li>
