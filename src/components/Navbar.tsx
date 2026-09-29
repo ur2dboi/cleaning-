@@ -333,7 +333,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               onClick={() => handleNav('about')}
               className="w-full text-left px-3 py-2.5 min-h-[44px] flex items-center rounded-lg hover:bg-slate-50 text-slate-800"
             >
-              About Us (16 Years Experience)
+              About Us
             </button>
 
             <button

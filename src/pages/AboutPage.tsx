@@ -24,13 +24,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         {/* Minimalist Header */}
         <div className="max-w-3xl mb-12">
           <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
-            Heritage & Leadership
+            Our Founders & Story
           </span>
           <h1 className="text-3xl sm:text-5xl font-serif font-bold text-slate-900 tracking-tight mt-2">
             About Jitto Cleaning Services
           </h1>
-          <p className="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
-            Two complementary founder backgrounds united by one simple conviction: cleaning should be done right the first time, every time.
+          <p className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed font-normal">
+            Jitto brings together two founders with very different backgrounds. One has spent over 16 years as a professional housekeeper in private luxury homes, where every detail is noticed. The other is a professional engineer and seasoned real estate investor who has bought, sold, and managed properties for years, and understands what it takes to get a space ready for the next owner or tenant.
           </p>
         </div>
 
@@ -40,14 +40,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             
             <div className="lg:col-span-7 space-y-6">
               <span className="text-[11px] font-bold tracking-[0.2em] text-jitto-navy uppercase">
-                Our Story & Leadership
+                Why We Started Jitto
               </span>
               
               <h2 className="text-2xl sm:text-4xl font-serif font-bold text-slate-900 leading-snug">
-                Two Distinct Backgrounds. One Uncompromising Standard.
+                Where Private Estate Detail Meets Engineering & Turnover Precision.
               </h2>
 
-              <p className="text-slate-800 text-sm sm:text-base font-medium leading-relaxed">
+              <p className="text-slate-800 text-sm sm:text-base leading-relaxed">
                 Jitto brings together two founders with very different backgrounds. One has spent over 16 years as a professional housekeeper in private luxury homes, where every detail is noticed. The other is a professional engineer and seasoned real estate investor who has bought, sold, and managed properties for years, and understands what it takes to get a space ready for the next owner or tenant.
               </p>
 
@@ -104,11 +104,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
             
             <h3 className="font-serif font-bold text-xl text-slate-900">
-              16+ Years Private Luxury Housekeeping
+              16+ Years as a Professional Housekeeper in Private Luxury Homes
             </h3>
             
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-              Spent over 16 years as a professional housekeeper in private luxury homes, where every detail is noticed. This background brings an instinctive eye for finish protection, delicate stone and wood care, and the high-touch discretion required in high-end private residences.
+              Has spent over 16 years as a professional housekeeper in private luxury homes, where every detail is noticed. This background brings an instinctive eye for finish protection, delicate stone and wood care, and the high-touch discretion required in high-end private residences.
             </p>
 
             <div className="space-y-2 pt-2 border-t border-slate-200/60 text-xs text-slate-700">
@@ -137,11 +137,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
             
             <h3 className="font-serif font-bold text-xl text-slate-900">
-              Professional Engineer & Real Estate Investor
+              Professional Engineer & Seasoned Real Estate Investor
             </h3>
             
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-              A professional engineer and seasoned real estate investor who has bought, sold, and managed properties for years. Understands what it takes to get a space ready for the next owner or tenant, applying engineering systems to quality control, turnover schedules, and contractor timelines.
+              A professional engineer and seasoned real estate investor who has bought, sold, and managed properties for years, and understands what it takes to get a space ready for the next owner or tenant. Applies engineering systems to quality control, turnover schedules, and contractor timelines.
             </p>
 
             <div className="space-y-2 pt-2 border-t border-slate-200/60 text-xs text-slate-700">
