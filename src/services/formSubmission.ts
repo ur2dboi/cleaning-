@@ -53,7 +53,7 @@ export const getWeb3FormsKey = (): string => {
 export const getAppScriptUrl = (): string => {
   return (
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_APPSCRIPT_URL) ||
-    ''
+    'https://script.google.com/macros/s/AKfycbylVKAZY55PocvW_XW0hEE6o7BK4MXZvhG4RQnFNK6TxID0QU0P5Jay-CjrXMetxiB9/exec'
   ).trim();
 };
 
@@ -175,7 +175,7 @@ export const submitToAppScript = async (
       method: 'POST',
       mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/plain;charset=utf-8',
       },
       body: JSON.stringify({
         ...payload,
