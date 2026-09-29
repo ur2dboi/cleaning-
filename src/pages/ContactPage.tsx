@@ -220,7 +220,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                       value={formName}
                       onChange={(e) => setFormName(e.target.value)}
                       placeholder="Jane Doe"
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                      className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                     />
                   </div>
 
@@ -232,7 +232,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                       value={formPhone}
                       onChange={(e) => setFormPhone(e.target.value)}
                       placeholder="(249) 000-0000"
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                      className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                     />
                   </div>
                 </div>
@@ -245,7 +245,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     value={formEmail}
                     onChange={(e) => setFormEmail(e.target.value)}
                     placeholder="jane@example.com"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                   />
                 </div>
 
@@ -254,7 +254,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   <select
                     value={formSubject}
                     onChange={(e) => setFormSubject(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
                   >
                     <option value="Residential Cleaning Inquiry">Residential Cleaning (Home / Condo / Deep Clean)</option>
                     <option value="Commercial RFP / Janitorial Contract">Commercial RFP / Janitorial Contract</option>
@@ -272,7 +272,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     value={formMessage}
                     onChange={(e) => setFormMessage(e.target.value)}
                     placeholder="Tell us about your space, approximate square footage, timeline, or requirements..."
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                   />
                 </div>
 

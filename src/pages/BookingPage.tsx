@@ -231,7 +231,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                 <select
                   value={packageType}
                   onChange={(e) => setPackageType(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-800 focus:outline-none focus:border-jitto-navy"
+                  className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm bg-white text-slate-800 focus:outline-none focus:border-jitto-navy"
                 >
                   {category === 'residential' && (
                     <>
@@ -280,7 +280,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                     value={bookingDate}
                     min={new Date().toISOString().split('T')[0]}
                     onChange={(e) => setBookingDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                   />
                 </div>
 
@@ -291,7 +291,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                   <select
                     value={timeSlot}
                     onChange={(e) => setTimeSlot(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:border-jitto-navy"
                   >
                     <option value="Morning (8:00 AM - 12:00 PM)">Morning (8:00 AM - 12:00 PM)</option>
                     <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00 PM)</option>
@@ -313,7 +313,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder="e.g. 88 Bayfield St, Unit 4"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                   />
                 </div>
 
@@ -324,7 +324,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                   <select
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:border-jitto-navy"
                   >
                     {COMPANY_INFO.serviceAreas.map((c) => (
                       <option key={c} value={c}>{c}</option>
@@ -371,7 +371,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Marcus Vance"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                   />
                 </div>
 
@@ -383,7 +383,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="(249) 000-0000"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                   />
                 </div>
 
@@ -395,7 +395,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="marcus@example.ca"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                    className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                   />
                 </div>
               </div>
@@ -410,7 +410,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                   value={specialRequests}
                   onChange={(e) => setSpecialRequests(e.target.value)}
                   placeholder="Lockbox location, delicate surfaces, pet considerations..."
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                  className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                 />
               </div>
 

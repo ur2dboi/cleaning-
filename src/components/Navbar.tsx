@@ -260,7 +260,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           <div className="space-y-1 text-xs font-medium text-slate-700">
             <button
               onClick={() => handleNav('home')}
-              className={`w-full text-left px-3 py-2 rounded-lg ${
+              className={`w-full text-left px-3 py-2.5 min-h-[44px] flex items-center rounded-lg ${
                 currentPage === 'home' ? 'bg-slate-100 font-semibold text-slate-900' : 'hover:bg-slate-50'
               }`}
             >
@@ -273,7 +273,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
             <button
               onClick={() => handleNav('residential')}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-50"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-lg hover:bg-slate-50 text-slate-800"
             >
               <HomeIcon className="w-4 h-4 text-jitto-navy" />
               <span>Residential Cleaning</span>
@@ -281,7 +281,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
             <button
               onClick={() => handleNav('commercial')}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-50"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-lg hover:bg-slate-50 text-slate-800"
             >
               <Building2 className="w-4 h-4 text-jitto-navy" />
               <span>Commercial Cleaning</span>
@@ -289,7 +289,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
             <button
               onClick={() => handleNav('post-construction')}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-50"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-lg hover:bg-slate-50 text-slate-800"
             >
               <HardHat className="w-4 h-4 text-jitto-navy" />
               <span>Post-Construction Detailing</span>
@@ -297,7 +297,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
             <button
               onClick={() => handleNav('junk-removal')}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-50"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-lg hover:bg-slate-50 text-slate-800"
             >
               <Truck className="w-4 h-4 text-jitto-navy" />
               <span>Junk & Debris Removal</span>
@@ -305,7 +305,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
             <button
               onClick={() => handleNav('services')}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-50"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-lg hover:bg-slate-50 text-slate-800"
             >
               <CheckCircle2 className="w-4 h-4 text-jitto-navy" />
               <span>All Services & Programs</span>
@@ -315,7 +315,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
             <button
               onClick={() => handleNav('quote')}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-50 font-semibold text-jitto-navy"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-lg hover:bg-slate-50 font-semibold text-jitto-navy"
             >
               <Calculator className="w-4 h-4 text-jitto-navy" />
               <span>Quotation Form</span>
@@ -323,7 +323,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
             <button
               onClick={() => handleNav('booking')}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-50"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-lg hover:bg-slate-50 text-slate-800"
             >
               <Calendar className="w-4 h-4 text-jitto-navy" />
               <span>Booking Form</span>
@@ -331,14 +331,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
             <button
               onClick={() => handleNav('about')}
-              className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50"
+              className="w-full text-left px-3 py-2.5 min-h-[44px] flex items-center rounded-lg hover:bg-slate-50 text-slate-800"
             >
               About Us (16 Years Experience)
             </button>
 
             <button
               onClick={() => handleNav('contact')}
-              className="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-50"
+              className="w-full text-left px-3 py-2.5 min-h-[44px] flex items-center rounded-lg hover:bg-slate-50 text-slate-800"
             >
               Contact Us & 24/7 Operations
             </button>
@@ -347,13 +347,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           <div className="mt-4 pt-3 border-t border-slate-100 flex gap-2">
             <a
               href={`tel:${COMPANY_INFO.phoneRaw}`}
-              className="flex-1 text-center py-2 rounded-lg bg-slate-100 text-slate-800 text-xs font-semibold"
+              className="flex-1 text-center py-2.5 min-h-[44px] flex items-center justify-center rounded-lg bg-slate-100 text-slate-800 text-xs font-semibold"
             >
               Call (249) 800-0127
             </a>
             <button
               onClick={() => handleNav('quote')}
-              className="flex-1 py-2 rounded-lg bg-jitto-navy text-white text-xs font-semibold"
+              className="flex-1 py-2.5 min-h-[44px] flex items-center justify-center rounded-lg bg-jitto-navy text-white text-xs font-semibold"
             >
               Request Proposal
             </button>

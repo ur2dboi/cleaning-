@@ -65,13 +65,13 @@ export const JunkRemovalPage: React.FC<JunkRemovalPageProps> = ({
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-4">
                 <button
                   onClick={() => {
                     onSelectQuoteService('junk-removal');
                     onNavigate('quote');
                   }}
-                  className="bg-jitto-navy hover:bg-jitto-navy-800 text-white font-medium px-6 py-3 rounded-xl transition-all text-xs sm:text-sm flex items-center gap-2 shadow-sm"
+                  className="w-full sm:w-auto min-h-[44px] justify-center bg-jitto-navy hover:bg-jitto-navy-800 text-white font-medium px-6 py-3 rounded-xl transition-all text-xs sm:text-sm flex items-center gap-2 shadow-sm"
                 >
                   <span>Request Hauling Proposal</span>
                   <ArrowRight className="w-4 h-4 text-jitto-cyan" />
@@ -79,7 +79,7 @@ export const JunkRemovalPage: React.FC<JunkRemovalPageProps> = ({
 
                 <a
                   href={`tel:${COMPANY_INFO.phoneRaw}`}
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium px-5 py-3 rounded-xl transition-colors text-xs sm:text-sm flex items-center gap-2"
+                  className="w-full sm:w-auto min-h-[44px] justify-center bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium px-5 py-3 rounded-xl transition-colors text-xs sm:text-sm flex items-center gap-2"
                 >
                   <Phone className="w-3.5 h-3.5 text-jitto-navy" />
                   <span>Direct Hauling Line: (249) 800-0127</span>

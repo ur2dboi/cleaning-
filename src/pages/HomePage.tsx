@@ -67,10 +67,10 @@ export const HomePage: React.FC<HomePageProps> = ({
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-1">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
                 <button
                   onClick={() => onNavigate('quote')}
-                  className="bg-jitto-cyan hover:bg-jitto-cyan-400 text-jitto-navy-950 font-bold px-6 py-3.5 rounded-xl shadow-glow-cyan transition-all text-sm flex items-center gap-2 group"
+                  className="w-full sm:w-auto bg-jitto-cyan hover:bg-jitto-cyan-400 text-jitto-navy-950 font-bold px-6 py-3.5 rounded-xl shadow-glow-cyan transition-all text-sm flex items-center justify-center gap-2 group min-h-[44px]"
                 >
                   <Sparkles className="w-4 h-4" />
                   <span>Request Custom Proposal</span>
@@ -79,14 +79,14 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                 <button
                   onClick={() => onNavigate('booking')}
-                  className="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-3.5 rounded-xl border border-white/20 transition-all text-sm flex items-center gap-2 backdrop-blur-sm"
+                  className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-3.5 rounded-xl border border-white/20 transition-all text-sm flex items-center justify-center gap-2 backdrop-blur-sm min-h-[44px]"
                 >
                   <span>Reserve Appointment Slot</span>
                 </button>
 
                 <a
                   href={`tel:${COMPANY_INFO.phoneRaw}`}
-                  className="inline-flex items-center gap-2 text-slate-300 hover:text-white px-3 py-2.5 transition-colors text-xs sm:text-sm font-semibold"
+                  className="inline-flex items-center justify-center gap-2 text-slate-300 hover:text-white px-3 py-2.5 transition-colors text-xs sm:text-sm font-semibold min-h-[44px]"
                 >
                   <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
                   <span>(249) 800-0127 (24/7)</span>
@@ -627,17 +627,17 @@ export const HomePage: React.FC<HomePageProps> = ({
               Request a custom proposal with zero obligation, or speak directly to company leadership today.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-3.5 pt-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 pt-1">
               <button
                 onClick={() => onNavigate('quote')}
-                className="bg-jitto-cyan hover:bg-jitto-cyan-400 text-jitto-navy-950 font-bold px-7 py-3.5 rounded-xl transition-all text-sm shadow-glow-cyan"
+                className="w-full sm:w-auto min-h-[44px] flex items-center justify-center bg-jitto-cyan hover:bg-jitto-cyan-400 text-jitto-navy-950 font-bold px-7 py-3.5 rounded-xl transition-all text-sm shadow-glow-cyan"
               >
                 Request Custom Proposal
               </button>
 
               <a
                 href={`tel:${COMPANY_INFO.phoneRaw}`}
-                className="border border-white/20 hover:border-white/40 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors text-sm"
+                className="w-full sm:w-auto min-h-[44px] flex items-center justify-center border border-white/20 hover:border-white/40 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors text-sm"
               >
                 Call: (249) 800-0127 (24/7)
               </a>

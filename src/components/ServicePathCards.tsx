@@ -67,7 +67,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
             </div>
 
             {/* Content Body */}
-            <div className="p-7">
+            <div className="p-5 sm:p-7">
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
                 Warm, trustworthy care for your private sanctuary. Founded on 16 years of hands-on housekeeping in private homes, we treat every room with discretion and meticulous care.
               </p>
@@ -103,10 +103,10 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
           </div>
 
           {/* Action Footer */}
-          <div className="px-7 pb-7 pt-2 border-t border-slate-100 flex items-center justify-between gap-3">
+          <div className="px-5 sm:px-7 pb-5 sm:pb-7 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
             <button
               onClick={() => onNavigate('residential')}
-              className="flex-1 bg-jitto-navy hover:bg-jitto-navy-800 text-white font-semibold py-3 px-4 rounded-xl transition-all text-xs flex items-center justify-center gap-2 shadow-sm"
+              className="flex-1 bg-jitto-navy hover:bg-jitto-navy-800 text-white font-semibold py-3 px-4 min-h-[44px] rounded-xl transition-all text-xs flex items-center justify-center gap-2 shadow-sm"
             >
               <span>Explore Residential</span>
               <ArrowRight className="w-3.5 h-3.5 text-jitto-cyan group-hover:translate-x-1 transition-transform" />
@@ -117,7 +117,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
                 if (onSelectQuoteService) onSelectQuoteService('residential');
                 onNavigate('quote');
               }}
-              className="py-3 px-4 rounded-xl border border-slate-200 text-slate-700 hover:border-jitto-navy hover:text-jitto-navy font-semibold text-xs transition-colors"
+              className="py-3 px-4 min-h-[44px] rounded-xl border border-slate-200 text-slate-700 hover:border-jitto-navy hover:text-jitto-navy font-semibold text-xs transition-colors flex items-center justify-center"
             >
               Quote
             </button>
@@ -152,7 +152,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
             </div>
 
             {/* Content Body */}
-            <div className="p-7">
+            <div className="p-5 sm:p-7">
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
                 Immaculate presentation and hygiene for offices, medical clinics, retail, and managed properties. Flexible after-hours schedules that never disrupt your business.
               </p>
@@ -188,10 +188,10 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
           </div>
 
           {/* Action Footer */}
-          <div className="px-7 pb-7 pt-2 border-t border-slate-100 flex items-center justify-between gap-3">
+          <div className="px-5 sm:px-7 pb-5 sm:pb-7 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
             <button
               onClick={() => onNavigate('commercial')}
-              className="flex-1 bg-jitto-navy hover:bg-jitto-navy-800 text-white font-semibold py-3 px-4 rounded-xl transition-all text-xs flex items-center justify-center gap-2 shadow-sm"
+              className="flex-1 bg-jitto-navy hover:bg-jitto-navy-800 text-white font-semibold py-3 px-4 min-h-[44px] rounded-xl transition-all text-xs flex items-center justify-center gap-2 shadow-sm"
             >
               <span>Explore Commercial</span>
               <ArrowRight className="w-3.5 h-3.5 text-jitto-cyan group-hover:translate-x-1 transition-transform" />
@@ -202,7 +202,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
                 if (onSelectQuoteService) onSelectQuoteService('commercial');
                 onNavigate('quote');
               }}
-              className="py-3 px-4 rounded-xl border border-slate-200 text-slate-700 hover:border-jitto-navy hover:text-jitto-navy font-semibold text-xs transition-colors"
+              className="py-3 px-4 min-h-[44px] rounded-xl border border-slate-200 text-slate-700 hover:border-jitto-navy hover:text-jitto-navy font-semibold text-xs transition-colors flex items-center justify-center"
             >
               Proposal
             </button>
@@ -237,7 +237,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
             </div>
 
             {/* Content Body */}
-            <div className="p-7">
+            <div className="p-5 sm:p-7">
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
                 Fine drywall dust eradication, paint/sticker scraping, and white-glove turnaround. We ensure your new build or renovation passes client walkthroughs and building inspections.
               </p>
@@ -273,10 +273,10 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
           </div>
 
           {/* Action Footer */}
-          <div className="px-7 pb-7 pt-2 border-t border-slate-100 flex items-center justify-between gap-3">
+          <div className="px-5 sm:px-7 pb-5 sm:pb-7 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
             <button
               onClick={() => onNavigate('post-construction')}
-              className="flex-1 bg-jitto-navy hover:bg-jitto-navy-800 text-white font-semibold py-3 px-4 rounded-xl transition-all text-xs flex items-center justify-center gap-2 shadow-sm"
+              className="flex-1 bg-jitto-navy hover:bg-jitto-navy-800 text-white font-semibold py-3 px-4 min-h-[44px] rounded-xl transition-all text-xs flex items-center justify-center gap-2 shadow-sm"
             >
               <span>Explore Construction</span>
               <ArrowRight className="w-3.5 h-3.5 text-jitto-cyan group-hover:translate-x-1 transition-transform" />
@@ -287,7 +287,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
                 if (onSelectQuoteService) onSelectQuoteService('post-construction');
                 onNavigate('quote');
               }}
-              className="py-3 px-4 rounded-xl border border-slate-200 text-slate-700 hover:border-jitto-navy hover:text-jitto-navy font-semibold text-xs transition-colors"
+              className="py-3 px-4 min-h-[44px] rounded-xl border border-slate-200 text-slate-700 hover:border-jitto-navy hover:text-jitto-navy font-semibold text-xs transition-colors flex items-center justify-center"
             >
               Specs
             </button>
@@ -297,7 +297,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
       </div>
 
       {/* COMPANION PATHWAY: JUNK & DEBRIS REMOVAL */}
-      <div className="mt-8 bg-gradient-to-r from-slate-900 via-jitto-navy-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white border border-slate-800 shadow-xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div className="mt-8 bg-gradient-to-r from-slate-900 via-jitto-navy-950 to-slate-900 rounded-3xl p-5 sm:p-8 text-white border border-slate-800 shadow-xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         <div className="flex items-start sm:items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0 text-jitto-cyan">
             <Truck className="w-6 h-6" />
@@ -319,10 +319,10 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 shrink-0">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full lg:w-auto">
           <button
             onClick={() => onNavigate('junk-removal')}
-            className="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/20 text-xs font-semibold transition-colors flex items-center gap-1.5"
+            className="w-full sm:w-auto px-5 py-3 min-h-[44px] rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/20 text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
           >
             <span>Explore Junk Removal</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -333,7 +333,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
               if (onSelectQuoteService) onSelectQuoteService('junk-removal');
               onNavigate('quote');
             }}
-            className="px-5 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-950 text-xs font-semibold transition-colors shadow-sm"
+            className="w-full sm:w-auto px-5 py-3 min-h-[44px] rounded-xl bg-white hover:bg-slate-100 text-slate-950 text-xs font-semibold transition-colors shadow-sm flex items-center justify-center"
           >
             Request Hauling Proposal
           </button>

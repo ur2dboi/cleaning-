@@ -60,7 +60,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#fafbfc] font-sans text-slate-800 selection:bg-jitto-cyan selection:text-jitto-navy-950">
+    <div className="min-h-screen flex flex-col bg-[#fafbfc] font-sans text-slate-800 selection:bg-jitto-cyan selection:text-jitto-navy-950 overflow-x-hidden w-full max-w-full">
       
       {/* Welcome Splash & Loading Sequence */}
       {isLoading && (
@@ -149,7 +149,7 @@ export function App() {
       <Footer onNavigate={navigateTo} />
 
       {/* Discreet Minimalist Floating Pill (Bottom Right) */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-2">
         {showScrollTop && (
           <button
             onClick={scrollToTop}

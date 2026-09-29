@@ -555,7 +555,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                           <select
                             value={commSqFt}
                             onChange={(e) => setCommSqFt(e.target.value)}
-                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
+                            className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
                           >
                             <option value="under-1500">Under 1,500 sq ft</option>
                             <option value="1500-3500">1,500 - 3,500 sq ft</option>
@@ -571,7 +571,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                           <select
                             value={preferredHours}
                             onChange={(e) => setPreferredHours(e.target.value)}
-                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
+                            className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
                           >
                             <option value="After Hours (Evenings)">After Hours (Evenings / Closed)</option>
                             <option value="Daytime Porter">Daytime Custodial / Porter</option>
@@ -654,7 +654,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                             value={projectSqFt}
                             onChange={(e) => setProjectSqFt(e.target.value)}
                             placeholder="e.g. 2800"
-                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                            className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                           />
                         </div>
 
@@ -666,7 +666,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                             type="date"
                             value={finishDate}
                             onChange={(e) => setFinishDate(e.target.value)}
-                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                            className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                           />
                         </div>
                       </div>
@@ -811,7 +811,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                           <select
                             value={junkLocation}
                             onChange={(e) => setJunkLocation(e.target.value)}
-                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
+                            className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
                           >
                             <option value="Curbside / Driveway">Curbside / Driveway (Ground Level Access)</option>
                             <option value="Main Floor / Attached Garage">Main Floor / Attached Garage</option>
@@ -828,7 +828,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                             type="date"
                             value={junkDate}
                             onChange={(e) => setJunkDate(e.target.value)}
-                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                            className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                           />
                         </div>
                       </div>
@@ -888,7 +888,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         value={contactName}
                         onChange={(e) => setContactName(e.target.value)}
                         placeholder="Elena Vance"
-                        className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                        className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                       />
                     </div>
 
@@ -900,7 +900,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         value={contactPhone}
                         onChange={(e) => setContactPhone(e.target.value)}
                         placeholder="(249) 000-0000"
-                        className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                        className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                       />
                     </div>
 
@@ -912,7 +912,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         value={contactEmail}
                         onChange={(e) => setContactEmail(e.target.value)}
                         placeholder="elena@example.ca"
-                        className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                        className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                       />
                     </div>
 
@@ -921,7 +921,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                       <select
                         value={selectedCity}
                         onChange={(e) => setSelectedCity(e.target.value)}
-                        className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
+                        className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
                       >
                         {COMPANY_INFO.serviceAreas.map((city) => (
                           <option key={city} value={city}>{city}</option>
@@ -937,7 +937,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                       value={propertyAddress}
                       onChange={(e) => setPropertyAddress(e.target.value)}
                       placeholder="e.g. 120 Lakeshore Dr, Unit 302"
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                      className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                     />
                   </div>
 
@@ -948,7 +948,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                       value={clientNotes}
                       onChange={(e) => setClientNotes(e.target.value)}
                       placeholder="Special surfaces, lockbox instructions, or inspection deadlines..."
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                      className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-jitto-navy"
                     />
                   </div>
                 </div>
