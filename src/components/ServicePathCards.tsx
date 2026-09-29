@@ -1,17 +1,19 @@
 import React from 'react';
-import type { PageRoute } from '../types';
+import type { PageRoute, ServiceCategory } from '../types';
 import { 
   ArrowRight, 
   Check, 
   Home as HomeIcon, 
   Building2, 
   HardHat,
-  Sparkles
+  Truck,
+  Sparkles,
+  Recycle
 } from 'lucide-react';
 
 interface ServicePathCardsProps {
   onNavigate: (page: PageRoute) => void;
-  onSelectQuoteService?: (service: 'residential' | 'commercial' | 'post-construction') => void;
+  onSelectQuoteService?: (service: ServiceCategory) => void;
 }
 
 export const ServicePathCards: React.FC<ServicePathCardsProps> = ({ 
@@ -246,7 +248,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
                   <div className="w-5 h-5 rounded-full bg-jitto-cyan/15 text-jitto-cyan-700 flex items-center justify-center shrink-0">
                     <Check className="w-3.5 h-3.5 stroke-[3]" />
                   </div>
-                  <span><strong>Dust Eradication:</strong> HEPA air filtration & duct vents</span>
+                  <span><strong>Dust Eradication:</strong> HEPA air filtration & vent registers</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <div className="w-5 h-5 rounded-full bg-jitto-cyan/15 text-jitto-cyan-700 flex items-center justify-center shrink-0">
@@ -292,6 +294,50 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
           </div>
         </div>
 
+      </div>
+
+      {/* COMPANION PATHWAY: JUNK & DEBRIS REMOVAL */}
+      <div className="mt-8 bg-gradient-to-r from-slate-900 via-jitto-navy-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white border border-slate-800 shadow-xl flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div className="flex items-start sm:items-center gap-4">
+          <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0 text-jitto-cyan">
+            <Truck className="w-6 h-6" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[10px] font-mono tracking-widest text-jitto-cyan uppercase">
+                Active Service Pathway
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-jitto-cyan" />
+              <span className="text-[10px] text-slate-400">Barrie & Simcoe County</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-serif font-bold">
+              Need Junk, Furniture or Renovation Debris Cleared?
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
+              Full-service hauling, heavy lifting, eco-friendly donation sorting, and our signature <strong>broom-swept guarantee</strong>.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <button
+            onClick={() => onNavigate('junk-removal')}
+            className="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/20 text-xs font-semibold transition-colors flex items-center gap-1.5"
+          >
+            <span>Explore Junk Removal</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+
+          <button
+            onClick={() => {
+              if (onSelectQuoteService) onSelectQuoteService('junk-removal');
+              onNavigate('quote');
+            }}
+            className="px-5 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-950 text-xs font-semibold transition-colors shadow-sm"
+          >
+            Request Hauling Proposal
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import { ServicesPage } from './pages/ServicesPage';
 import { ResidentialPage } from './pages/ResidentialPage';
 import { CommercialPage } from './pages/CommercialPage';
 import { PostConstructionPage } from './pages/PostConstructionPage';
+import { JunkRemovalPage } from './pages/JunkRemovalPage';
 import { QuotationPage } from './pages/QuotationPage';
 import { BookingPage } from './pages/BookingPage';
 import { AboutPage } from './pages/AboutPage';
@@ -25,7 +26,7 @@ export function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#/', '').replace('#', '').toLowerCase();
-      if (['home', 'services', 'residential', 'commercial', 'post-construction', 'quote', 'booking', 'about', 'contact'].includes(hash)) {
+      if (['home', 'services', 'residential', 'commercial', 'post-construction', 'junk-removal', 'quote', 'booking', 'about', 'contact'].includes(hash)) {
         setCurrentPage(hash as PageRoute);
       }
     };
@@ -106,6 +107,13 @@ export function App() {
 
         {currentPage === 'post-construction' && (
           <PostConstructionPage 
+            onNavigate={navigateTo} 
+            onSelectQuoteService={handleSelectQuoteService} 
+          />
+        )}
+
+        {currentPage === 'junk-removal' && (
+          <JunkRemovalPage 
             onNavigate={navigateTo} 
             onSelectQuoteService={handleSelectQuoteService} 
           />

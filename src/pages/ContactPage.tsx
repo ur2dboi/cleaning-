@@ -259,7 +259,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     <option value="Residential Cleaning Inquiry">Residential Cleaning (Home / Condo / Deep Clean)</option>
                     <option value="Commercial RFP / Janitorial Contract">Commercial RFP / Janitorial Contract</option>
                     <option value="Post-Construction Clean / Builder Partnership">Post-Construction / Handover Inspection</option>
-                    <option value="HVAC or Junk Removal Upcoming Service">HVAC / Junk Removal Upcoming Service</option>
+                    <option value="Junk & Debris Removal Service">Junk & Debris Removal (Hauling & Cleanout)</option>
                     <option value="General Question or Feedback">General Question</option>
                   </select>
                 </div>

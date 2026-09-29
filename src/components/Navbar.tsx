@@ -10,6 +10,7 @@ import {
   Home as HomeIcon, 
   Building2, 
   HardHat, 
+  Truck,
   Calculator, 
   Calendar,
   CheckCircle2
@@ -97,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                 onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
                 onMouseEnter={() => setServicesDropdownOpen(true)}
                 className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors ${
-                  ['services', 'residential', 'commercial', 'post-construction'].includes(currentPage)
+                  ['services', 'residential', 'commercial', 'post-construction', 'junk-removal'].includes(currentPage)
                     ? 'text-slate-900 font-semibold bg-slate-100/70'
                     : 'hover:text-slate-900 hover:bg-slate-50'
                 }`}
@@ -144,13 +145,24 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                     </div>
                   </button>
 
+                  <button
+                    onClick={() => handleNav('junk-removal')}
+                    className="w-full flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50 text-left transition-colors"
+                  >
+                    <Truck className="w-4 h-4 text-jitto-navy shrink-0" />
+                    <div>
+                      <div className="font-semibold text-slate-900 text-xs">Junk & Debris Removal</div>
+                      <div className="text-[11px] text-slate-500">Hauling, estate cleanouts & donation</div>
+                    </div>
+                  </button>
+
                   <div className="my-1 border-t border-slate-100" />
                   
                   <button
                     onClick={() => handleNav('services')}
                     className="w-full text-center py-1.5 text-[11px] font-semibold text-jitto-navy hover:text-jitto-cyan-600 transition-colors"
                   >
-                    All Services & Upcoming Expansions →
+                    Explore All Services & Programs →
                   </button>
                 </div>
               )}
@@ -284,11 +296,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             </button>
 
             <button
+              onClick={() => handleNav('junk-removal')}
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-50"
+            >
+              <Truck className="w-4 h-4 text-jitto-navy" />
+              <span>Junk & Debris Removal</span>
+            </button>
+
+            <button
               onClick={() => handleNav('services')}
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-slate-50"
             >
               <CheckCircle2 className="w-4 h-4 text-jitto-navy" />
-              <span>All Services & Upcoming Expansions</span>
+              <span>All Services & Programs</span>
             </button>
 
             <div className="my-2 border-t border-slate-100" />

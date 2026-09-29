@@ -139,14 +139,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Post-Construction Detailing
                 </button>
               </li>
-              <li className="pt-2 text-[10px] uppercase font-bold text-slate-500">Upcoming:</li>
               <li>
-                <button onClick={() => handleNav('services')} className="hover:text-white text-slate-400 transition-colors">
-                  HVAC & Duct Cleaning
-                </button>
-              </li>
-              <li>
-                <button onClick={() => handleNav('services')} className="hover:text-white text-slate-400 transition-colors">
+                <button onClick={() => handleNav('junk-removal')} className="hover:text-white transition-colors">
                   Junk & Debris Removal
                 </button>
               </li>

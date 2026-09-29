@@ -8,6 +8,7 @@ import {
   Home as HomeIcon, 
   Building2, 
   HardHat, 
+  Truck,
   Check, 
   ArrowRight,
   RotateCcw,
@@ -184,11 +185,12 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                 <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5">
                   01 / Service Classification
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {[
                     { id: 'residential', label: 'Residential', icon: HomeIcon, desc: 'Homes & Condos' },
                     { id: 'commercial', label: 'Commercial', icon: Building2, desc: 'Offices & Retail' },
-                    { id: 'post-construction', label: 'Post-Construction', icon: HardHat, desc: 'New Builds & Renos' }
+                    { id: 'post-construction', label: 'Post-Construction', icon: HardHat, desc: 'New Builds & Renos' },
+                    { id: 'junk-removal', label: 'Junk Removal', icon: Truck, desc: 'Hauling & Cleanout' }
                   ].map((s) => {
                     const Icon = s.icon;
                     const active = category === s.id;
@@ -201,6 +203,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                           if (s.id === 'residential') setPackageType('Regular Maintenance Clean');
                           if (s.id === 'commercial') setPackageType('After-Hours Commercial Clean');
                           if (s.id === 'post-construction') setPackageType('Handover Final Clean');
+                          if (s.id === 'junk-removal') setPackageType('Residential Junk & Furniture Haul');
                         }}
                         className={`p-3 rounded-xl border text-left transition-all ${
                           active
@@ -251,6 +254,15 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                       <option value="Phase 2: Final Detail Clean">Phase 2: Final Detail Clean (HEPA & Glass)</option>
                       <option value="Phase 3: Touch-Up Handover Clean">Phase 3: Touch-Up Handover / Inspection Clean</option>
                       <option value="Full 3-Phase Package">Full 3-Phase Handover Package</option>
+                    </>
+                  )}
+                  {category === 'junk-removal' && (
+                    <>
+                      <option value="Residential Junk & Furniture Haul">Residential Junk & Furniture Haul</option>
+                      <option value="Renovation & Construction Debris Haul">Renovation & Construction Debris Haul</option>
+                      <option value="Estate & Full Garage Cleanout">Estate & Full Garage Cleanout</option>
+                      <option value="Commercial / Office Decommission Haul">Commercial / Office Decommission Haul</option>
+                      <option value="Curbside Rapid Pickup">Curbside Rapid Pickup</option>
                     </>
                   )}
                 </select>

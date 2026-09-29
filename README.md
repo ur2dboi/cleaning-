@@ -15,7 +15,7 @@ This website is custom-engineered for **Jitto Cleaning Services**, speaking dire
 1. **Residential Cleaning (Homeowners & Families)**: Warm, trustworthy housekeeping, recurring maintenance, deep resets, and move-in/move-out turnover cleans.
 2. **Commercial & Janitorial (Offices, Clinics & Retail)**: Professional corporate presentation, hospital-grade clinic sanitization, after-hours flexibility, and customized service agreements.
 3. **Post-Construction Detailing (Builders, General Contractors & Renovators)**: Turnkey dust & debris eradication, HEPA air filtration, paint/sticker scraping, and time-stamped photo verification logs ready for handover and occupancy inspections.
-4. **Coming Soon Services**: Dedicated showcases and early waitlist inquiries for **HVAC Air Duct Cleaning** and **Junk & Debris Removal**.
+4. **Junk & Debris Removal (Homeowners, Realtors & Contractors)**: Turnkey hauling, estate clearances, renovation debris removal, and responsible eco-friendly recycling with our signature broom-swept finish.
 
 ---
 
@@ -35,18 +35,20 @@ This website is custom-engineered for **Jitto Cleaning Services**, speaking dire
    - Master catalog with interactive category switcher.
    - Deep-dive cards for each package with room-by-room checklist previews.
    - "Why Jitto vs Standard Cleaners" feature matrix.
-   - "Coming Soon" teasers for HVAC Air Duct Sanitation & Junk Hauling with early notification signup.
+   - Dedicated showcases for Residential, Commercial, Post-Construction, and Junk & Debris Removal.
 
 3. **Dedicated Service Landing Pages**:
    - **Residential (`#/residential`)**: Homeowner sanctuary focus, room-by-room checklist breakdown.
    - **Commercial (`#/commercial`)**: Office & clinic sanitation, after-hours contracts, security protocols.
    - **Post-Construction (`#/post-construction`)**: 3-phase workflow (Rough, Final, Handover Touch-Up), inspection readiness.
+   - **Junk & Debris Removal (`#/junk-removal`)**: Full-service hauling, acceptance guide, broom-swept finish, and eco-diversion charity partnerships.
 
 4. **Quotation Form (`#/quote`)**:
    - Smart dynamic quote generator that starts with *"Which service do you need?"*:
      - **Residential**: Selects bedrooms, bathrooms, home square footage, cleaning frequency (weekly, bi-weekly, monthly, deep, move-in/out), and specialty add-ons.
      - **Commercial**: Selects facility type (office, clinic, retail), commercial square footage, preferred cleaning hours (after-hours, daytime porter, weekends), and schedule frequency.
-     - **Post-Construction**: Selects project type, size (sq ft), construction phase, target finish date, dust severity level, and features a **job site photo / blueprint upload zone**.
+     - **Post-Construction**: Selects project type, size (sq ft), construction phase, target finish date, and features a **job site photo / blueprint upload zone**.
+     - **Junk Removal**: Selects estimated load volume (single item to multiple truckloads), item types (furniture, appliances, renovation debris, yard waste, e-waste), accessibility, and photo upload for fast exact quote.
    - Real-time dynamic price calculation range in CAD.
    - Reference ID generation (e.g. `JITTO-QT-8421`) and celebratory confetti effect.
 

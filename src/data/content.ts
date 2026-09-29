@@ -169,24 +169,83 @@ export const POST_CONSTRUCTION_DETAILS = {
   ]
 };
 
-export const COMING_SOON_SERVICES = [
-  {
-    id: "hvac",
-    title: "HVAC & Air Duct Cleaning",
-    badge: "Coming Soon",
-    desc: "Complete interior duct sanitation, furnace fan cleaning, and allergen extraction to ensure crisp, clean indoor air quality for homes and offices.",
-    eta: "Launching Soon in Simcoe County",
-    highlights: ["Negative air HEPA collection", "Mold & dust mite elimination", "Improves HVAC efficiency", "Recommended after renovations"]
-  },
-  {
-    id: "junk",
-    title: "Junk & Debris Removal",
-    badge: "Coming Soon",
-    desc: "Professional hauling and eco-conscious disposal for renovation leftovers, estate cleanouts, bulky furniture, and yard clutter.",
-    eta: "Launching Soon in Simcoe County",
-    highlights: ["Same-day & scheduled hauling", "Donation & recycling priority", "Heavy lifting included", "Broom-clean finish after haul"]
-  }
-];
+export const JUNK_REMOVAL_DETAILS = {
+  title: "Junk & Debris Removal",
+  subtitle: "Full-service hauling, responsible recycling, and our signature broom-swept guarantee.",
+  targetAudience: "Homeowners, Realtors, Contractors, Estate Executors & Property Managers",
+  overview: "From single heavy appliances to complete estate cleanouts and jobsite construction debris, Jitto provides dependable, full-service hauling across Barrie and Simcoe County. Our crew handles all the heavy lifting, loading, and responsible sorting—with priority given to local donation and green diversion. And because we are professional cleaners, we sweep and vacuum the area spotless before leaving.",
+  services: [
+    {
+      name: "Residential Declutter & Furniture",
+      badge: "Home & Condo",
+      timing: "Same-Day / Next-Day Available",
+      description: "Quick, hassle-free removal of old sofas, mattresses, appliances, electronics, basement clutter, and garage overflow.",
+      includes: [
+        "Two-person professional lifting crew",
+        "Safe extraction without scratching walls or doorframes",
+        "Donation delivery for salvageable items",
+        "Broom-swept clean finish of loading area"
+      ]
+    },
+    {
+      name: "Renovation & Construction Debris",
+      badge: "Jobsite Ready",
+      timing: "Scheduled or On-Demand Sweeps",
+      description: "Removal of drywall off-cuts, lumber, flooring, tiles, framing offcuts, packaging, and general contractor scrap.",
+      includes: [
+        "Heavy debris hauling and weight-certified disposal",
+        "Sweep-out of subfloors and work areas",
+        "Compliant Simcoe County disposal transfers",
+        "Photo verification sent directly to project managers"
+      ]
+    },
+    {
+      name: "Estate & Whole-Home Cleanouts",
+      badge: "Full Property Reset",
+      timing: "Comprehensive Project Scoping",
+      description: "Respectful, thorough clearing of entire estates, rental turnovers, foreclosures, or downsizing transitions.",
+      includes: [
+        "Room-by-room sorting & categorization",
+        "Separation of family keepsakes and donation items",
+        "Complete removal of remaining unwanted items",
+        "Detailed vacuuming and floor sweep"
+      ]
+    },
+    {
+      name: "Commercial & Office Decommission",
+      badge: "Commercial Facilities",
+      timing: "After-Hours & Weekend Hauling",
+      description: "Removal of old desks, cubicles, retail display fixtures, filing cabinets, and certified electronic e-waste recycling.",
+      includes: [
+        "Disassembly of modular office furniture",
+        "Certified electronic waste diversion",
+        "Flexible off-hours scheduling to avoid business disruption",
+        "Itemized disposal manifest for corporate records"
+      ]
+    }
+  ],
+  whatWeTake: [
+    { title: "Furniture & Bedding", items: "Couches, sectionals, mattresses, box springs, dressers, dining sets, desks" },
+    { title: "Appliances & White Goods", items: "Refrigerators, freezers, stoves, washers, dryers, microwaves, air conditioners" },
+    { title: "Renovation Materials", items: "Drywall, studs, plywood, tile, sinks, cabinetry, carpet rolls, doors" },
+    { title: "Yard & Outdoor Waste", items: "Fencing, patio furniture, tree limbs, brush, old barbecues, sheds" },
+    { title: "Electronics & E-Waste", items: "Computers, monitors, printers, televisions, stereos, small appliances" },
+    { title: "Household & Attic Clutter", items: "Boxes, books, clothes, exercise equipment, tools, holiday decorations" }
+  ],
+  whatWeDoNotTake: [
+    "Wet paints, stains, or liquid solvents",
+    "Hazardous chemicals, motor oil, or car batteries",
+    "Biological or medical waste",
+    "Asbestos-containing materials",
+    "Pressurized propane tanks or explosives"
+  ],
+  benefits: [
+    { title: "Heavy Lifting & Labor Included", desc: "You just point to what needs to go. Our two-person uniformed crew handles all carrying, navigating stairs, and loading." },
+    { title: "The Broom-Swept Guarantee", desc: "Unlike standard haulers who leave dirt and drywall dust behind, we sweep and detail the area clean after loading." },
+    { title: "Eco-Friendly Donation & Diversion", desc: "We partner with local charities and transfer stations across Simcoe County to divert usable goods from landfills." },
+    { title: "Upfront Transparent Proposals", desc: "Volume-based pricing with no hidden weight or disposal fees. What we quote is what you pay." }
+  ]
+};
 
 export const TESTIMONIALS: Testimonial[] = [
   {
@@ -218,6 +277,16 @@ export const TESTIMONIALS: Testimonial[] = [
     rating: 5,
     content: "Our dental clinic requires uncompromising disinfection. Jitto has handled our after-hours commercial cleaning flawlessly for 8 months. Transparent checklists and direct access to the owners make communication effortless.",
     date: "3 weeks ago"
+  },
+  {
+    id: "4",
+    author: "David MacIntyre",
+    role: "Property Owner & Renovator",
+    location: "Barrie (Allandale)",
+    category: "junk-removal",
+    rating: 5,
+    content: "We gutted our basement and had a massive pile of drywall, studs, and old shelving. Jitto gave an upfront quote, arrived right on time with a clean truck, cleared everything in under 90 minutes, and actually swept the entire concrete floor clean. Unbeatable service.",
+    date: "1 week ago"
   }
 ];
 

@@ -154,7 +154,7 @@ export const PostConstructionPage: React.FC<PostConstructionPageProps> = ({
                 HEPA Backpack Vacs & Delicate Millwork Care
               </h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                Standard vacuums blow fine drywall silica back into the air. Our commercial HEPA extraction traps sub-micron particles, ensuring clean air ducts, polished light fixtures, and zero residue on custom cabinetry.
+                Standard vacuums blow fine drywall silica back into the air. Our commercial HEPA extraction traps sub-micron particles, ensuring pristine vents, polished light fixtures, and zero residue on custom cabinetry.
               </p>
             </div>
           </div>

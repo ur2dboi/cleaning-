@@ -8,6 +8,7 @@ import {
   Home as HomeIcon, 
   Building2, 
   HardHat, 
+  Truck,
   CheckCircle2, 
   Upload, 
   Phone, 
@@ -55,6 +56,17 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
   );
   const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
 
+  // Junk Removal State
+  const [junkVolume, setJunkVolume] = useState<string>('1/2 Truckload');
+  const [junkCategories, setJunkCategories] = useState<string[]>([
+    'Furniture & Mattresses',
+    'Appliances & White Goods'
+  ]);
+  const [junkLocation, setJunkLocation] = useState<string>('Curbside / Driveway');
+  const [junkDate, setJunkDate] = useState<string>(
+    new Date(Date.now() + 2 * 86400000).toISOString().split('T')[0]
+  );
+
   // Contact Details
   const [contactName, setContactName] = useState<string>('');
   const [companyName, setCompanyName] = useState<string>('');
@@ -74,6 +86,13 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
   const toggleResAddon = (id: string) => {
     setResAddons(prev => 
       prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
+  };
+
+  // Toggle junk categories
+  const toggleJunkCategory = (item: string) => {
+    setJunkCategories(prev =>
+      prev.includes(item) ? prev.filter(x => x !== item) : [...prev, item]
     );
   };
 
@@ -109,6 +128,11 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
       scopeData['Estimated Area'] = `${commSqFt} sq. ft.`;
       scopeData['Cleaning Window'] = preferredHours;
       scopeData['Cadence'] = commFrequency;
+    } else if (selectedService === 'junk-removal') {
+      scopeData['Estimated Load Size'] = junkVolume;
+      scopeData['Items to Remove'] = junkCategories.join(', ');
+      scopeData['Pickup Location'] = junkLocation;
+      scopeData['Target Pickup Date'] = junkDate;
     } else {
       scopeData['Project Type'] = projectType;
       scopeData['Square Footage'] = `${projectSqFt} sq. ft.`;
@@ -127,8 +151,8 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
         email: contactEmail,
         address: propertyAddress,
         city: selectedCity,
-        frequency: selectedService === 'residential' ? resFrequency : selectedService === 'commercial' ? commFrequency : 'One-time post-construction',
-        preferredDate: selectedService === 'post-construction' ? finishDate : undefined,
+        frequency: selectedService === 'residential' ? resFrequency : selectedService === 'commercial' ? commFrequency : selectedService === 'junk-removal' ? 'One-time Haul' : 'One-time post-construction',
+        preferredDate: selectedService === 'post-construction' ? finishDate : selectedService === 'junk-removal' ? junkDate : undefined,
         preferredTime: selectedService === 'commercial' ? preferredHours : undefined,
         scopeDetails: scopeData,
         notes: clientNotes,
@@ -246,6 +270,26 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                   </div>
                 </>
               )}
+              {selectedService === 'junk-removal' && (
+                <>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Estimated Volume:</span>
+                    <span className="font-semibold text-slate-900">{junkVolume}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Location / Access:</span>
+                    <span className="font-semibold text-slate-900">{junkLocation}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Target Date:</span>
+                    <span className="font-semibold text-slate-900">{junkDate}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Selected Items:</span>
+                    <span className="font-semibold text-slate-900 truncate max-w-[220px]">{junkCategories.join(', ')}</span>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
@@ -285,11 +329,12 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                     01 / Select Cleaning Category
                   </label>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {[
                       { id: 'residential', label: 'Residential', icon: HomeIcon, sub: 'Homes & Condos' },
                       { id: 'commercial', label: 'Commercial', icon: Building2, sub: 'Offices & Facilities' },
                       { id: 'post-construction', label: 'Post-Construction', icon: HardHat, sub: 'New Builds & Renos' },
+                      { id: 'junk-removal', label: 'Junk Removal', icon: Truck, sub: 'Hauling & Cleanouts' },
                     ].map((item) => {
                       const Icon = item.icon;
                       const active = selectedService === item.id;
@@ -681,6 +726,141 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                             {uploadedPhotos.map((url, i) => (
                               <div key={i} className="relative w-12 h-12 rounded-lg overflow-hidden border border-slate-200 shrink-0">
                                 <img src={url} alt="Site" className="w-full h-full object-cover" />
+                              </div>
+                            ))}
+                            <span className="text-[11px] text-slate-500">{uploadedPhotos.length} photo(s) attached</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* JUNK REMOVAL QUESTIONS */}
+                  {selectedService === 'junk-removal' && (
+                    <div className="space-y-5">
+                      <div>
+                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                          Estimated Volume / Load Size
+                        </label>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                          {[
+                            { id: 'Single Item / Appliance', label: 'Single Item', sub: 'Couch, fridge, mattress' },
+                            { id: '1/4 Truckload', label: '1/4 Truckload', sub: 'Light clutter / few items' },
+                            { id: '1/2 Truckload', label: '1/2 Truckload', sub: 'Standard room / garage' },
+                            { id: '3/4 Truckload', label: '3/4 Truckload', sub: 'Major basement / reno' },
+                            { id: 'Full Box Truck', label: 'Full Box Truck', sub: 'Full estate / big project' },
+                            { id: 'Multiple Truckloads', label: 'Multiple Loads', sub: 'Commercial / multi-ton' },
+                          ].map((item) => (
+                            <button
+                              key={item.id}
+                              type="button"
+                              onClick={() => setJunkVolume(item.id)}
+                              className={`p-2.5 rounded-lg border text-left transition-all ${
+                                junkVolume === item.id
+                                  ? 'bg-slate-100 border-jitto-navy text-jitto-navy font-semibold'
+                                  : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                              }`}
+                            >
+                              <div className="text-xs font-semibold text-slate-900">{item.label}</div>
+                              <div className="text-[11px] text-slate-500 mt-0.5">{item.sub}</div>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                          Types of Items to Remove (Select all that apply)
+                        </label>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                          {[
+                            'Furniture & Mattresses',
+                            'Appliances & White Goods',
+                            'Renovation Scraps & Drywall',
+                            'Yard Waste & Branches',
+                            'Garage & Estate Clutter',
+                            'Electronics & E-Waste',
+                          ].map((cat) => {
+                            const active = junkCategories.includes(cat);
+                            return (
+                              <button
+                                key={cat}
+                                type="button"
+                                onClick={() => toggleJunkCategory(cat)}
+                                className={`flex items-center gap-2 p-2.5 rounded-lg border text-xs text-left transition-all ${
+                                  active
+                                    ? 'bg-slate-100 border-slate-400 text-slate-900 font-medium'
+                                    : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                                }`}
+                              >
+                                <div className={`w-3.5 h-3.5 rounded flex items-center justify-center border ${active ? 'bg-jitto-navy text-white border-jitto-navy' : 'border-slate-300'}`}>
+                                  {active && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                                </div>
+                                <span className="truncate">{cat}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                            Item Location & Accessibility
+                          </label>
+                          <select
+                            value={junkLocation}
+                            onChange={(e) => setJunkLocation(e.target.value)}
+                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
+                          >
+                            <option value="Curbside / Driveway">Curbside / Driveway (Ground Level Access)</option>
+                            <option value="Main Floor / Attached Garage">Main Floor / Attached Garage</option>
+                            <option value="Basement / Upstairs (Stair Carry)">Basement / Upstairs (Stair Carry)</option>
+                            <option value="Construction / Job Site">Construction / Commercial Job Site</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                            Preferred Pickup Date
+                          </label>
+                          <input
+                            type="date"
+                            value={junkDate}
+                            onChange={(e) => setJunkDate(e.target.value)}
+                            className="w-full px-3 py-2 rounded-lg border border-slate-200 text-xs focus:outline-none focus:border-jitto-navy"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Photo Upload Zone for Junk */}
+                      <div>
+                        <label className="block text-xs font-medium text-slate-600 mb-1">
+                          Upload Item Photos for Fast Estimate (Optional)
+                        </label>
+                        <div className="border border-dashed border-slate-300 rounded-xl p-4 text-center bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                          <input
+                            type="file"
+                            multiple
+                            accept="image/*"
+                            id="photo-upload-input-junk"
+                            onChange={handlePhotoUpload}
+                            className="hidden"
+                          />
+                          <label htmlFor="photo-upload-input-junk" className="cursor-pointer flex flex-col items-center">
+                            <Upload className="w-5 h-5 text-slate-400 mb-1" />
+                            <span className="text-xs font-semibold text-jitto-navy hover:underline">
+                              Snap or attach photos of items
+                            </span>
+                            <span className="text-[10px] text-slate-400 mt-0.5">Allows our team to provide an exact upfront estimate</span>
+                          </label>
+                        </div>
+
+                        {uploadedPhotos.length > 0 && (
+                          <div className="mt-2 flex items-center gap-2 overflow-x-auto">
+                            {uploadedPhotos.map((url, i) => (
+                              <div key={i} className="relative w-12 h-12 rounded-lg overflow-hidden border border-slate-200 shrink-0">
+                                <img src={url} alt="Item" className="w-full h-full object-cover" />
                               </div>
                             ))}
                             <span className="text-[11px] text-slate-500">{uploadedPhotos.length} photo(s) attached</span>

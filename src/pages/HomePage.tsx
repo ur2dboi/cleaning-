@@ -312,7 +312,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       "Manufacturer protective stickers, tape, and paint overspray scraped safely",
                       "Window glass and sliding door tracks vacuumed and detailed streak-free",
                       "Inside and outside of all new custom cabinetry vacuumed and wiped",
-                      "Duct register covers and light fixtures dusted and wiped clean",
+                      "Ceiling and wall register covers, vents, and light fixtures dusted and wiped clean",
                       "Digital photo verification signoff log sent directly to project managers"
                     ].map((task, i) => (
                       <li key={i} className="flex items-start gap-2">
@@ -392,7 +392,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 One Team For Home, Business & Renovation
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed">
-                Whether you need weekly home cleaning, an office janitorial program, or a post-construction handover, you work with one company and one dependable point of contact.
+                Whether you need weekly home cleaning, an office janitorial program, post-construction handover, or junk removal, you work with one dependable company and one accountable point of contact.
               </p>
             </div>
 
