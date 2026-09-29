@@ -284,9 +284,9 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                     <span className="text-slate-500">Target Date:</span>
                     <span className="font-semibold text-slate-900">{junkDate}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Selected Items:</span>
-                    <span className="font-semibold text-slate-900 truncate max-w-[220px]">{junkCategories.join(', ')}</span>
+                  <div className="flex justify-between items-start gap-4">
+                    <span className="text-slate-500 shrink-0">Selected Items:</span>
+                    <span className="font-semibold text-slate-900 text-right">{junkCategories.join(', ')}</span>
                   </div>
                 </>
               )}
@@ -479,10 +479,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                       </div>
 
                       <div>
-                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                        <label className="block text-xs font-medium text-slate-600 mb-2">
                           Special Focus Areas (Optional)
                         </label>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                           {[
                             { id: 'baseboards', name: 'Baseboards Hand-Wash' },
                             { id: 'oven', name: 'Inside Oven Detailing' },
@@ -497,16 +497,16 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                                 key={addon.id}
                                 type="button"
                                 onClick={() => toggleResAddon(addon.id)}
-                                className={`flex items-center gap-2 p-2 rounded-lg border text-xs text-left transition-all ${
+                                className={`flex items-center gap-2.5 p-3 rounded-xl border text-xs sm:text-sm text-left transition-all min-h-[44px] ${
                                   active
                                     ? 'bg-slate-100 border-slate-400 text-slate-900 font-medium'
                                     : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                                 }`}
                               >
-                                <div className={`w-3.5 h-3.5 rounded flex items-center justify-center border ${active ? 'bg-jitto-navy text-white border-jitto-navy' : 'border-slate-300'}`}>
+                                <div className={`w-4 h-4 rounded flex items-center justify-center border shrink-0 ${active ? 'bg-jitto-navy text-white border-jitto-navy' : 'border-slate-300'}`}>
                                   {active && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                                 </div>
-                                <span>{addon.name}</span>
+                                <span className="leading-snug break-words text-slate-800 font-medium">{addon.name}</span>
                               </button>
                             );
                           })}
@@ -519,10 +519,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                   {selectedService === 'commercial' && (
                     <div className="space-y-5">
                       <div>
-                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                        <label className="block text-xs font-medium text-slate-600 mb-2">
                           Business / Facility Classification
                         </label>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                           {[
                             'Corporate Office',
                             'Medical / Dental Clinic',
@@ -535,7 +535,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                               key={type}
                               type="button"
                               onClick={() => setBusinessType(type)}
-                              className={`p-2.5 rounded-lg border text-xs font-medium text-left transition-all ${
+                              className={`p-3 min-h-[44px] rounded-xl border text-xs sm:text-sm font-medium text-left transition-all flex items-center ${
                                 businessType === type
                                   ? 'bg-slate-100 border-jitto-navy text-jitto-navy font-semibold'
                                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
@@ -769,10 +769,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                       </div>
 
                       <div>
-                        <label className="block text-xs font-medium text-slate-600 mb-1.5">
+                        <label className="block text-xs font-medium text-slate-600 mb-2">
                           Types of Items to Remove (Select all that apply)
                         </label>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                           {[
                             'Furniture & Mattresses',
                             'Appliances & White Goods',
@@ -787,16 +787,16 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                                 key={cat}
                                 type="button"
                                 onClick={() => toggleJunkCategory(cat)}
-                                className={`flex items-center gap-2 p-2.5 rounded-lg border text-xs text-left transition-all ${
+                                className={`flex items-center gap-2.5 p-3 rounded-xl border text-xs sm:text-sm text-left transition-all min-h-[44px] ${
                                   active
                                     ? 'bg-slate-100 border-slate-400 text-slate-900 font-medium'
                                     : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                                 }`}
                               >
-                                <div className={`w-3.5 h-3.5 rounded flex items-center justify-center border ${active ? 'bg-jitto-navy text-white border-jitto-navy' : 'border-slate-300'}`}>
+                                <div className={`w-4 h-4 rounded flex items-center justify-center border shrink-0 ${active ? 'bg-jitto-navy text-white border-jitto-navy' : 'border-slate-300'}`}>
                                   {active && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                                 </div>
-                                <span className="truncate">{cat}</span>
+                                <span className="leading-snug break-words text-slate-800 font-medium">{cat}</span>
                               </button>
                             );
                           })}
@@ -813,10 +813,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                             onChange={(e) => setJunkLocation(e.target.value)}
                             className="w-full px-3.5 py-2.5 min-h-[44px] rounded-xl border border-slate-200 text-sm bg-white text-slate-700 focus:outline-none focus:border-jitto-navy"
                           >
-                            <option value="Curbside / Driveway">Curbside / Driveway (Ground Level Access)</option>
+                            <option value="Curbside / Driveway">Curbside / Driveway (Ground Level)</option>
                             <option value="Main Floor / Attached Garage">Main Floor / Attached Garage</option>
-                            <option value="Basement / Upstairs (Stair Carry)">Basement / Upstairs (Stair Carry)</option>
-                            <option value="Construction / Job Site">Construction / Commercial Job Site</option>
+                            <option value="Basement / Upstairs (With Stairs)">Basement / Upstairs (With Stairs)</option>
+                            <option value="Construction / Job Site">Construction / Commercial Site</option>
                           </select>
                         </div>
 
