@@ -101,7 +101,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
-                  <span>Fully Insured & Bonded</span>
+                  <span>Fully Insured & Protected</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ListChecks className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />

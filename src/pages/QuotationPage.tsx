@@ -1018,7 +1018,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
 
                 <div className="pt-4 border-t border-slate-100">
                   <div className="text-[11px] text-slate-400 uppercase tracking-wider font-semibold mb-1.5">
-                    Direct Founder & OpenPhone Lines
+                    Direct Operations & Client Lines
                   </div>
                   <div className="space-y-1">
                     <a
@@ -1033,7 +1033,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                       className="flex items-center gap-2 text-xs font-bold text-slate-900 hover:text-jitto-cyan-600 transition-colors"
                     >
                       <Phone className="w-3.5 h-3.5 text-jitto-cyan-600" />
-                      <span>437-447-5020 (OpenPhone)</span>
+                      <span>(437) 447-5020 (Client Line / Text)</span>
                     </a>
                   </div>
                 </div>

@@ -110,7 +110,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-bold text-slate-400 uppercase">Client Line (OpenPhone)</div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase">Client Line (Call & Text)</div>
                     <a href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`} className="font-semibold text-slate-900 hover:text-jitto-navy text-sm">
                       {COMPANY_INFO.phoneSecondary}
                     </a>

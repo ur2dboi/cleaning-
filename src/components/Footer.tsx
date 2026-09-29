@@ -47,7 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             className="text-xs font-semibold text-white hover:text-jitto-cyan transition-colors px-3.5 py-2.5 min-h-[44px] flex items-center justify-center gap-1.5 rounded-lg bg-slate-800/60 border border-slate-700/60"
           >
             <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
-            <span>437-447-5020 (OpenPhone)</span>
+            <span>437-447-5020 (Client Line)</span>
           </a>
 
           <button
@@ -93,7 +93,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   <a href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`} className="hover:text-jitto-cyan font-medium">
                     437-447-5020
                   </a>
-                  <span className="text-slate-500 text-[11px] ml-1.5">(OpenPhone Client Line)</span>
+                  <span className="text-slate-500 text-[11px] ml-1.5">(Client Services / Text)</span>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-slate-300">
@@ -184,7 +184,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               ))}
             </div>
             <div className="pt-2 text-[11px] text-slate-500">
-              Fully insured & bonded across Simcoe County, Ontario.
+              Fully insured across Simcoe County, Ontario.
             </div>
           </div>
 

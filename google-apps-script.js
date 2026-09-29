@@ -237,12 +237,12 @@ function sendCustomerReceipt(data) {
       "---------------- WHAT HAPPENS NEXT -----------------------\n" +
       "1. Founders Review: Our team reviews each property specification personally to ensure accurate scope.\n" +
       "2. Personalized Proposal: You will receive your customized scope and confirmation within 2 hours during operational hours.\n" +
-      "3. 24/7 Operations: If you have an urgent inquiry or need immediate scheduling, call us directly at (249) 800-0127 or text/call our OpenPhone line at 437-447-5020.\n\n" +
+      "3. 24/7 Operations: If you have an urgent inquiry or need immediate scheduling, call us directly at (249) 800-0127 or text/call our client line at (437) 447-5020.\n\n" +
       "Warm regards,\n\n" +
       "Jane & The Jitto Cleaning Services Team\n" +
       "Barrie & Simcoe County, Ontario\n" +
       "Operations Line: (249) 800-0127 (24/7 Available)\n" +
-      "OpenPhone Line: 437-447-5020\n" +
+      "Client Services Line: (437) 447-5020 (Call or Text)\n" +
       "Email: info@jittogroups.ca\n" +
       "Website: https://www.jittogroups.ca";
 

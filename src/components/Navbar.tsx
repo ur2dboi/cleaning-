@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               className="text-slate-300 hover:text-jitto-cyan transition-colors font-medium flex items-center gap-1"
             >
               <span>{COMPANY_INFO.phoneSecondary}</span>
-              <span className="text-[10px] text-jitto-cyan font-mono">(OpenPhone)</span>
+              <span className="text-[10px] text-jitto-cyan font-mono">(Client Line)</span>
             </a>
           </div>
         </div>
@@ -242,7 +242,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                 >
                   {COMPANY_INFO.phoneSecondary}
                 </a>
-                <span className="text-[9px] text-jitto-navy font-semibold ml-1">OpenPhone</span>
+                <span className="text-[9px] text-slate-500 ml-1 font-medium">Client</span>
               </div>
             </div>
 
@@ -377,7 +377,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`}
               className="flex-1 text-center py-2.5 min-h-[44px] flex items-center justify-center rounded-lg bg-slate-50 border border-slate-200 text-slate-800 text-xs font-semibold"
             >
-              OpenPhone: 437-447-5020
+              Call/Text: (437) 447-5020
             </a>
             <button
               onClick={() => handleNav('quote')}
