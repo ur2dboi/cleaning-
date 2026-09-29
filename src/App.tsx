@@ -160,19 +160,30 @@ export function App() {
           </button>
         )}
 
-        <div className="bg-[#0b1528] text-white p-1 rounded-full shadow-lg border border-slate-700/60 flex items-center gap-1">
+        <div className="bg-[#0b1528] text-white p-1 rounded-full shadow-lg border border-slate-700/60 flex items-center gap-0.5">
           <a
             href={`tel:${COMPANY_INFO.phoneRaw}`}
-            className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full hover:text-jitto-cyan transition-colors"
+            className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-full hover:text-jitto-cyan transition-colors"
+            title="Operations & 24/7 Dispatch: (249) 800-0127"
           >
             <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
-            <span className="hidden sm:inline">(249) 800-0127</span>
-            <span className="sm:hidden">24/7 Call</span>
+            <span className="hidden md:inline">(249) 800-0127</span>
+            <span className="md:hidden">24/7</span>
+          </a>
+
+          <a
+            href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`}
+            className="flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-full hover:text-jitto-cyan transition-colors border-l border-slate-700/60"
+            title="Client Line: (437) 447-5020"
+          >
+            <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
+            <span className="hidden md:inline">(437) 447-5020</span>
+            <span className="md:hidden">437</span>
           </a>
 
           <button
             onClick={() => navigateTo('quote')}
-            className="bg-white hover:bg-slate-100 text-slate-900 font-medium text-xs px-3 py-1.5 rounded-full transition-colors"
+            className="bg-white hover:bg-slate-100 text-slate-900 font-medium text-xs px-3 py-1.5 rounded-full transition-colors ml-0.5"
           >
             Proposal
           </button>

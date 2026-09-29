@@ -67,12 +67,20 @@ export const PostConstructionPage: React.FC<PostConstructionPageProps> = ({
                   <ArrowRight className="w-4 h-4 text-jitto-cyan" />
                 </button>
 
-                <a
-                  href={`tel:${COMPANY_INFO.phoneRaw}`}
-                  className="w-full sm:w-auto min-h-[44px] justify-center bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium px-5 py-3 rounded-xl transition-colors text-xs sm:text-sm flex items-center"
-                >
-                  Urgent PM Hotline: (249) 800-0127
-                </a>
+                <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+                  <a
+                    href={`tel:${COMPANY_INFO.phoneRaw}`}
+                    className="w-full sm:w-auto min-h-[44px] justify-center bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium px-4 py-3 rounded-xl transition-colors text-xs sm:text-sm flex items-center"
+                  >
+                    PM Hotline: (249) 800-0127
+                  </a>
+                  <a
+                    href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`}
+                    className="w-full sm:w-auto min-h-[44px] justify-center bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium px-4 py-3 rounded-xl transition-colors text-xs sm:text-sm flex items-center"
+                  >
+                    Client Line: (437) 447-5020
+                  </a>
+                </div>
               </div>
             </div>
 

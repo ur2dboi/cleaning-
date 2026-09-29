@@ -312,6 +312,6 @@ export const FAQS = [
   },
   {
     q: "Can I reach the owners if I have questions?",
-    a: "Absolutely. When you call (249) 800-0127 or email info@jittogroups.ca, you connect directly with the founders and operational leaders—not a distant call center."
+    a: "Absolutely. When you call (249) 800-0127 or (437) 447-5020, or email info@jittogroups.ca, you connect directly with the founders and operational leaders—not a distant call center."
   }
 ];

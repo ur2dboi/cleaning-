@@ -173,7 +173,14 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
             </div>
 
             <div className="mt-6 pt-4 border-t border-slate-100 text-xs text-slate-400">
-              Need immediate dispatch or emergency scheduling? Call <strong>(249) 800-0127</strong> (24/7).
+              Need immediate dispatch or emergency scheduling? Call{' '}
+              <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="font-semibold text-slate-700 underline">
+                (249) 800-0127
+              </a>{' '}
+              (24/7) or{' '}
+              <a href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`} className="font-semibold text-slate-700 underline">
+                (437) 447-5020
+              </a>.
             </div>
           </div>
         ) : (

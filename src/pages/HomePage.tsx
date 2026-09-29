@@ -84,13 +84,23 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <span>Reserve Appointment Slot</span>
                 </button>
 
-                <a
-                  href={`tel:${COMPANY_INFO.phoneRaw}`}
-                  className="inline-flex items-center justify-center gap-2 text-slate-300 hover:text-white px-3 py-2.5 transition-colors text-xs sm:text-sm font-semibold min-h-[44px]"
-                >
-                  <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
-                  <span>(249) 800-0127 (24/7)</span>
-                </a>
+                <div className="flex flex-wrap items-center gap-2">
+                  <a
+                    href={`tel:${COMPANY_INFO.phoneRaw}`}
+                    className="inline-flex items-center justify-center gap-1.5 text-slate-300 hover:text-white px-2.5 py-2 transition-colors text-xs font-semibold min-h-[44px]"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
+                    <span>(249) 800-0127 (24/7)</span>
+                  </a>
+                  <span className="text-slate-600 hidden sm:inline">|</span>
+                  <a
+                    href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`}
+                    className="inline-flex items-center justify-center gap-1.5 text-slate-300 hover:text-white px-2.5 py-2 transition-colors text-xs font-semibold min-h-[44px]"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
+                    <span>(437) 447-5020</span>
+                  </a>
+                </div>
               </div>
 
               {/* Trust Metric Badges */}
@@ -436,7 +446,15 @@ export const HomePage: React.FC<HomePageProps> = ({
                 You Can Reach The Owners Directly
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed">
-                Questions or concerns go straight to the people who run Jitto at (249) 800-0127, not an outsourced call centre.
+                Questions or concerns go straight to the people who run Jitto at{' '}
+                <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-white hover:text-jitto-cyan underline font-semibold">
+                  (249) 800-0127
+                </a>{' '}
+                or{' '}
+                <a href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`} className="text-white hover:text-jitto-cyan underline font-semibold">
+                  (437) 447-5020
+                </a>
+                , not an outsourced call centre.
               </p>
             </div>
 
@@ -634,7 +652,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               Request a custom proposal with zero obligation, or speak directly to company leadership today.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 pt-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 pt-1">
               <button
                 onClick={() => onNavigate('quote')}
                 className="w-full sm:w-auto min-h-[44px] flex items-center justify-center bg-jitto-cyan hover:bg-jitto-cyan-400 text-jitto-navy-950 font-bold px-7 py-3.5 rounded-xl transition-all text-sm shadow-glow-cyan"
@@ -644,9 +662,16 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <a
                 href={`tel:${COMPANY_INFO.phoneRaw}`}
-                className="w-full sm:w-auto min-h-[44px] flex items-center justify-center border border-white/20 hover:border-white/40 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors text-sm"
+                className="w-full sm:w-auto min-h-[44px] flex items-center justify-center border border-white/20 hover:border-white/40 text-white font-semibold px-5 py-3.5 rounded-xl transition-colors text-xs sm:text-sm"
               >
-                Call: (249) 800-0127 (24/7)
+                (249) 800-0127 (24/7)
+              </a>
+
+              <a
+                href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`}
+                className="w-full sm:w-auto min-h-[44px] flex items-center justify-center border border-white/20 hover:border-white/40 text-white font-semibold px-5 py-3.5 rounded-xl transition-colors text-xs sm:text-sm"
+              >
+                (437) 447-5020 (Client Line)
               </a>
             </div>
           </div>

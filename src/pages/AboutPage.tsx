@@ -231,7 +231,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 You Can Reach The Owners Directly
               </h3>
               <p className="text-slate-600 text-xs leading-relaxed">
-                Questions or concerns go straight to the people who run Jitto at (249) 800-0127, not an anonymous call centre.
+                Questions or concerns go straight to the people who run Jitto at{' '}
+                <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-slate-900 hover:text-jitto-navy underline font-semibold">
+                  (249) 800-0127
+                </a>{' '}
+                or{' '}
+                <a href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`} className="text-slate-900 hover:text-jitto-navy underline font-semibold">
+                  (437) 447-5020
+                </a>
+                , not an anonymous call centre.
               </p>
             </div>
 

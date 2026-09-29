@@ -170,7 +170,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             <div className="bg-slate-50 rounded-2xl p-5 border border-slate-200/80 text-xs text-slate-600 space-y-1">
               <div className="font-semibold text-slate-900">Direct Founder Guarantee</div>
               <p>
-                When you call (249) 800-0127, you speak directly to company leadership with 16+ years of private housekeeping experience.
+                When you call{' '}
+                <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="font-semibold text-slate-900 hover:text-jitto-navy underline">
+                  (249) 800-0127
+                </a>{' '}
+                or{' '}
+                <a href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`} className="font-semibold text-slate-900 hover:text-jitto-navy underline">
+                  (437) 447-5020
+                </a>
+                , you speak directly to company leadership with 16+ years of private housekeeping experience.
               </p>
             </div>
           </div>
