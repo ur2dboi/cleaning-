@@ -45,7 +45,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
             {/* Image Container with Gradient & Badge */}
             <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-900">
               <img 
-                src="/images/residential-hero.jpg?v=4" 
+                src="/images/pathway-home-residential.jpg" 
                 alt="Pristine luxury master bedroom with fresh linen and morning sunlight" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
@@ -130,7 +130,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
             {/* Image Container with Gradient & Badge */}
             <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-900">
               <img 
-                src="/images/commercial-hero.jpg?v=4" 
+                src="/images/pathway-business-commercial.jpg" 
                 alt="Immaculate modern executive office conference room and glass partitions" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
@@ -215,7 +215,7 @@ export const ServicePathCards: React.FC<ServicePathCardsProps> = ({
             {/* Image Container with Gradient & Badge */}
             <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-900">
               <img 
-                src="/images/home-post-construction.jpg?v=4" 
+                src="/images/pathway-builder-construction.jpg" 
                 alt="Post-construction handover ready luxury modern home" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
