@@ -60,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <Logo variant="dark" size="sm" onClick={() => handleNav('home')} />
             
             <p className="text-xs text-slate-400 leading-relaxed pr-6 mt-2">
-              Jitto was built on one simple idea: cleaning should be done right the first time, every time. Founded by a professional housekeeper with over 16 years of hands-on experience in private homes, we serve residences, businesses, and construction sites across Barrie and Simcoe County.
+              Jitto brings together two founders with very different backgrounds: 16+ years of private luxury housekeeping where every detail is noticed, paired with a professional engineer and seasoned real estate investor who understands what it takes to get a space ready for the next owner or tenant.
             </p>
 
             <div className="pt-2 space-y-2 text-xs">

@@ -376,12 +376,12 @@ export const HomePage: React.FC<HomePageProps> = ({
             
             {/* 01 */}
             <div className="p-6 rounded-2xl bg-[#071733]/80 border border-slate-800 hover:border-jitto-cyan/40 transition-colors space-y-2.5">
-              <div className="text-xs font-mono font-bold text-jitto-cyan">01 / FOUNDING CRAFT</div>
+              <div className="text-xs font-mono font-bold text-jitto-cyan">01 / DIVERSE FOUNDER HERITAGE</div>
               <h3 className="font-serif font-bold text-base sm:text-lg text-white">
-                Built on 16 Years of Hands-On Housekeeping
+                16 Years Luxury Housekeeping + Engineering Precision
               </h3>
               <p className="text-slate-300 text-xs leading-relaxed">
-                Jitto was founded by a professional housekeeper with over 16 years of experience in private homes. Our standards come from real experience, not a generic training manual.
+                Jitto unites two distinct founder backgrounds: 16+ years in private luxury homes where every detail is noticed, combined with a professional engineer and real estate investor who understands property turnover.
               </p>
             </div>
 

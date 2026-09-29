@@ -27,7 +27,7 @@ export const COMPANY_INFO = {
     "Simcoe County"
   ],
   trustSignals: [
-    { label: "16+ Years Hands-On Experience", description: "Founded by a professional housekeeper with over 16 years in private estate residences." },
+    { label: "16+ Years Hands-On Experience", description: "Brings together 16+ years of private luxury housekeeping with professional engineering and seasoned real estate investment." },
     { label: "Fully Insured & Protected", description: "Comprehensive commercial and residential liability protection for total peace of mind." },
     { label: "100% Background-Checked Staff", description: "Vetted, discreet, and trustworthy professionals with verified background checks." },
     { label: "Checklists, Not Guesswork", description: "Every clean follows a standardized room-by-room quality checklist." },
