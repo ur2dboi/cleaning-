@@ -60,7 +60,7 @@ export const JunkRemovalPage: React.FC<JunkRemovalPageProps> = ({
                 </span>
                 <span className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg">
                   <ShieldCheck className="w-4 h-4 text-jitto-navy" />
-                  Fully Insured & Protected
+                  Fully Insured
                 </span>
               </div>
 

@@ -351,7 +351,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 </div>
                 <div className="flex items-center gap-2.5">
                   <ShieldCheck className="w-4 h-4 text-jitto-navy shrink-0" />
-                  <span><strong>Fully Insured & Protected:</strong> Heavy lifting crew included</span>
+                  <span><strong>Fully Insured:</strong> Heavy lifting crew included</span>
                 </div>
               </div>
             </div>

@@ -62,7 +62,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <div className="pt-2 flex flex-wrap gap-2 text-xs text-slate-700">
                 <span className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg font-medium">
                   <ShieldCheck className="w-3.5 h-3.5 text-jitto-navy" />
-                  Fully Insured & Protected
+                  Fully Insured
                 </span>
                 <span className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg font-medium">
                   <UserCheck className="w-3.5 h-3.5 text-jitto-navy" />
