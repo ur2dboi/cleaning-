@@ -57,7 +57,7 @@ This website is custom-engineered for **Jitto Cleaning Services**, speaking dire
    - The founding story: 16+ years of private estate housekeeping experience.
    - Why Jitto started: solving the problem of unreliable cleaning where clients had to chase, inspect, or manage rotating strangers.
    - The 7 core pillars written with authentic detail.
-   - Trust signals: Fully insured, WSIB covered, 100% background-checked team, local accountability.
+   - Trust signals: Fully insured, 100% background-checked team, local accountability.
    - Official uniform standards (navy polo with embroidered Jitto emblem).
 
 7. **Contact Us (`#/contact`)**:

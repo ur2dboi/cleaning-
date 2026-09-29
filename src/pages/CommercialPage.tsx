@@ -37,7 +37,7 @@ export const CommercialPage: React.FC<CommercialPageProps> = ({
               </h1>
 
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-                Your workplace defines your brand to clients and team members. Jitto delivers dependable, after-hours janitorial programs backed by <strong>full Ontario WSIB registration, $5M commercial liability</strong>, and direct founder accountability.
+                Your workplace defines your brand to clients and team members. Jitto delivers dependable, after-hours janitorial programs backed by <strong>comprehensive commercial liability insurance</strong>, vetted specialists, and direct founder accountability.
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2 text-xs text-slate-700">
@@ -47,7 +47,7 @@ export const CommercialPage: React.FC<CommercialPageProps> = ({
                 </span>
                 <span className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg">
                   <ShieldCheck className="w-4 h-4 text-jitto-navy" />
-                  Bonded, Insured & WSIB
+                  Fully Insured & Bonded
                 </span>
                 <span className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg">
                   <FileCheck2 className="w-4 h-4 text-jitto-navy" />

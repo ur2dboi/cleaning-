@@ -101,7 +101,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
-                  <span>Insured & WSIB Covered</span>
+                  <span>Fully Insured & Bonded</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ListChecks className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
@@ -448,7 +448,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="text-xs font-mono font-bold text-jitto-cyan mb-1">07 / COMMUNITY ACCOUNTABILITY</div>
               <h4 className="font-serif font-bold text-xl sm:text-2xl text-white">Local and Accountable Across Simcoe County</h4>
               <p className="text-slate-300 text-xs sm:text-sm max-w-2xl mt-1">
-                Our crews live and work in the communities we serve. We stand behind every clean with full insurance, WSIB, and personal oversight.
+                Our crews live and work in the communities we serve. We stand behind every clean with comprehensive liability insurance, vetted staff, and personal oversight.
               </p>
             </div>
 
@@ -492,7 +492,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div className="w-5 h-5 rounded-full bg-jitto-cyan/15 text-jitto-cyan-700 flex items-center justify-center shrink-0">
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                 </div>
-                <span>Ontario WSIB & $5M Comprehensive Commercial Liability</span>
+                <span>Comprehensive Commercial & Residential Liability Insurance</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <div className="w-5 h-5 rounded-full bg-jitto-cyan/15 text-jitto-cyan-700 flex items-center justify-center shrink-0">

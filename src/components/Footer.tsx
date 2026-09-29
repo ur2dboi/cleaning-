@@ -164,7 +164,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               ))}
             </div>
             <div className="pt-2 text-[11px] text-slate-500">
-              Fully insured & WSIB registered across Ontario.
+              Fully insured & bonded across Simcoe County, Ontario.
             </div>
           </div>
 

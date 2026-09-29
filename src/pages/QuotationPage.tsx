@@ -832,7 +832,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="w-3.5 h-3.5 text-jitto-navy mt-0.5 shrink-0 stroke-[2.5]" />
-                    <span>Full commercial liability & Ontario WSIB coverage</span>
+                    <span>Comprehensive commercial & residential liability insurance</span>
                   </div>
                 </div>
 

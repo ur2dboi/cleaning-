@@ -51,7 +51,7 @@ export const PostConstructionPage: React.FC<PostConstructionPageProps> = ({
                 </span>
                 <span className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg">
                   <ShieldCheck className="w-4 h-4 text-jitto-navy" />
-                  WSIB & $5M Liability Insured
+                  Fully Insured & Certified Handover
                 </span>
               </div>
 

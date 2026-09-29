@@ -26,7 +26,7 @@ export const COMPANY_INFO = {
   ],
   trustSignals: [
     { label: "16+ Years Hands-On Experience", description: "Founded by a professional housekeeper with over 16 years in private estate residences." },
-    { label: "Fully Insured & WSIB Covered", description: "Comprehensive commercial and residential liability protection for total peace of mind." },
+    { label: "Fully Insured & Protected", description: "Comprehensive commercial and residential liability protection for total peace of mind." },
     { label: "100% Background-Checked Staff", description: "Vetted, discreet, and uniformed professionals in official Jitto navy polos." },
     { label: "Checklists, Not Guesswork", description: "Every clean follows a standardized room-by-room quality checklist." },
     { label: "Proof, Not Promises", description: "Time-stamped before-and-after photos and completed checklists sent directly to your phone." },
@@ -124,7 +124,7 @@ export const COMMERCIAL_DETAILS = {
   title: "Commercial & Office Cleaning",
   subtitle: "Immaculate presentation and hygiene for offices, clinics, retail, and managed properties.",
   targetAudience: "Offices, Medical/Dental Clinics, Retail Boutiques, Property Managers",
-  overview: "First impressions define your business. Jitto delivers professional, reliable janitorial and commercial cleaning with flexible scheduling that fits your operating hours—daytime porter, evening after-hours, or weekend programs. Our staff are fully insured, WSIB covered, and adhere to strict security protocols.",
+  overview: "First impressions define your business. Jitto delivers professional, reliable janitorial and commercial cleaning with flexible scheduling that fits your operating hours—daytime porter, evening after-hours, or weekend programs. Our staff are fully insured, background-checked, and adhere to strict security protocols.",
   benefits: [
     { title: "Reliability & Accountable Crews", desc: "No skipped visits or excuses. We follow scheduled contracts with precision." },
     { title: "After-Hours & 24/7 Scheduling", desc: "We clean when your doors are closed so your workday is never interrupted." },
@@ -227,8 +227,8 @@ export const FAQS = [
     a: "Every home, commercial facility, and job site is unique. Rather than quoting generic flat estimates that fail to reflect real requirements, we provide a customized proposal based on your exact square footage, room layout, condition, and cleaning frequency. We provide complimentary walkthrough consultations and transparent SOW agreements."
   },
   {
-    q: "Are you fully insured and covered by WSIB?",
-    a: "Yes, 100%. Jitto Cleaning Services is fully registered, carries comprehensive commercial liability insurance, and all staff are WSIB-covered and criminal background-checked for your complete protection."
+    q: "Are you fully insured?",
+    a: "Yes, 100%. Jitto Cleaning Services is fully registered, carries comprehensive commercial and residential liability insurance, and all staff are criminal background-checked for your complete protection."
   },
   {
     q: "Do I need to provide cleaning supplies or equipment?",
