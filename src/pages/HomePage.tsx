@@ -579,7 +579,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             {TESTIMONIALS.map((t) => (
               <div 
                 key={t.id}
-                className="p-6 rounded-2xl border border-slate-200 bg-white shadow-card flex flex-col justify-between space-y-5"
+                className="p-5 sm:p-6 rounded-2xl border border-slate-200 bg-white shadow-card flex flex-col justify-between space-y-5"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -613,7 +613,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* 7. MINIMALIST 24/7 FOOTER CTA */}
       <section className="py-10 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-jitto-navy via-jitto-navy-900 to-[#030c1c] rounded-2xl p-7 sm:p-12 text-white text-center shadow-2xl relative overflow-hidden">
+        <div className="bg-gradient-to-r from-jitto-navy via-jitto-navy-900 to-[#030c1c] rounded-2xl p-6 sm:p-12 text-white text-center shadow-2xl relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto space-y-5">
             <span className="text-xs font-mono tracking-widest text-jitto-cyan uppercase font-bold">
               24/7 Operations • Simcoe County

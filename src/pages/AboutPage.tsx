@@ -174,7 +174,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
 
             <button
               onClick={() => onNavigate('quote')}
-              className="bg-jitto-navy hover:bg-jitto-navy-800 text-white font-medium px-5 py-2.5 rounded-xl text-xs transition-colors shrink-0"
+              className="w-full sm:w-auto min-h-[44px] flex items-center justify-center bg-jitto-navy hover:bg-jitto-navy-800 text-white font-medium px-5 py-2.5 rounded-xl text-xs transition-colors shrink-0"
             >
               Request Proposal
             </button>
