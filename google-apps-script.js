@@ -1,36 +1,17 @@
 /**
  * ============================================================================
- * JITTO CLEANING SERVICES - GOOGLE APPS SCRIPT WEBHOOK
+ * JITTO CLEANING SERVICES - GOOGLE APPS SCRIPT WEBHOOK (V2 - FOOLPROOF)
  * ============================================================================
  * 
- * This script automatically captures Quotation Requests, Booking Reservations,
- * and Contact Inquiries from the website into a Google Sheet and optionally sends
- * an instant email notification.
- * 
- * ----------------------------------------------------------------------------
- * 📋 SETUP INSTRUCTIONS (Takes ~2 minutes):
- * ----------------------------------------------------------------------------
- * 1. Open a new Google Sheet (go to https://sheets.new).
- * 2. Name your sheet "Jitto Cleaning Inquiries".
- * 3. In the top menu, click: Extensions > Apps Script.
- * 4. Delete any code in Code.gs, and paste this ENTIRE file into the editor.
- * 5. (Optional) Change ADMIN_EMAIL below to your preferred notification email.
- * 6. Click the blue "Deploy" button (top right) > "New deployment".
- * 7. Click the gear icon next to "Select type" and choose "Web app".
- * 8. Configure the deployment settings:
- *      - Description: "Jitto Cleaning Form Webhook"
- *      - Execute as: "Me (your-email@gmail.com)"
- *      - Who has access: "Anyone" (CRITICAL: Must be Anyone so the site can submit)
- * 9. Click "Deploy" and click "Authorize access" when prompted.
- * 10. Copy the "Web app URL" (looks like: https://script.google.com/macros/s/AKfycb.../exec).
- * 11. Paste this URL into your .env file or Vercel project environment variables as:
- *      VITE_APPSCRIPT_URL="https://script.google.com/macros/s/.../exec"
+ * Target Google Sheet:
+ * https://docs.google.com/spreadsheets/d/18cvXPcs1AYHieIiadsFmb5L9286omefB_oZHbOYUuQw/edit
  * ============================================================================
  */
 
-// Configuration
-var ADMIN_EMAIL = "info@jittogroups.ca"; // Change to your preferred notification email
-var SEND_EMAIL_NOTIFICATIONS = true; // Set to false if you only want rows saved to Sheets
+// CONFIGURATION
+var SPREADSHEET_ID = "18cvXPcs1AYHieIiadsFmb5L9286omefB_oZHbOYUuQw";
+var ADMIN_EMAIL = "info@jittogroups.ca"; // Primary business inbox
+var SEND_EMAIL_NOTIFICATIONS = true;
 var SHEET_NAME = "Website Inquiries";
 
 /**
@@ -41,15 +22,46 @@ function doPost(e) {
   lock.tryLock(10000);
 
   try {
-    var rawContents = e.postData.contents;
-    var data = JSON.parse(rawContents);
+    if (!e || !e.postData || !e.postData.contents) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ status: "error", message: "No post data received" }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
 
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var data;
+    try {
+      data = JSON.parse(e.postData.contents);
+    } catch (jsonErr) {
+      data = e.parameter || {};
+    }
+
+    // 1. Open the spreadsheet by ID or Active fallback
+    var ss;
+    try {
+      ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    } catch (openErr) {
+      ss = SpreadsheetApp.getActiveSpreadsheet();
+    }
+
+    if (!ss) {
+      throw new Error("Unable to locate Google Sheet. Please ensure SPREADSHEET_ID is correct.");
+    }
+
+    // 2. Find or create the target sheet tab
     var sheet = ss.getSheetByName(SHEET_NAME);
-
-    // If sheet does not exist, create it with formatted header row
     if (!sheet) {
-      sheet = ss.insertSheet(SHEET_NAME);
+      // Check if default Sheet1 is empty, otherwise create new tab
+      var firstSheet = ss.getSheets()[0];
+      if (firstSheet && firstSheet.getLastRow() === 0) {
+        sheet = firstSheet;
+        sheet.setName(SHEET_NAME);
+      } else {
+        sheet = ss.insertSheet(SHEET_NAME);
+      }
+    }
+
+    // 3. Ensure header row exists
+    if (sheet.getLastRow() === 0) {
       var headers = [
         "Timestamp",
         "Reference ID",
@@ -70,7 +82,6 @@ function doPost(e) {
       ];
       sheet.appendRow(headers);
       
-      // Format header row
       var headerRange = sheet.getRange(1, 1, 1, headers.length);
       headerRange.setBackground("#012d6c");
       headerRange.setFontColor("#ffffff");
@@ -78,7 +89,7 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
 
-    // Format scope details
+    // 4. Format scope details
     var scopeSummary = "N/A";
     if (data.scopeDetails) {
       if (typeof data.scopeDetails === "object") {
@@ -95,7 +106,7 @@ function doPost(e) {
       }
     }
 
-    // Append new row
+    // 5. Append row to spreadsheet
     var timestamp = new Date().toLocaleString("en-CA", { timeZone: "America/Toronto" });
     var rowData = [
       timestamp,
@@ -119,12 +130,14 @@ function doPost(e) {
     sheet.appendRow(rowData);
 
     // Auto-fit column widths
-    for (var i = 1; i <= rowData.length; i++) {
-      sheet.autoResizeColumn(i);
-    }
+    try {
+      for (var i = 1; i <= rowData.length; i++) {
+        sheet.autoResizeColumn(i);
+      }
+    } catch (resizeErr) {}
 
-    // Send email notification to business owner
-    if (SEND_EMAIL_NOTIFICATIONS && ADMIN_EMAIL) {
+    // 6. Send email notification to owner and Google Account email
+    if (SEND_EMAIL_NOTIFICATIONS) {
       sendEmailAlert(data, timestamp, scopeSummary);
     }
 
@@ -137,6 +150,7 @@ function doPost(e) {
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
+    Logger.log("doPost Error: " + error.toString());
     return ContentService
       .createTextOutput(JSON.stringify({ 
         status: "error", 
@@ -157,6 +171,7 @@ function doGet(e) {
     .createTextOutput(JSON.stringify({
       status: "active",
       service: "Jitto Cleaning Services - Form Webhook",
+      spreadsheetId: SPREADSHEET_ID,
       timestamp: new Date().toISOString()
     }))
     .setMimeType(ContentService.MimeType.JSON);
@@ -192,10 +207,20 @@ function sendEmailAlert(data, timestamp, scopeSummary) {
       "---------------- CLIENT NOTES ----------------------\n" +
       (data.notes || "None provided") + "\n\n" +
       "====================================================\n" +
-      "View full records in your Google Sheet: 'Jitto Cleaning Inquiries'";
+      "View full records in your Google Sheet:\n" +
+      "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID + "/edit";
+
+    // Send to both ADMIN_EMAIL and the effective user who deployed the script
+    var recipients = [ADMIN_EMAIL];
+    try {
+      var effectiveEmail = Session.getEffectiveUser().getEmail();
+      if (effectiveEmail && recipients.indexOf(effectiveEmail) === -1) {
+        recipients.push(effectiveEmail);
+      }
+    } catch (sessErr) {}
 
     MailApp.sendEmail({
-      to: ADMIN_EMAIL,
+      to: recipients.join(","),
       subject: subject,
       body: body,
       replyTo: data.email || undefined
