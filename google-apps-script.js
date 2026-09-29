@@ -1,7 +1,11 @@
 /**
  * ============================================================================
- * JITTO CLEANING SERVICES - GOOGLE APPS SCRIPT WEBHOOK (V2 - FOOLPROOF)
+ * JITTO CLEANING SERVICES - GOOGLE APPS SCRIPT WEBHOOK (V3 - DUAL NOTIFICATIONS)
  * ============================================================================
+ * 
+ * 1. Appends all inquiries into Google Sheets
+ * 2. Sends INSTANT NOTIFICATION to You (Business Owner)
+ * 3. Sends INSTANT CONFIRMATION RECEIPT to the Customer
  * 
  * Target Google Sheet:
  * https://docs.google.com/spreadsheets/d/18cvXPcs1AYHieIiadsFmb5L9286omefB_oZHbOYUuQw/edit
@@ -11,7 +15,8 @@
 // CONFIGURATION
 var SPREADSHEET_ID = "18cvXPcs1AYHieIiadsFmb5L9286omefB_oZHbOYUuQw";
 var ADMIN_EMAIL = "info@jittogroups.ca"; // Primary business inbox
-var SEND_EMAIL_NOTIFICATIONS = true;
+var SEND_OWNER_ALERT = true;       // Alert you on new leads
+var SEND_CUSTOMER_RECEIPT = true;  // Send auto-confirmation to the customer
 var SHEET_NAME = "Website Inquiries";
 
 /**
@@ -24,18 +29,18 @@ function doPost(e) {
   try {
     if (!e || !e.postData || !e.postData.contents) {
       return ContentService
-        .createTextOutput(JSON.stringify({ status: "error", message: "No post data received" }))
+        .createTextOutput(JSON.stringify({ status: "error", message: "No data received" }))
         .setMimeType(ContentService.MimeType.JSON);
     }
 
     var data;
     try {
       data = JSON.parse(e.postData.contents);
-    } catch (jsonErr) {
+    } catch (err) {
       data = e.parameter || {};
     }
 
-    // 1. Open the spreadsheet by ID or Active fallback
+    // 1. Open Google Sheet directly by ID
     var ss;
     try {
       ss = SpreadsheetApp.openById(SPREADSHEET_ID);
@@ -44,13 +49,12 @@ function doPost(e) {
     }
 
     if (!ss) {
-      throw new Error("Unable to locate Google Sheet. Please ensure SPREADSHEET_ID is correct.");
+      throw new Error("Unable to locate Google Sheet ID: " + SPREADSHEET_ID);
     }
 
-    // 2. Find or create the target sheet tab
+    // 2. Select or create the tab
     var sheet = ss.getSheetByName(SHEET_NAME);
     if (!sheet) {
-      // Check if default Sheet1 is empty, otherwise create new tab
       var firstSheet = ss.getSheets()[0];
       if (firstSheet && firstSheet.getLastRow() === 0) {
         sheet = firstSheet;
@@ -60,28 +64,15 @@ function doPost(e) {
       }
     }
 
-    // 3. Ensure header row exists
+    // 3. Create header row if empty
     if (sheet.getLastRow() === 0) {
       var headers = [
-        "Timestamp",
-        "Reference ID",
-        "Form Type",
-        "Service Category",
-        "Customer Name",
-        "Company",
-        "Email",
-        "Phone",
-        "Address",
-        "City",
-        "Preferred Date",
-        "Preferred Time",
-        "Scope / Specifications",
-        "Client Notes",
-        "Photos Count",
-        "Status"
+        "Timestamp", "Reference ID", "Form Type", "Service Category",
+        "Customer Name", "Company", "Email", "Phone", "Address", "City",
+        "Preferred Date", "Preferred Time", "Scope / Specifications",
+        "Client Notes", "Photos Count", "Status"
       ];
       sheet.appendRow(headers);
-      
       var headerRange = sheet.getRange(1, 1, 1, headers.length);
       headerRange.setBackground("#012d6c");
       headerRange.setFontColor("#ffffff");
@@ -89,7 +80,7 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
 
-    // 4. Format scope details
+    // 4. Format Scope Summary
     var scopeSummary = "N/A";
     if (data.scopeDetails) {
       if (typeof data.scopeDetails === "object") {
@@ -106,7 +97,7 @@ function doPost(e) {
       }
     }
 
-    // 5. Append row to spreadsheet
+    // 5. Append Row to Sheet
     var timestamp = new Date().toLocaleString("en-CA", { timeZone: "America/Toronto" });
     var rowData = [
       timestamp,
@@ -136,51 +127,48 @@ function doPost(e) {
       }
     } catch (resizeErr) {}
 
-    // 6. Send email notification to owner and Google Account email
-    if (SEND_EMAIL_NOTIFICATIONS) {
-      sendEmailAlert(data, timestamp, scopeSummary);
+    // 6A. Send Email Alert to YOU (The Owner)
+    if (SEND_OWNER_ALERT) {
+      sendOwnerAlert(data, timestamp, scopeSummary);
+    }
+
+    // 6B. Send Instant Confirmation Receipt to the CUSTOMER
+    if (SEND_CUSTOMER_RECEIPT && data.email && data.email.indexOf("@") !== -1) {
+      sendCustomerReceipt(data);
     }
 
     return ContentService
       .createTextOutput(JSON.stringify({ 
         status: "success", 
         referenceId: data.referenceId,
-        message: "Inquiry recorded successfully in Google Sheet" 
+        message: "Logged to Google Sheet, notified owner and customer" 
       }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
     Logger.log("doPost Error: " + error.toString());
     return ContentService
-      .createTextOutput(JSON.stringify({ 
-        status: "error", 
-        message: error.toString() 
-      }))
+      .createTextOutput(JSON.stringify({ status: "error", message: error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
-
   } finally {
     lock.releaseLock();
   }
 }
 
-/**
- * Handle GET requests for simple health check
- */
 function doGet(e) {
   return ContentService
-    .createTextOutput(JSON.stringify({
-      status: "active",
+    .createTextOutput(JSON.stringify({ 
+      status: "active", 
       service: "Jitto Cleaning Services - Form Webhook",
-      spreadsheetId: SPREADSHEET_ID,
-      timestamp: new Date().toISOString()
+      spreadsheetId: SPREADSHEET_ID 
     }))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
 /**
- * Format and send an email alert to the business owner
+ * 1. EMAIL NOTIFICATION SENT TO YOU (BUSINESS OWNER)
  */
-function sendEmailAlert(data, timestamp, scopeSummary) {
+function sendOwnerAlert(data, timestamp, scopeSummary) {
   try {
     var subject = "[JITTO NEW LEAD] " + (data.formType || "Inquiry") + " - Ref #" + (data.referenceId || "N/A") + " (" + (data.fullName || "Customer") + ")";
     
@@ -207,17 +195,16 @@ function sendEmailAlert(data, timestamp, scopeSummary) {
       "---------------- CLIENT NOTES ----------------------\n" +
       (data.notes || "None provided") + "\n\n" +
       "====================================================\n" +
-      "View full records in your Google Sheet:\n" +
+      "View in your Google Sheet:\n" +
       "https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID + "/edit";
 
-    // Send to both ADMIN_EMAIL and the effective user who deployed the script
     var recipients = [ADMIN_EMAIL];
     try {
-      var effectiveEmail = Session.getEffectiveUser().getEmail();
-      if (effectiveEmail && recipients.indexOf(effectiveEmail) === -1) {
-        recipients.push(effectiveEmail);
+      var ownerEmail = Session.getEffectiveUser().getEmail();
+      if (ownerEmail && recipients.indexOf(ownerEmail) === -1) {
+        recipients.push(ownerEmail);
       }
-    } catch (sessErr) {}
+    } catch (e) {}
 
     MailApp.sendEmail({
       to: recipients.join(","),
@@ -225,7 +212,46 @@ function sendEmailAlert(data, timestamp, scopeSummary) {
       body: body,
       replyTo: data.email || undefined
     });
-  } catch (emailErr) {
-    Logger.log("Email dispatch failed: " + emailErr.toString());
+  } catch (err) {
+    Logger.log("Owner email error: " + err.toString());
+  }
+}
+
+/**
+ * 2. INSTANT CONFIRMATION EMAIL SENT TO THE CUSTOMER
+ */
+function sendCustomerReceipt(data) {
+  try {
+    var subject = "We Received Your " + (data.formType || "Inquiry") + " — Jitto Cleaning Services [Ref #" + (data.referenceId || "N/A") + "]";
+    
+    var body = 
+      "Dear " + (data.fullName || "Valued Client") + ",\n\n" +
+      "Thank you for reaching out to Jitto Cleaning Services! We have successfully received your " + (data.formType || "inquiry") + ".\n\n" +
+      "---------------- SUMMARY OF YOUR REQUEST ----------------\n" +
+      "Reference ID:     " + (data.referenceId || "N/A") + "\n" +
+      "Service Category: " + (data.serviceCategory ? data.serviceCategory.toUpperCase() : "CLEANING") + "\n" +
+      "Location:         " + (data.city || "Barrie / Simcoe County") + (data.address ? " (" + data.address + ")" : "") + "\n" +
+      (data.preferredDate ? "Target Date:      " + data.preferredDate + "\n" : "") +
+      (data.preferredTime ? "Preferred Window: " + data.preferredTime + "\n" : "") +
+      "\n" +
+      "---------------- WHAT HAPPENS NEXT -----------------------\n" +
+      "1. Founders Review: Our team reviews each property specification personally to ensure accurate scope.\n" +
+      "2. Personalized Proposal: You will receive your customized scope and confirmation within 2 hours during operational hours.\n" +
+      "3. 24/7 Operations: If you have an urgent inquiry or need immediate scheduling, call us directly at (249) 800-0127.\n\n" +
+      "Warm regards,\n\n" +
+      "Jane & The Jitto Cleaning Services Team\n" +
+      "Barrie & Simcoe County, Ontario\n" +
+      "Direct Line: (249) 800-0127 (24/7 Available)\n" +
+      "Email: info@jittogroups.ca\n" +
+      "Website: https://www.jittogroups.ca";
+
+    MailApp.sendEmail({
+      to: data.email,
+      subject: subject,
+      body: body,
+      replyTo: ADMIN_EMAIL
+    });
+  } catch (custErr) {
+    Logger.log("Customer receipt error: " + custErr.toString());
   }
 }
