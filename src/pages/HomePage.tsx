@@ -120,7 +120,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-jitto-navy-900 group">
                 <div className="relative aspect-[4/3] sm:aspect-[16/11] overflow-hidden bg-slate-900">
                   <img 
-                    src="/images/home-hero-showcase.jpg" 
+                    src="/images/home-hero-showcase.jpg?v=4" 
                     alt="Pristine luxury home living room with double height windows" 
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
                   />
@@ -518,7 +518,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card bg-white group flex flex-col justify-between">
               <div className="h-64 sm:h-72 overflow-hidden bg-slate-900">
                 <img 
-                  src="/images/home-residential-detail.jpg" 
+                  src="/images/home-residential-detail.jpg?v=4" 
                   alt="Spotless luxury modern residential kitchen detailing" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -533,7 +533,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-card bg-white group flex flex-col justify-between">
               <div className="h-64 sm:h-72 overflow-hidden bg-slate-900">
                 <img 
-                  src="/images/home-commercial-workspace.jpg?v=3" 
+                  src="/images/home-commercial-workspace.jpg?v=4" 
                   alt="Pristine corporate office workspace" 
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />

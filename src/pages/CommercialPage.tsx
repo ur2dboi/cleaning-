@@ -80,8 +80,8 @@ export const CommercialPage: React.FC<CommercialPageProps> = ({
             <div className="lg:col-span-5">
               <div className="rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm">
                 <img 
-                  src="/images/commercial-hero-office.jpg" 
-                  alt="Jitto Commercial Cleaners in building lobby" 
+                  src="/images/commercial-hero-office.jpg?v=4" 
+                  alt="Immaculate corporate reception lobby with polished terrazzo and modern architecture" 
                   className="w-full h-auto object-cover"
                 />
               </div>

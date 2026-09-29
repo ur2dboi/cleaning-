@@ -91,7 +91,7 @@ export const JunkRemovalPage: React.FC<JunkRemovalPageProps> = ({
             <div className="lg:col-span-5">
               <div className="rounded-2xl overflow-hidden border border-slate-200/80 shadow-md">
                 <img 
-                  src="/images/junk-removal-service.jpg" 
+                  src="/images/junk-removal-service.jpg?v=4" 
                   alt="Professional Jitto junk removal team loading clean white commercial truck in driveway" 
                   className="w-full h-auto object-cover"
                 />
