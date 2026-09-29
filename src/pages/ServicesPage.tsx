@@ -296,11 +296,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 </div>
               </div>
 
-              {/* Unique Image Showcase: junk-removal-service.jpg */}
+              {/* Unique Image Showcase: junk-removal-truck.jpg */}
               <div className="my-8 rounded-xl overflow-hidden border border-slate-100 h-64 sm:h-80">
                 <img 
-                  src="/images/junk-removal-service.jpg?v=4" 
-                  alt="Junk & Debris Removal Service truck and team loading items" 
+                  src="/images/junk-removal-truck.jpg" 
+                  alt="Junk & Debris Removal Service clean white truck and organized furniture items" 
                   className="w-full h-full object-cover"
                 />
               </div>
