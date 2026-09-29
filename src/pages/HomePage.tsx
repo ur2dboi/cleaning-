@@ -563,12 +563,16 @@ export const HomePage: React.FC<HomePageProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-bold text-jitto-navy uppercase tracking-widest">
-              Client Experiences
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-slate-900 mt-1.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-2xs text-[11px] font-bold text-slate-700 mb-2.5">
+              <span className="text-amber-500 font-bold">★★★★★</span>
+              <span>5.0 Star Verified Google Reviews</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-slate-900 mt-1">
               Trusted Across Barrie & Simcoe County
             </h2>
+            <p className="text-slate-500 text-xs sm:text-sm mt-1.5">
+              Real feedback from local homeowners and families we are proud to serve.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -578,10 +582,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                 className="p-6 rounded-2xl border border-slate-200 bg-white shadow-card flex flex-col justify-between space-y-5"
               >
                 <div>
-                  <div className="flex items-center gap-1 text-amber-400 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400" />
-                    ))}
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-1 text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-amber-400" />
+                      ))}
+                    </div>
+                    <span className="text-[11px] font-medium text-slate-400">{t.date}</span>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal italic">
                     "{t.content}"
@@ -593,8 +600,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <div className="font-bold text-slate-900">{t.author}</div>
                     <div className="text-[11px] text-slate-500">{t.role} • {t.location}</div>
                   </div>
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-slate-100 text-jitto-navy">
-                    {t.category}
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-emerald-800">
+                    Verified
                   </span>
                 </div>
               </div>

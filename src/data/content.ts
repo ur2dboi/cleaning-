@@ -250,43 +250,33 @@ export const JUNK_REMOVAL_DETAILS = {
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: "1",
-    author: "Elena Rostova",
-    role: "Homeowner",
-    location: "Barrie (South Shore)",
+    author: "Michelle Hiliz",
+    role: "Verified Client (7 reviews)",
+    location: "Barrie",
     category: "residential",
     rating: 5,
-    content: "With 16 years of housekeeping experience, Jitto’s standards are unmatched. Having the same crew show up every two weeks gives me total trust. The house smells clean, never chemically, and our kitchen island looks like a magazine cover.",
-    date: "2 weeks ago"
+    content: "I decided to give Jitto a chance even though they're a new local business. I figured a company that's just starting out would work hard to earn its reputation — and they definitely did. The team was professional, thorough, and genuinely cared about doing a great job. What was meant to be a one-time cleaning turned into biweekly service because I was so happy with the results. I'm looking forward to having them back!",
+    date: "1 month ago"
   },
   {
     id: "2",
-    author: "Marcus Vance",
-    role: "Project Manager, Vance Custom Homes",
-    location: "Innisfil",
-    category: "post-construction",
+    author: "Mohammad Mokhtari",
+    role: "Local Guide Level 2",
+    location: "Barrie & Cottage Country",
+    category: "residential",
     rating: 5,
-    content: "In construction, delays kill margins. Jitto came through on a 4,800 sq ft custom build handover on 48 hours notice. Every speck of drywall dust was gone, windows were streak-free, and they sent a full photo report before our clients arrived.",
+    content: "Jane has done an excellent job caring for our home and cottage over the years. She is reliable, detail-oriented, and truly cares about doing things well. I would highly recommend Jitto to anyone and look forward to having her help us again.",
     date: "1 month ago"
   },
   {
     id: "3",
-    author: "Dr. Sarah Thornton",
-    role: "Clinic Director, Simcoe Wellness",
-    location: "Downtown Barrie",
-    category: "commercial",
+    author: "Lynn Lacroix",
+    role: "Verified Client (3 reviews)",
+    location: "Barrie & Simcoe County",
+    category: "residential",
     rating: 5,
-    content: "Our dental clinic requires uncompromising disinfection. Jitto has handled our after-hours commercial cleaning flawlessly for 8 months. Transparent checklists and direct access to the owners make communication effortless.",
-    date: "3 weeks ago"
-  },
-  {
-    id: "4",
-    author: "David MacIntyre",
-    role: "Property Owner & Renovator",
-    location: "Barrie (Allandale)",
-    category: "junk-removal",
-    rating: 5,
-    content: "We gutted our basement and had a massive pile of drywall, studs, and old shelving. Jitto gave an upfront quote, arrived right on time with a clean truck, cleared everything in under 90 minutes, and actually swept the entire concrete floor clean. Unbeatable service.",
-    date: "1 week ago"
+    content: "My mother in law was looking for a cleaner and found this wonderful website. Jane is very thoughtful and is always in touch to make things go smoothly. My mother in law was very impressed with her first cleaning experience. She has booked her next appointment with her. Thank you Jane!",
+    date: "1 month ago"
   }
 ];
 
