@@ -482,7 +482,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         <label className="block text-xs font-medium text-slate-600 mb-2">
                           Special Focus Areas (Optional)
                         </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                        <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-3 gap-2">
                           {[
                             { id: 'baseboards', name: 'Baseboards Hand-Wash' },
                             { id: 'oven', name: 'Inside Oven Detailing' },
@@ -497,7 +497,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                                 key={addon.id}
                                 type="button"
                                 onClick={() => toggleResAddon(addon.id)}
-                                className={`flex items-center gap-2.5 p-3 rounded-xl border text-xs sm:text-sm text-left transition-all min-h-[44px] ${
+                                className={`flex items-center gap-2 p-2.5 min-h-[52px] rounded-xl border text-xs text-left transition-all ${
                                   active
                                     ? 'bg-slate-100 border-slate-400 text-slate-900 font-medium'
                                     : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
@@ -522,7 +522,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         <label className="block text-xs font-medium text-slate-600 mb-2">
                           Business / Facility Classification
                         </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                        <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-3 gap-2">
                           {[
                             'Corporate Office',
                             'Medical / Dental Clinic',
@@ -535,13 +535,13 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                               key={type}
                               type="button"
                               onClick={() => setBusinessType(type)}
-                              className={`p-3 min-h-[44px] rounded-xl border text-xs sm:text-sm font-medium text-left transition-all flex items-center ${
+                              className={`p-2.5 min-h-[52px] rounded-xl border text-xs font-medium text-left transition-all flex items-center leading-snug ${
                                 businessType === type
                                   ? 'bg-slate-100 border-jitto-navy text-jitto-navy font-semibold'
                                   : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                               }`}
                             >
-                              {type}
+                              <span className="break-words">{type}</span>
                             </button>
                           ))}
                         </div>
@@ -772,7 +772,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         <label className="block text-xs font-medium text-slate-600 mb-2">
                           Types of Items to Remove (Select all that apply)
                         </label>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                        <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-3 gap-2">
                           {[
                             'Furniture & Mattresses',
                             'Appliances & White Goods',
@@ -787,7 +787,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                                 key={cat}
                                 type="button"
                                 onClick={() => toggleJunkCategory(cat)}
-                                className={`flex items-center gap-2.5 p-3 rounded-xl border text-xs sm:text-sm text-left transition-all min-h-[44px] ${
+                                className={`flex items-center gap-2 p-2.5 min-h-[52px] rounded-xl border text-xs text-left transition-all ${
                                   active
                                     ? 'bg-slate-100 border-slate-400 text-slate-900 font-medium'
                                     : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
