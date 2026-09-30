@@ -9,7 +9,8 @@ import {
   Check,
   Sparkles,
   Building2,
-  CheckCircle2
+  CheckCircle2,
+  Phone
 } from 'lucide-react';
 
 interface AboutPageProps {
@@ -225,7 +226,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm space-y-2">
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm space-y-3">
               <div className="font-mono text-xs font-bold text-slate-400">06 / ACCESS</div>
               <h3 className="font-serif font-bold text-base text-slate-900">
                 You Can Reach The Owners Directly
@@ -241,6 +242,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 </a>
                 , not an anonymous call centre.
               </p>
+              <div className="pt-1 flex flex-wrap gap-2">
+                <a
+                  href={`tel:${COMPANY_INFO.phoneRaw}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold text-xs border border-slate-200 transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-jitto-navy shrink-0" />
+                  <span>(249) 800-0127 (24/7)</span>
+                </a>
+                <a
+                  href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-900 font-semibold text-xs border border-slate-200 transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-jitto-navy shrink-0" />
+                  <span>(437) 447-5020 (Client Line)</span>
+                </a>
+              </div>
             </div>
 
           </div>

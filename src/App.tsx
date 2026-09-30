@@ -168,7 +168,7 @@ export function App() {
           >
             <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
             <span className="hidden md:inline">(249) 800-0127</span>
-            <span className="md:hidden">24/7</span>
+            <span className="md:hidden font-mono text-[11px]">(249)</span>
           </a>
 
           <a
@@ -178,7 +178,7 @@ export function App() {
           >
             <Phone className="w-3.5 h-3.5 text-jitto-cyan" />
             <span className="hidden md:inline">(437) 447-5020</span>
-            <span className="md:hidden">437</span>
+            <span className="md:hidden font-mono text-[11px]">(437)</span>
           </a>
 
           <button

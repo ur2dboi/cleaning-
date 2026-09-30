@@ -440,7 +440,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
 
             {/* 06 */}
-            <div className="p-6 rounded-2xl bg-[#071733]/80 border border-slate-800 hover:border-jitto-cyan/40 transition-colors space-y-2.5">
+            <div className="p-6 rounded-2xl bg-[#071733]/80 border border-slate-800 hover:border-jitto-cyan/40 transition-colors space-y-3">
               <div className="text-xs font-mono font-bold text-jitto-cyan">06 / DIRECT LEADERSHIP</div>
               <h3 className="font-serif font-bold text-base sm:text-lg text-white">
                 You Can Reach The Owners Directly
@@ -456,6 +456,22 @@ export const HomePage: React.FC<HomePageProps> = ({
                 </a>
                 , not an outsourced call centre.
               </p>
+              <div className="pt-1 flex flex-wrap gap-2">
+                <a
+                  href={`tel:${COMPANY_INFO.phoneRaw}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white font-semibold text-xs border border-slate-700/80 hover:border-jitto-cyan transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
+                  <span>(249) 800-0127 (24/7)</span>
+                </a>
+                <a
+                  href={`tel:${COMPANY_INFO.phoneSecondaryRaw}`}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-white font-semibold text-xs border border-slate-700/80 hover:border-jitto-cyan transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
+                  <span>(437) 447-5020 (Client Line)</span>
+                </a>
+              </div>
             </div>
 
           </div>
