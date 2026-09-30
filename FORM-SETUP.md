@@ -40,3 +40,15 @@ Verify matching reference IDs and values in Google Sheets and BOTH inboxes. Chec
 
 ## Verification performed locally
 Production build succeeds. Automated tests cover form validation, missing configuration, unsuccessful upstream responses, customer-receipt partial failure, script authentication, scope/field protections, and frontend provider wording. Live email delivery requires the deployment steps above and has not been verified here.
+
+## Gift card recipient notification (added Oct 2026)
+
+Gift card orders add four sheet columns: `Recipient Name`, `Recipient Email`,
+`Gift Amount`, `Recipient Notification Sent`.
+
+Flow: buyer submits → sheet row + owner email + buyer receipt are sent. The owner
+email contains a **one-time link** (`?action=notifyRecipient&ref=…&token=…`, an
+HMAC of the reference ID keyed by `LEAD_SECRET`). After you confirm the QuickBooks
+payment, open that link — the recipient is then emailed their gift announcement
+(with the buyer's personal message) and `Recipient Notification Sent` is stamped.
+Re-opening the link is safe: it reports "already notified" and sends nothing.

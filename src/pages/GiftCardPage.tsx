@@ -149,6 +149,10 @@ export const GiftCardPage: React.FC<GiftCardPageProps> = ({ onNavigate }) => {
                 Jitto will contact the recipient to introduce the gift and schedule their walkthrough. Gift cards apply
                 toward any Jitto cleaning service and do not expire.
               </p>
+              <p>
+                <strong>Next step:</strong> complete your payment — once it's confirmed, we'll email the recipient
+                your gift announcement and personal message.
+              </p>
               <p role="status" className="text-xs text-slate-600">
                 {submissionResult?.customerReceiptSent
                   ? 'A confirmation email has been sent. Please check your inbox and spam folder.'

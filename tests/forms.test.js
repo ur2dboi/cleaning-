@@ -26,6 +26,10 @@ test('backend rejects missing secret and invalid data; sheet formula protection 
  assert.equal(c.handleSubmission_({...lead,email:''}).code,'VALIDATION');
  assert.equal(c.cell_('=IMPORTXML("bad")'), '\'=IMPORTXML("bad")');
  assert.match(c.scope_({packageOrStage:'Deep Clean',frequency:'Weekly',scopeDetails:{Rooms:['Kitchen','Bath']}}),/Deep Clean.*Weekly.*Kitchen, Bath/);
+ const src=fs.readFileSync('google-apps-script.js','utf8');
+ assert.match(src,/action === 'notifyRecipient'/);
+ assert.match(src,/Recipient Notification Sent/);
+ assert.match(src,/hmac_\(cfg\.secret, 'notifyRecipient:/);
 });
 test('frontend has no direct provider calls or visible provider names',()=>{
  const service=fs.readFileSync('src/services/formSubmission.ts','utf8');assert.ok(!service.includes('no-cors'));assert.ok(service.includes("fetch('/api/lead'"));

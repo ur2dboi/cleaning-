@@ -8,7 +8,9 @@ var TZ = 'America/Toronto';
 var HEADERS = ['Timestamp', 'Reference ID', 'Form Type', 'Service Category', 'Customer Name',
   'Company', 'Email', 'Phone', 'Property Address', 'City', 'Preferred Date', 'Preferred Time',
   'Scope / Specifications', 'Client Notes', 'Photos Attached', 'Status', 'Package / Stage',
-  'Frequency', 'Photo Names', 'Owner Notification Sent', 'Customer Receipt Sent', 'Last Error', 'Payload Fingerprint'];
+  'Frequency', 'Photo Names', 'Owner Notification Sent', 'Customer Receipt Sent',
+  'Recipient Name', 'Recipient Email', 'Gift Amount', 'Recipient Notification Sent',
+  'Last Error', 'Payload Fingerprint'];
 function settings_() {
   var p = PropertiesService.getScriptProperties();
   return { secret: p.getProperty('LEAD_SECRET'),
@@ -18,9 +20,90 @@ function settings_() {
 function json_(data) {
   return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
 }
-function doGet() {
+function hmac_(secret, message) {
+  var bytes = Utilities.computeHmacSha256Signature(Utilities.newBlob(message).getBytes(), secret, Utilities.Charset.UTF_8);
+  return bytes.map(function(b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');
+}
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if (p.action === 'notifyRecipient') return notifyRecipient_(p);
   // Health only: no public test-email, diagnostic or write endpoints.
   return json_({ ok: true, service: 'Jitto Cleaning', version: 'verified-forms-v2' });
+}
+// One-time, token-guarded trigger included in the owner's gift card email.
+// The owner clicks it after payment is confirmed; only then is the recipient emailed.
+function notifyRecipient_(p) {
+  function page(msg, ok) {
+    return ContentService.createTextOutput(
+      '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>Jitto Gift Card Notification</title></head>' +
+      '<body style="font-family:system-ui,sans-serif;max-width:480px;margin:64px auto;padding:0 24px;color:#0f172a">' +
+      '<div style="border:1px solid #e2e8f0;border-radius:16px;padding:32px">' +
+      '<div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#012d6c">Jitto Cleaning Services</div>' +
+      '<p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:' + (ok ? '#0f766e' : '#b91c1c') + ';font-weight:600">' + msg + '</p>' +
+      '<p style="margin:16px 0 0;font-size:13px;color:#64748b">You can close this tab.</p>' +
+      '</div></body></html>'
+    ).setMimeType(ContentService.MimeType.HTML);
+  }
+  var cfg = settings_();
+  var ref = String(p.ref || '');
+  var token = String(p.token || '');
+  if (!cfg.secret || !/^[A-Za-z0-9-]{8,80}$/.test(ref) || !token || token !== hmac_(cfg.secret, 'notifyRecipient:' + ref)) {
+    return page('This link is invalid or has expired.', false);
+  }
+  var lock = LockService.getScriptLock();
+  var locked = false;
+  try {
+    locked = lock.tryLock(20000);
+    if (!locked) return page('The service is busy. Please try this link again in a minute.', false);
+    var target = sheet_(cfg.sheetId), sh = target.sheet, h = target.headers;
+    var refCol = h.indexOf('Reference ID') + 1;
+    var row = 0;
+    if (sh.getLastRow() > 1) {
+      var match = sh.getRange(2, refCol, sh.getLastRow() - 1, 1).createTextFinder(ref).matchEntireCell(true).findNext();
+      if (match) row = match.getRow();
+    }
+    if (!row) return page('Reference ' + ref + ' was not found.', false);
+    var vals = sh.getRange(row, 1, 1, h.length).getValues()[0];
+    function col(key) { var i = h.indexOf(key); return i < 0 ? '' : String(vals[i] === null ? '' : vals[i]).trim(); }
+    if (col('Recipient Notification Sent')) {
+      return page('The recipient was already notified for ' + ref + '. No action is needed.', true);
+    }
+    if (col('Form Type') !== 'Gift Card Order') return page('This link is only for gift card orders.', false);
+    var recipient = col('Recipient Email');
+    if (!emailValid_(recipient)) return page('No valid recipient email is stored for ' + ref + '.', false);
+    var buyer = (col('Customer Name') || 'A Jitto client').replace(/[\r\n]+/g, ' ');
+    var recipientName = (col('Recipient Name') || 'there').replace(/[\r\n]+/g, ' ');
+    var amount = col('Gift Amount');
+    var message = col('Client Notes');
+    var sendDate = col('Preferred Date');
+    var subject = 'A gift card from ' + buyer + ' — Jitto Cleaning Services [' + ref + ']';
+    var body = 'Hello ' + recipientName + ',\n\n' +
+      buyer + ' has gifted you ' + (amount ? amount + ' toward a Jitto Cleaning gift card.' : 'a Jitto Cleaning gift card.') + '\n';
+    if (message) body += '\nPersonal message from ' + buyer + ':\n"' + message + '"\n';
+    body += '\nGift cards apply toward any Jitto cleaning service and do not expire.' +
+      (sendDate ? '\nRequested gift date: ' + sendDate + '.' : '') +
+      '\n\nJitto will contact you to introduce the gift and schedule your walkthrough. Simply reply to this email or call (249) 800-0127 or (437) 447-5020.\n\n' +
+      'Reference: ' + ref + '\nJitto Cleaning Services\nhttps://www.jittogroups.ca';
+    try {
+      MailApp.sendEmail({ to: recipient, replyTo: cfg.owner, name: 'Jitto Cleaning Services', subject: subject, body: body });
+      sh.getRange(row, h.indexOf('Recipient Notification Sent') + 1).setValue(new Date().toISOString());
+      SpreadsheetApp.flush();
+    } catch (err) {
+      var errCol = h.indexOf('Last Error');
+      if (errCol > 0) {
+        var prev = String(vals[errCol] || '');
+        sh.getRange(row, errCol + 1).setValue((prev ? prev + ' | ' : '') + 'Recipient: ' + err.message);
+        SpreadsheetApp.flush();
+      }
+      return page('Sending to the recipient failed (' + err.message + '). Please try this link again.', false);
+    }
+    return page('Gift card notification sent to ' + recipient + ' for ' + ref + '.', true);
+  } catch (err) {
+    return page('Unexpected error: ' + err.message, false);
+  } finally {
+    if (locked) lock.releaseLock();
+  }
 }
 function doPost(e) {
   var data;
@@ -117,7 +200,12 @@ function handleSubmission_(d) {
       'Preferred Time': d.preferredTime || '', 'Scope / Specifications': details, 'Client Notes': d.notes || '',
       'Photos Attached': files.length, 'Status': 'Received — notifications pending',
       'Package / Stage': d.packageOrStage || '', 'Frequency': d.frequency || '', 'Photo Names': files.map(function(f) { return f.name; }).join(', '),
-      'Owner Notification Sent': '', 'Customer Receipt Sent': '', 'Last Error': '', 'Payload Fingerprint': fingerprint
+      'Owner Notification Sent': '', 'Customer Receipt Sent': '',
+      'Recipient Name': (d.scopeDetails || {})['Recipient Name'] || '',
+      'Recipient Email': (d.scopeDetails || {})['Recipient Email'] || '',
+      'Gift Amount': (d.scopeDetails || {})['Gift Amount'] || '',
+      'Recipient Notification Sent': '',
+      'Last Error': '', 'Payload Fingerprint': fingerprint
     };
     if (row) {
       var existing = sh.getRange(row, 1, 1, h.length).getValues()[0];
@@ -135,14 +223,21 @@ function handleSubmission_(d) {
     }
     saved = true;
     function update(key, value) { sh.getRange(row, h.indexOf(key) + 1).setValue(cell_(value)); SpreadsheetApp.flush(); }
-    var summary = HEADERS.filter(function(key) { return ['Status', 'Owner Notification Sent', 'Customer Receipt Sent', 'Last Error', 'Payload Fingerprint'].indexOf(key) < 0; })
+    var summary = HEADERS.filter(function(key) { return ['Status', 'Owner Notification Sent', 'Customer Receipt Sent', 'Recipient Notification Sent', 'Last Error', 'Payload Fingerprint'].indexOf(key) < 0; })
       .map(function(key) { return key + ': ' + record[key]; }).join('\n');
     var errors = [];
     if (!ownerSent) {
       try {
+        var ownerBody = summary;
+        if (record['Form Type'] === 'Gift Card Order' && emailValid_(record['Recipient Email'])) {
+          ownerBody += '\n\nGIFT CARD — RECIPIENT NOTIFICATION\n' +
+            'After payment is confirmed, open this one-time link to email the recipient their gift announcement:\n' +
+            ScriptApp.getService().getUrl() + '?action=notifyRecipient&ref=' + d.referenceId +
+            '&token=' + hmac_(cfg.secret, 'notifyRecipient:' + d.referenceId);
+        }
         MailApp.sendEmail({ to: cfg.owner, replyTo: d.email.trim(), name: 'Jitto Cleaning Services',
           subject: '[Jitto] New ' + record['Form Type'] + ' — ' + d.referenceId,
-          body: summary, attachments: blobs });
+          body: ownerBody, attachments: blobs });
         ownerSent = true;
         update('Owner Notification Sent', new Date().toISOString());
       } catch (err) { errors.push('Owner: ' + err.message); }
