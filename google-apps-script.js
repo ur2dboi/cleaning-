@@ -21,7 +21,8 @@ function json_(data) {
   return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
 }
 function hmac_(secret, message) {
-  var bytes = Utilities.computeHmacSha256Signature(Utilities.newBlob(message).getBytes(), secret, Utilities.Charset.UTF_8);
+  // String + charset overload only: (byte[], key, charset) is rejected by Apps Script.
+  var bytes = Utilities.computeHmacSha256Signature(message, secret, Utilities.Charset.UTF_8);
   return bytes.map(function(b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');
 }
 function doGet(e) {

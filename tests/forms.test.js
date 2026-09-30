@@ -20,7 +20,12 @@ test('customer receipt failure returned honestly after owner notification', asyn
  try { global.fetch=async()=>({ok:true,json:async()=>({ok:true,referenceId:lead.referenceId,sheetLogged:true,emailDelivered:true,customerReceiptSent:false})}); const r=res();await handler({method:'POST',headers:{},body:lead},r);assert.equal(r.code,200);assert.equal(r.data.customerReceiptSent,false); } finally {global.fetch=original;}
 });
 test('backend rejects missing secret and invalid data; sheet formula protection and scope mapping',()=>{
- const c={PropertiesService:{getScriptProperties:()=>({getProperty:()=>null})},ContentService:{MimeType:{JSON:'json'},createTextOutput:text=>({setMimeType:()=>JSON.parse(text)})}};
+ const c={PropertiesService:{getScriptProperties:()=>({getProperty:()=>null})},ContentService:{MimeType:{JSON:'json'},createTextOutput:text=>({setMimeType:()=>JSON.parse(text)})},
+  Utilities:{Charset:{UTF_8:'UTF-8'},computeHmacSha256Signature:(value,key,charset)=>{
+   // Mirrors the only accepted Apps Script overloads: (string, key, charset) or (byte[], key).
+   if (typeof value==='string' && key && charset==='UTF-8') return [0xab,0xcd];
+   throw new Error('The parameters don\'t match the method signature for Utilities.computeHmacSha256Signature.');
+  }}};
  vm.createContext(c);vm.runInContext(fs.readFileSync('google-apps-script.js','utf8'),c);
  assert.equal(c.doPost({postData:{contents:JSON.stringify(lead)}}).code,'UNAUTHORIZED');
  assert.equal(c.handleSubmission_({...lead,email:''}).code,'VALIDATION');
@@ -30,6 +35,7 @@ test('backend rejects missing secret and invalid data; sheet formula protection 
  assert.match(src,/action === 'notifyRecipient'/);
  assert.match(src,/Recipient Notification Sent/);
  assert.match(src,/hmac_\(cfg\.secret, 'notifyRecipient:/);
+ assert.match(c.hmac_('secret-key','notifyRecipient:JITTO-GC-test'),/^[0-9a-f]{4}$/);
 });
 test('frontend has no direct provider calls or visible provider names',()=>{
  const service=fs.readFileSync('src/services/formSubmission.ts','utf8');assert.ok(!service.includes('no-cors'));assert.ok(service.includes("fetch('/api/lead'"));
