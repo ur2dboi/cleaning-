@@ -13,7 +13,8 @@ import {
   Truck,
   Calculator, 
   Calendar,
-  CheckCircle2
+  CheckCircle2,
+  Gift
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -188,6 +189,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             </button>
 
             <button
+              onClick={() => handleNav('gift-cards')}
+              className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors ${
+                currentPage === 'gift-cards'
+                  ? 'text-slate-900 font-semibold bg-slate-100/70'
+                  : 'hover:text-slate-900 hover:bg-slate-50'
+              }`}
+            >
+              <Gift className="w-3.5 h-3.5 text-jitto-navy" />
+              <span>Gift Cards</span>
+            </button>
+
+            <button
               onClick={() => handleNav('quote')}
               className={`flex items-center gap-1 px-3 py-2 rounded-lg transition-colors ${
                 currentPage === 'quote' 
@@ -356,6 +369,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               className="w-full text-left px-3 py-2.5 min-h-[44px] flex items-center rounded-lg hover:bg-slate-50 text-slate-800"
             >
               About Us
+            </button>
+
+            <button
+              onClick={() => handleNav('gift-cards')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[44px] rounded-lg ${
+                currentPage === 'gift-cards' ? 'bg-slate-100 font-semibold text-slate-900' : 'hover:bg-slate-50 text-slate-800'
+              }`}
+            >
+              <Gift className="w-4 h-4 text-jitto-navy" />
+              <span>Gift Cards</span>
             </button>
 
             <button
