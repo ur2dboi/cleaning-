@@ -58,7 +58,7 @@ export const RESIDENTIAL_DETAILS = {
         "Scrubbing and sanitizing toilets, tubs, showers, and mirrors",
         "Vacuuming carpets, rugs, and damp-mopping all hard floors",
         "Emptying all trash bins and replacing liners",
-        "Neatening beds and living spaces"
+        "Making beds (linens changed on request) and tidying living spaces"
       ]
     },
     {

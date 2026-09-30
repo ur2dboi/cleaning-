@@ -73,7 +73,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 HOUSEKEEPING EXPERTISE MEETS REAL ESTATE EXPERIENCE
               </span>
               <p className="text-xs text-slate-400 leading-relaxed pr-6">
-                Jitto was built on one simple idea: cleaning should be done right the first time, every time. Founded by a professional housekeeper with over 16 years in private homes and an engineer and real estate investor who knows what properties need, we serve residences, businesses, and construction sites across Barrie and Simcoe County.
+                Jitto was built on one simple idea: cleaning should be done right the first time, every time. Founded by a professional housekeeper with over 16 years in private homes and an engineer and real estate investor who knows what properties need. We serve residences, businesses, and construction sites across Barrie and Simcoe County.
               </p>
             </div>
 
