@@ -78,7 +78,7 @@ function fingerprint_(d) {
   return hash.map(function(b) { return ('0' + ((b + 256) % 256).toString(16)).slice(-2); }).join('');
 }
 function handleSubmission_(d) {
-  if (!d || ['Quotation Request', 'Booking Reservation', 'Contact Message'].indexOf(d.formType) < 0 ||
+  if (!d || ['Quotation Request', 'Booking Reservation', 'Contact Message', 'Gift Card Order'].indexOf(d.formType) < 0 ||
       typeof d.referenceId !== 'string' || !/^[A-Za-z0-9-]{8,80}$/.test(d.referenceId) ||
       typeof d.fullName !== 'string' || !d.fullName.trim() || !emailValid_(d.email) ||
       typeof d.phone !== 'string' || !d.phone.trim()) return { ok: false, code: 'VALIDATION' };

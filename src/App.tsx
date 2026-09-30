@@ -13,6 +13,7 @@ import { QuotationPage } from './pages/QuotationPage';
 import { BookingPage } from './pages/BookingPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
+import { GiftCardPage } from './pages/GiftCardPage';
 import { COMPANY_INFO } from './data/content';
 import { Phone, Calculator, ArrowUp } from 'lucide-react';
 
@@ -26,7 +27,7 @@ export function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#/', '').replace('#', '').toLowerCase();
-      if (['home', 'services', 'residential', 'commercial', 'post-construction', 'junk-removal', 'quote', 'booking', 'about', 'contact'].includes(hash)) {
+      if (['home', 'services', 'residential', 'commercial', 'post-construction', 'junk-removal', 'quote', 'booking', 'about', 'contact', 'gift-cards'].includes(hash)) {
         setCurrentPage(hash as PageRoute);
       }
     };
@@ -139,8 +140,14 @@ export function App() {
         )}
 
         {currentPage === 'contact' && (
-          <ContactPage 
-            onNavigate={navigateTo} 
+          <ContactPage
+            onNavigate={navigateTo}
+          />
+        )}
+
+        {currentPage === 'gift-cards' && (
+          <GiftCardPage
+            onNavigate={navigateTo}
           />
         )}
       </main>

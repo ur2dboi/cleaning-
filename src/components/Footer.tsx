@@ -143,6 +143,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Contact Us
                 </button>
               </li>
+              <li>
+                <button onClick={() => handleNav('gift-cards')} className="hover:text-white transition-colors">
+                  Gift Cards
+                </button>
+              </li>
             </ul>
           </div>
 

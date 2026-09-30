@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import handler, { validateLead } from '../api/lead.js';
 const lead = { formType: 'Contact Message', referenceId: 'JITTO-MSG-test123', fullName: 'Jane', email: 'jane@example.com', phone: '0123456789' };
 const res = () => ({ headers: {}, setHeader(k,v) { this.headers[k]=v; }, status(v) { this.code=v; return this; }, json(v) { this.data=v; return this; } });
-test('all three forms validated', () => { for (const formType of ['Contact Message','Booking Reservation','Quotation Request']) assert.equal(validateLead({...lead,formType}),null); });
+test('all forms validated', () => { for (const formType of ['Contact Message','Booking Reservation','Quotation Request','Gift Card Order']) assert.equal(validateLead({...lead,formType}),null); });
 test('missing email and oversized photos rejected', () => { assert.ok(validateLead({...lead,email:''})); assert.ok(validateLead({...lead,attachments:[{name:'a.png',mimeType:'image/png',base64:Buffer.alloc(512001).toString('base64')}]})); });
 test('no configuration cannot simulate success', async () => { delete process.env.APPSCRIPT_URL; delete process.env.APPSCRIPT_SECRET; const r=res(); await handler({method:'POST',headers:{},body:lead},r); assert.equal(r.code,503); assert.equal(r.data.ok,false); });
 test('unverified and partial owner failures are not accepted', async () => {
@@ -29,5 +29,5 @@ test('backend rejects missing secret and invalid data; sheet formula protection 
 });
 test('frontend has no direct provider calls or visible provider names',()=>{
  const service=fs.readFileSync('src/services/formSubmission.ts','utf8');assert.ok(!service.includes('no-cors'));assert.ok(service.includes("fetch('/api/lead'"));
- for(const n of ['Booking','Contact','Quotation']){const s=fs.readFileSync(`src/pages/${n}Page.tsx`,'utf8');assert.ok(!/web3forms|apps.?script/i.test(s)); assert.ok(s.includes('role="alert"'));assert.ok(s.includes('customerReceiptSent'));}
+ for(const n of ['Booking','Contact','Quotation','GiftCard']){const s=fs.readFileSync(`src/pages/${n}Page.tsx`,'utf8');assert.ok(!/web3forms|apps.?script/i.test(s)); assert.ok(s.includes('role="alert"'));assert.ok(s.includes('customerReceiptSent'));}
 });

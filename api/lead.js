@@ -1,6 +1,6 @@
 /** Vercel serverless endpoint. Never exposes the webhook URL or shared secret. */
 export const config = { maxDuration: 60 };
-const FORM_TYPES = ['Quotation Request', 'Booking Reservation', 'Contact Message'];
+const FORM_TYPES = ['Quotation Request', 'Booking Reservation', 'Contact Message', 'Gift Card Order'];
 export function validateLead(data) {
   if (!data || typeof data !== 'object' || Array.isArray(data)) return 'Invalid request.';
   if (!FORM_TYPES.includes(data.formType)) return 'Please select a valid form.';

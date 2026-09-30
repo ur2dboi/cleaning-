@@ -15,7 +15,8 @@ import {
   Award,
   Layers,
   ChevronRight,
-  Star
+  Star,
+  Gift
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -690,6 +691,31 @@ export const HomePage: React.FC<HomePageProps> = ({
                 (437) 447-5020 (Client Line)
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. GIFT CARDS */}
+      <section className="py-10 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 sm:p-12 text-center relative overflow-hidden">
+          <div className="max-w-2xl mx-auto space-y-5">
+            <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-jitto-cyan/10 text-jitto-navy mx-auto">
+              <Gift className="w-6 h-6" />
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-slate-900">
+              Give the Gift of a Clean Home
+            </h2>
+            <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
+              Jitto gift cards make a thoughtful gift for birthdays, holidays, new homeowners, and busy families.
+            </p>
+
+            <button
+              onClick={() => onNavigate('gift-cards')}
+              className="inline-flex items-center justify-center gap-2 min-h-[44px] bg-jitto-navy hover:bg-jitto-navy-800 text-white font-bold px-7 py-3.5 rounded-xl transition-all text-sm shadow-lg"
+            >
+              <span>Buy a Gift Card</span>
+              <ArrowRight className="w-4 h-4 text-jitto-cyan" />
+            </button>
           </div>
         </div>
       </section>

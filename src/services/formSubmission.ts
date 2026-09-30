@@ -1,7 +1,7 @@
 /** Verified, same-origin form submission. Provider configuration stays on the server. */
 export interface LeadAttachment { name: string; mimeType: string; base64: string }
 export interface LeadSubmissionPayload {
-  formType: 'Quotation Request' | 'Booking Reservation' | 'Contact Message';
+  formType: 'Quotation Request' | 'Booking Reservation' | 'Contact Message' | 'Gift Card Order';
   referenceId: string;
   serviceCategory?: string;
   fullName: string;

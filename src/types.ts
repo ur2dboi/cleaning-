@@ -1,5 +1,5 @@
 export type ServiceCategory = 'residential' | 'commercial' | 'post-construction' | 'junk-removal';
-export type PageRoute = 'home' | 'services' | 'residential' | 'commercial' | 'post-construction' | 'junk-removal' | 'quote' | 'booking' | 'about' | 'contact';
+export type PageRoute = 'home' | 'services' | 'residential' | 'commercial' | 'post-construction' | 'junk-removal' | 'quote' | 'booking' | 'about' | 'contact' | 'gift-cards';
 
 export interface Testimonial {
   id: string;
