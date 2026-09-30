@@ -178,7 +178,12 @@ export const submitToAppScript = async (
         'Content-Type': 'text/plain;charset=utf-8',
       },
       body: JSON.stringify({
+        action: 'inquiry',
         ...payload,
+        name: payload.fullName,
+        contactNumber: payload.phone,
+        date: payload.preferredDate,
+        time: payload.preferredTime,
         submittedAt: new Date().toISOString(),
       }),
     });
