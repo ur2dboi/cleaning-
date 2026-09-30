@@ -125,35 +125,11 @@ git push -u origin main
 
 ---
 
-## ⚡ Form Integrations (Web3Forms & Google Apps Script)
+## Form submission and notifications
 
-All 3 forms (**Quotation Scope Request**, **Booking Slot Reservation**, and **Contact Inquiry**) are connected to a dual-dispatch system:
-1. **Web3Forms**: Forwards inquiries instantly to your email inbox.
-2. **Google Apps Script**: Appends new leads as organized rows into a Google Sheet and triggers alerts.
+All three forms use a verified same-origin `/api/lead` endpoint. Requests are stored in Google Sheets before notification emails are attempted. No simulated successes or browser-direct provider calls are used.
 
-### 1. Web3Forms Setup (Email Dispatch)
-1. Go to [https://web3forms.com](https://web3forms.com) and enter `info@jittogroups.ca` (or your email) to receive a free Access Key.
-2. In your `.env` file (or Vercel Environment Variables), set:
-   ```env
-   VITE_WEB3FORMS_ACCESS_KEY="your-access-key-here"
-   ```
-3. Whenever a visitor submits a quote, booking, or contact form, you will receive an email with all customer details, address, and scope requirements.
-
-### 2. Google Apps Script Setup (Google Sheets CRM)
-A complete script is included in `google-apps-script.js`:
-1. Open a new Google Sheet at [https://sheets.new](https://sheets.new) (e.g. name it "Jitto Cleaning Inquiries").
-2. In the top menu, click **Extensions > Apps Script**.
-3. Replace the template code with the code from `google-apps-script.js`.
-4. Click **Deploy > New deployment**.
-5. Select type: **Web app**.
-6. Set **Execute as**: *Me* and **Who has access**: *Anyone*.
-7. Authorize access and copy the generated Web App URL (`https://script.google.com/macros/s/.../exec`).
-8. Add this URL to your `.env` (or Vercel Environment Variables):
-   ```env
-   VITE_APPSCRIPT_URL="https://script.google.com/macros/s/.../exec"
-   ```
-
-*Note: The website features graceful fallback simulation mode—even before API keys are plugged in, forms generate unique reference IDs (`JITTO-PR-XXXXXX`, `JITTO-BK-XXXXXX`) and provide feedback.*
+**Deployment and troubleshooting:** see [FORM-SETUP.md](FORM-SETUP.md). Both the updated website and the new Apps Script version must be deployed. The browser receives only a reference number and confirmation status.
 
 ---
 

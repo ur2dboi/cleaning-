@@ -33,11 +33,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const [submissionResult, setSubmissionResult] = useState<SubmissionResponse | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
+  const [submissionError, setSubmissionError] = useState('');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setSubmissionError('');
     setIsSubmitting(true);
 
-    const refId = `JITTO-MSG-${Math.floor(100000 + Math.random() * 900000)}`;
+    const refId = messageRefId || `JITTO-MSG-${crypto.randomUUID()}`;
     setMessageRefId(refId);
 
     try {
@@ -55,11 +59,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
       });
 
       setSubmissionResult(result);
+      setSubmitted(true);
+
     } catch (err) {
-      console.error('Contact submission error:', err);
+      setSubmissionError(err instanceof Error ? err.message : 'Your request could not be confirmed. Please try again or call us.');
     } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
     }
   };
 
@@ -199,26 +204,28 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   Ref #{messageRefId}
                 </span>
                 <h4 className="font-serif font-bold text-lg text-slate-900 mb-1">Message Delivered</h4>
+                <p className="text-xs text-slate-600 my-4" role="status">{submissionResult?.customerReceiptSent ? "A confirmation email has been sent. Please check your inbox and spam folder." : "Your request was received, but the confirmation email could not be sent. Please keep your reference number and contact us if needed."}</p>
                 <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4">
                   Thank you for reaching out, <strong>{formName}</strong>. Our leadership team has received your message and will review and reply within 2 hours.
                 </p>
 
-                {/* Integration Status Badges */}
+                <p className="text-xs text-slate-600 my-4" role="status">{submissionResult?.customerReceiptSent ? "A confirmation email has been sent. Please check your inbox and spam folder." : "Your request was received, but the confirmation email could not be sent. Please keep your reference number and contact us if needed."}</p>
+            {/* Confirmation Badges */}
                 <div className="flex flex-wrap justify-center items-center gap-2 mb-6">
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium text-[11px]">
                     <MailCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Web3Forms: {submissionResult?.web3Forms.simulated ? 'Active (Demo Simulation)' : 'Dispatched to Inbox'}</span>
+                    <span>Inquiry Logged & Transmitted</span>
                   </div>
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 font-medium text-[11px]">
-                    <Database className="w-3.5 h-3.5 text-blue-600" />
-                    <span>Google Sheets: {submissionResult?.appScript.simulated ? 'Active (Demo Simulation)' : 'Appended to Sheets'}</span>
+                    <Clock className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Response Expected Within 2 Hours</span>
                   </div>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => {
-                    setSubmitted(false);
+                    setSubmitted(false); setMessageRefId(''); setSubmissionError('');
                     setFormName('');
                     setFormEmail('');
                     setFormPhone('');
@@ -231,7 +238,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onChange={() => setMessageRefId('')} onSubmit={handleSubmit} className="space-y-4">
+              {submissionError && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">{submissionError}</p>}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-medium text-slate-600 mb-1">Full Name *</label>
@@ -306,7 +314,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
                         <Loader2 className="w-3.5 h-3.5 animate-spin text-jitto-cyan" />
-                        <span>Dispatching to Apps Script & Web3Forms...</span>
+                        <span>Sending Message...</span>
                       </span>
                     ) : (
                       <>
@@ -316,7 +324,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     )}
                   </button>
                   <p className="text-center text-[10px] text-slate-400 mt-2">
-                    Connected to Web3Forms inbox relay and Google Apps Script CRM webhook.
+                    Your inquiry is received directly by our operations team.
                   </p>
                 </div>
               </form>

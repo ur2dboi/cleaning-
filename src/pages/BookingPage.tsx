@@ -48,11 +48,15 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submissionResult, setSubmissionResult] = useState<SubmissionResponse | null>(null);
 
+  const [submissionError, setSubmissionError] = useState('');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setSubmissionError('');
     setIsSubmitting(true);
 
-    const generatedId = `JITTO-BK-${Math.floor(100000 + Math.random() * 900000)}`;
+    const generatedId = bookingId || `JITTO-BK-${crypto.randomUUID()}`;
     setBookingId(generatedId);
 
     try {
@@ -76,10 +80,6 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
       });
 
       setSubmissionResult(result);
-    } catch (err) {
-      console.error('Booking submission error:', err);
-    } finally {
-      setIsSubmitting(false);
       setIsBooked(true);
       window.scrollTo({ top: 80, behavior: 'smooth' });
 
@@ -89,6 +89,10 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
         origin: { y: 0.6 },
         colors: ['#012d6c', '#00c2cb', '#94a3b8']
       });
+    } catch (err) {
+      setSubmissionError(err instanceof Error ? err.message : 'Your request could not be confirmed. Please try again or call us.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -122,18 +126,19 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
             </div>
 
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed my-6">
-              Thank you, <strong>{fullName}</strong>. We have placed a reservation hold for <strong>{bookingDate}</strong> ({timeSlot}). A Jitto operations manager will contact you directly to confirm the walkthrough and dispatch your assigned crew.
+              Thank you, <strong>{fullName}</strong>. We have received your reservation request for <strong>{bookingDate}</strong> ({timeSlot}). A Jitto operations manager will contact you directly to confirm the walkthrough and dispatch your assigned crew.
             </p>
 
-            {/* Integration Status Badges */}
+            <p className="text-xs text-slate-600 my-4" role="status">{submissionResult?.customerReceiptSent ? "A confirmation email has been sent. Please check your inbox and spam folder." : "Your request was received, but the confirmation email could not be sent. Please keep your reference number and contact us if needed."}</p>
+            {/* Confirmation Badges */}
             <div className="flex flex-wrap items-center gap-2 mb-6">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium text-[11px]">
                 <MailCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Web3Forms: {submissionResult?.web3Forms.simulated ? 'Active (Demo Simulation)' : 'Dispatched to Inbox'}</span>
+                <span>Reservation Request Received</span>
               </div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 font-medium text-[11px]">
                 <Database className="w-3.5 h-3.5 text-blue-600" />
-                <span>Google Sheets: {submissionResult?.appScript.simulated ? 'Active (Demo Simulation)' : 'Appended to Sheets'}</span>
+                <span>Pending Schedule Review</span>
               </div>
             </div>
 
@@ -164,7 +169,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                 Return to Homepage
               </button>
               <button
-                onClick={() => setIsBooked(false)}
+                onClick={() => { setIsBooked(false); setBookingId(''); setSubmissionError(''); }}
                 className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2.5 px-5 rounded-xl transition-colors text-xs flex items-center justify-center gap-1.5"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -185,7 +190,8 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
           </div>
         ) : (
           <div className="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200/80 shadow-sm">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onChange={() => setBookingId('')} onSubmit={handleSubmit} className="space-y-6">
+              {submissionError && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">{submissionError}</p>}
 
               {/* Service Selection */}
               <div>
@@ -206,7 +212,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                         key={s.id}
                         type="button"
                         onClick={() => {
-                          setCategory(s.id as ServiceCategory);
+                          setCategory(s.id as ServiceCategory); setBookingId('');
                           if (s.id === 'residential') setPackageType('Regular Maintenance Clean');
                           if (s.id === 'commercial') setPackageType('After-Hours Commercial Clean');
                           if (s.id === 'post-construction') setPackageType('Handover Final Clean');
@@ -431,7 +437,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                   {isSubmitting ? (
                     <span className="flex items-center gap-2">
                       <Loader2 className="w-4 h-4 animate-spin text-jitto-cyan" />
-                      <span>Dispatching to Apps Script & Web3Forms...</span>
+                      <span>Confirming Your Reservation...</span>
                     </span>
                   ) : (
                     <>
@@ -441,7 +447,7 @@ export const BookingPage: React.FC<BookingPageProps> = ({ onNavigate }) => {
                   )}
                 </button>
                 <p className="text-center text-[11px] text-slate-400 mt-2">
-                  Connected to Web3Forms inbox relay and Google Apps Script CRM webhook.
+                  No commitment or payment required today. A team member will verify walkthrough details.
                 </p>
               </div>
 

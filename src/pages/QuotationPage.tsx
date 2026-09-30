@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { PageRoute, ServiceCategory } from '../types';
 import { COMPANY_INFO } from '../data/content';
-import { submitLeadForm, type SubmissionResponse } from '../services/formSubmission';
+import { submitLeadForm, prepareAttachments, MAX_PHOTO_BYTES, type SubmissionResponse } from '../services/formSubmission';
 import confetti from 'canvas-confetti';
 import { 
   Calculator, 
@@ -96,23 +96,30 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
     );
   };
 
-  // Simulated Photo Upload
+  const [photoFiles, setPhotoFiles] = useState<File[]>([]);
+
+  // Photos are sent as email attachments, not browser-local URLs.
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      const newUrls: string[] = [];
-      for (let i = 0; i < files.length; i++) {
-        newUrls.push(URL.createObjectURL(files[i]));
-      }
-      setUploadedPhotos(prev => [...prev, ...newUrls]);
+    const files = Array.from(e.target.files || []);
+    const next = [...photoFiles, ...files];
+    if (next.length > 3 || next.reduce((n, f) => n + f.size, 0) > MAX_PHOTO_BYTES || next.some(f => !['image/jpeg', 'image/png', 'image/webp'].includes(f.type))) {
+      setSubmissionError('Please select up to 3 JPG, PNG or WebP photos, no more than 500 KB combined.');
+      e.target.value = ''; return;
     }
+    setSubmissionError('');
+    setPhotoFiles(next);
+    setUploadedPhotos(prev => [...prev, ...files.map(f => URL.createObjectURL(f))]);
   };
+
+  const [submissionError, setSubmissionError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setSubmissionError('');
     setIsSubmitting(true);
 
-    const refNum = `JITTO-PR-${Math.floor(100000 + Math.random() * 900000)}`;
+    const refNum = quoteReference || `JITTO-PR-${crypto.randomUUID()}`;
     setQuoteReference(refNum);
 
     // Build specific scope details by category
@@ -156,14 +163,11 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
         preferredTime: selectedService === 'commercial' ? preferredHours : undefined,
         scopeDetails: scopeData,
         notes: clientNotes,
-        photoCount: uploadedPhotos.length,
+        photoCount: ['post-construction', 'junk-removal'].includes(selectedService) ? photoFiles.length : 0,
+        attachments: await prepareAttachments(['post-construction', 'junk-removal'].includes(selectedService) ? photoFiles : []),
       });
 
       setSubmissionResult(result);
-    } catch (err) {
-      console.error('Submission dispatch error:', err);
-    } finally {
-      setIsSubmitting(false);
       setIsSubmitted(true);
       window.scrollTo({ top: 80, behavior: 'smooth' });
 
@@ -173,6 +177,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
         origin: { y: 0.6 },
         colors: ['#012d6c', '#00c2cb', '#94a3b8']
       });
+    } catch (err) {
+      setSubmissionError(err instanceof Error ? err.message : 'Your request could not be confirmed. Please try again or call us.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -214,15 +222,16 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                 Our founders review each request personally. You will receive a comprehensive Scope of Work (SOW) and personalized proposal within <strong>2 hours</strong>.
               </p>
 
-              {/* Integration Status Badges */}
+              <p className="text-xs text-slate-600 my-4" role="status">{submissionResult?.customerReceiptSent ? "A confirmation email has been sent. Please check your inbox and spam folder." : "Your request was received, but the confirmation email could not be sent. Please keep your reference number and contact us if needed."}</p>
+              {/* Confirmation Badges */}
               <div className="flex flex-wrap items-center gap-2 pt-2">
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium text-[11px]">
                   <MailCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Web3Forms: {submissionResult?.web3Forms.simulated ? 'Active (Demo Simulation)' : 'Dispatched to Inbox'}</span>
+                  <span>Proposal Request Received</span>
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 font-medium text-[11px]">
                   <Database className="w-3.5 h-3.5 text-blue-600" />
-                  <span>Google Sheets: {submissionResult?.appScript.simulated ? 'Active (Demo Simulation)' : 'Appended to Sheets'}</span>
+                  <span>Scoped for Engineering Review</span>
                 </div>
               </div>
             </div>
@@ -302,7 +311,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
               </button>
 
               <button
-                onClick={() => setIsSubmitted(false)}
+                onClick={() => { setIsSubmitted(false); setQuoteReference(''); setSubmissionError(''); }}
                 className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-5 rounded-xl transition-colors text-xs flex items-center justify-center gap-1.5"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -328,7 +337,8 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
             
             {/* MAIN FORM */}
             <div className="lg:col-span-8 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onChange={() => setQuoteReference('')} onSubmit={handleSubmit} className="space-y-8">
+              {submissionError && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">{submissionError}</p>}
 
                 {/* STEP 1: SERVICE TYPE */}
                 <div>
@@ -349,7 +359,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                         <button
                           key={item.id}
                           type="button"
-                          onClick={() => setSelectedService(item.id as ServiceCategory)}
+                          onClick={() => { setSelectedService(item.id as ServiceCategory); setQuoteReference(''); setPhotoFiles([]); uploadedPhotos.forEach(url => URL.revokeObjectURL(url)); setUploadedPhotos([]); }}
                           className={`p-4 rounded-xl border text-left transition-all ${
                             active
                               ? 'border-jitto-navy bg-slate-50 ring-1 ring-jitto-navy'
@@ -714,7 +724,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                           <input
                             type="file"
                             multiple
-                            accept="image/*"
+                            accept="image/jpeg,image/png,image/webp"
                             id="photo-upload-input"
                             onChange={handlePhotoUpload}
                             className="hidden"
@@ -849,7 +859,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                           <input
                             type="file"
                             multiple
-                            accept="image/*"
+                            accept="image/jpeg,image/png,image/webp"
                             id="photo-upload-input-junk"
                             onChange={handlePhotoUpload}
                             className="hidden"
@@ -859,7 +869,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                             <span className="text-xs font-semibold text-jitto-navy hover:underline">
                               Snap or attach photos of items
                             </span>
-                            <span className="text-[10px] text-slate-400 mt-0.5">Allows our team to provide an exact upfront estimate</span>
+                            <span className="text-[10px] text-slate-400 mt-0.5">Up to 3 photos; 500 KB combined. Included with your request.</span>
                           </label>
                         </div>
 
@@ -938,6 +948,10 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                   </div>
 
                   <div className="mt-4">
+                    <label className="block text-xs font-medium text-slate-600 mb-1">Company / Organization (optional)</label>
+                    <input type="text" value={companyName} onChange={e => setCompanyName(e.target.value)} placeholder="Company name" className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+                  </div>
+                  <div className="mt-4">
                     <label className="block text-xs font-medium text-slate-600 mb-1">Property Address or Site Location</label>
                     <input
                       type="text"
@@ -970,7 +984,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
                         <Loader2 className="w-4 h-4 animate-spin text-jitto-cyan" />
-                        <span>Dispatching to Apps Script & Web3Forms...</span>
+                        <span>Generating Proposal Request...</span>
                       </span>
                     ) : (
                       <>
@@ -980,7 +994,7 @@ export const QuotationPage: React.FC<QuotationPageProps> = ({
                     )}
                   </button>
                   <p className="text-center text-[11px] text-slate-400 mt-2">
-                    Connected to Web3Forms inbox relay and Google Apps Script CRM webhook.
+                    Complimentary custom scope proposal. No obligation or payment required.
                   </p>
                 </div>
 

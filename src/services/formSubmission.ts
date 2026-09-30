@@ -1,10 +1,5 @@
-/**
- * Jitto Cleaning Services - Form Dispatch Service
- * Dual-integration supporting:
- * 1. Web3Forms (Instant email forwarding to inbox)
- * 2. Google Apps Script (Automated rows in Google Sheets & CRM triggers)
- */
-
+/** Verified, same-origin form submission. Provider configuration stays on the server. */
+export interface LeadAttachment { name: string; mimeType: string; base64: string }
 export interface LeadSubmissionPayload {
   formType: 'Quotation Request' | 'Booking Reservation' | 'Contact Message';
   referenceId: string;
@@ -19,209 +14,54 @@ export interface LeadSubmissionPayload {
   frequency?: string;
   preferredTime?: string;
   preferredDate?: string;
-  scopeDetails?: Record<string, any>;
+  scopeDetails?: Record<string, string | string[]>;
   notes?: string;
   photoCount?: number;
+  attachments?: LeadAttachment[];
 }
-
 export interface SubmissionResponse {
   success: boolean;
   referenceId: string;
-  web3Forms: {
-    attempted: boolean;
-    success: boolean;
-    simulated: boolean;
-    message?: string;
-  };
-  appScript: {
-    attempted: boolean;
-    success: boolean;
-    simulated: boolean;
-    message?: string;
-  };
-  timestamp: string;
+  stored: boolean;
+  ownerNotificationSent: boolean;
+  customerReceiptSent: boolean;
+  message?: string;
 }
-
-// Environment keys (with fallback to window / import.meta.env)
-export const getWeb3FormsKey = (): string => {
-  return (
-    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_WEB3FORMS_ACCESS_KEY) ||
-    ''
-  ).trim();
-};
-
-export const getAppScriptUrl = (): string => {
-  return (
-    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_APPSCRIPT_URL) ||
-    'https://script.google.com/macros/s/AKfycbylVKAZY55PocvW_XW0hEE6o7BK4MXZvhG4RQnFNK6TxID0QU0P5Jay-CjrXMetxiB9/exec'
-  ).trim();
-};
-
-/**
- * Format flat key-values for Web3Forms email body
- */
-const buildWeb3FormsBody = (payload: LeadSubmissionPayload, accessKey: string) => {
-  const scopeSummary = payload.scopeDetails
-    ? Object.entries(payload.scopeDetails)
-        .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`)
-        .join(' | ')
-    : 'N/A';
-
-  return {
-    access_key: accessKey,
-    subject: `[Jitto Cleaning] New ${payload.formType} - Ref #${payload.referenceId} (${payload.fullName})`,
-    from_name: 'Jitto Cleaning Web Portal',
-    replyto: payload.email,
-    'Reference ID': payload.referenceId,
-    'Form Type': payload.formType,
-    'Service Category': payload.serviceCategory || 'General',
-    'Customer Name': payload.fullName,
-    'Company / Organization': payload.companyName || 'N/A',
-    'Email Address': payload.email,
-    'Phone Number': payload.phone,
-    'Property Address': payload.address || 'N/A',
-    'City': payload.city || 'Barrie / Simcoe County',
-    'Service Frequency': payload.frequency || 'N/A',
-    'Preferred Date': payload.preferredDate || 'N/A',
-    'Preferred Time Window': payload.preferredTime || 'N/A',
-    'Scope Details': scopeSummary,
-    'Client Notes / Special Requests': payload.notes || 'None provided',
-    'Photos Attached': payload.photoCount ? `${payload.photoCount} files uploaded` : 'None',
-    'Submitted At': new Date().toLocaleString('en-CA', { timeZone: 'America/Toronto' }),
-  };
-};
-
-/**
- * Dispatch to Web3Forms API
- */
-export const submitToWeb3Forms = async (
-  payload: LeadSubmissionPayload
-): Promise<{ attempted: boolean; success: boolean; simulated: boolean; message?: string }> => {
-  const accessKey = getWeb3FormsKey();
-
-  if (!accessKey) {
-    console.info(
-      `[Web3Forms] VITE_WEB3FORMS_ACCESS_KEY is not configured. Simulating successful submission for Ref #${payload.referenceId}. To enable live email dispatch, add your key to .env or Vercel Environment Variables.`
-    );
-    return {
-      attempted: false,
-      success: true,
-      simulated: true,
-      message: 'Demo simulation mode (add VITE_WEB3FORMS_ACCESS_KEY for live email dispatch)',
-    };
+export const MAX_PHOTO_BYTES = 500 * 1024;
+export async function prepareAttachments(files: File[]): Promise<LeadAttachment[]> {
+  if (files.length > 3 || files.reduce((total, f) => total + f.size, 0) > MAX_PHOTO_BYTES) {
+    throw new Error('Please select up to 3 photos, no more than 500 KB combined.');
   }
-
-  try {
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(buildWeb3FormsBody(payload, accessKey)),
-    });
-
-    const data = await response.json();
-    if (response.ok && data.success) {
-      return {
-        attempted: true,
-        success: true,
-        simulated: false,
-        message: 'Dispatched to Web3Forms successfully',
-      };
-    } else {
-      console.warn('[Web3Forms Error]', data);
-      return {
-        attempted: true,
-        success: false,
-        simulated: false,
-        message: data.message || 'Web3Forms API rejected the request',
-      };
+  return Promise.all(files.map(file => new Promise<LeadAttachment>((resolve, reject) => {
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      reject(new Error('Please use JPG, PNG or WebP photos.')); return;
     }
-  } catch (err: any) {
-    console.error('[Web3Forms Network Exception]', err);
-    return {
-      attempted: true,
-      success: false,
-      simulated: false,
-      message: err.message || 'Network error submitting to Web3Forms',
-    };
-  }
-};
-
-/**
- * Dispatch to Google Apps Script Web App
- */
-export const submitToAppScript = async (
-  payload: LeadSubmissionPayload
-): Promise<{ attempted: boolean; success: boolean; simulated: boolean; message?: string }> => {
-  const scriptUrl = getAppScriptUrl();
-
-  if (!scriptUrl) {
-    console.info(
-      `[Google Apps Script] VITE_APPSCRIPT_URL is not configured. Simulating successful submission for Ref #${payload.referenceId}. To connect Google Sheets, deploy google-apps-script.js and set the URL in .env.`
-    );
-    return {
-      attempted: false,
-      success: true,
-      simulated: true,
-      message: 'Demo simulation mode (add VITE_APPSCRIPT_URL to save to Google Sheets)',
-    };
-  }
-
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('A photo could not be read. Please select it again.'));
+    reader.onload = () => resolve({ name: file.name, mimeType: file.type, base64: String(reader.result).split(',')[1] });
+    reader.readAsDataURL(file);
+  })));
+}
+export async function submitLeadForm(payload: LeadSubmissionPayload): Promise<SubmissionResponse> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 65000);
   try {
-    // Note: Google Apps Script Web Apps require no-cors mode in browser or standard form post
-    await fetch(scriptUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8',
-      },
-      body: JSON.stringify({
-        action: 'inquiry',
-        ...payload,
-        name: payload.fullName,
-        contactNumber: payload.phone,
-        date: payload.preferredDate,
-        time: payload.preferredTime,
-        submittedAt: new Date().toISOString(),
-      }),
+    const response = await fetch('/api/lead', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload), signal: controller.signal,
     });
-
-    return {
-      attempted: true,
-      success: true,
-      simulated: false,
-      message: 'Dispatched to Google Apps Script',
-    };
-  } catch (err: any) {
-    console.error('[Google Apps Script Exception]', err);
-    return {
-      attempted: true,
-      success: false,
-      simulated: false,
-      message: err.message || 'Network error submitting to Google Apps Script',
-    };
-  }
-};
-
-/**
- * Unified dispatch handler: submits in parallel to both platforms
- */
-export const submitLeadForm = async (
-  payload: LeadSubmissionPayload
-): Promise<SubmissionResponse> => {
-  // Execute both dispatches simultaneously
-  const [w3fResult, appScriptResult] = await Promise.all([
-    submitToWeb3Forms(payload),
-    submitToAppScript(payload),
-  ]);
-
-  return {
-    success: w3fResult.success || appScriptResult.success,
-    referenceId: payload.referenceId,
-    web3Forms: w3fResult,
-    appScript: appScriptResult,
-    timestamp: new Date().toISOString(),
-  };
-};
+    let data;
+    try { data = await response.json(); }
+    catch { throw new Error('We could not verify your request. Please retry or call us directly.'); }
+    if (!response.ok || data.ok !== true || !data.sheetLogged || !data.emailDelivered || data.referenceId !== payload.referenceId) {
+      throw new Error(data.message || 'Your request could not be confirmed. Please retry or call us directly.');
+    }
+    return { success: true, referenceId: data.referenceId, stored: data.sheetLogged,
+      ownerNotificationSent: data.emailDelivered, customerReceiptSent: data.customerReceiptSent === true };
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new Error('Confirmation is taking longer than expected. Your request may have been received. Retry to check it without sending a duplicate, or call us.');
+    }
+    throw error;
+  } finally { clearTimeout(timeout); }
+}
