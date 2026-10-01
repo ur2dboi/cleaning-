@@ -18,12 +18,11 @@ interface GiftCardPageProps {
   onNavigate: (page: PageRoute) => void;
 }
 
-// TODO: PLACEHOLDER — replace these three URLs with the real QuickBooks
-// payment links ($100 / $200 / $300) as soon as they are provided.
+// QuickBooks payment links by gift card amount.
 const PAYMENT_LINKS: Record<string, string> = {
-  '100': 'https://example.com/quickbooks-gift-card-100',
-  '200': 'https://example.com/quickbooks-gift-card-200',
-  '300': 'https://example.com/quickbooks-gift-card-300'
+  '100': 'https://connect.intuit.com/pay/Jitto/scs-v1-d8a8ba114c834677a65b79a20475c1ceb100a5fc455f4b3bbc490f536746c2d1ce04d501543b4d3f9874a12d80dafcb9-0?locale=EN_CA&cta=copylistmultilink',
+  '200': 'https://connect.intuit.com/pay/Jitto/scs-v1-8f9fafc02d8d4a97853da6c9d2cbabb514ac642903ea475ca5cbc79551c1a4046eca4f64030a4c519533d91faffd29c3-0?locale=EN_CA&cta=copylistmultilink',
+  '300': 'https://connect.intuit.com/pay/Jitto/scs-v1-080ab3083acb4475abef66262fc431dce465ef06f4104167b595ea6ed54179c9d8ec9177f6e644f9a90948b3b4dcb233-0?locale=EN_CA&cta=copylistmultilink'
 };
 
 const CLEANING_TYPES = [
