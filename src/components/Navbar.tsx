@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
+import { FacebookIcon } from './FacebookIcon';
 import { COMPANY_INFO } from '../data/content';
 import type { PageRoute } from '../types';
 import { 
@@ -72,6 +73,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             >
               <span>{COMPANY_INFO.phoneSecondary}</span>
               <span className="text-[10px] text-jitto-cyan font-mono">(Client Line)</span>
+            </a>
+            <a
+              href="https://www.facebook.com/JITTOCleaningServices"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Jitto Cleaning Services on Facebook"
+              className="text-slate-300 hover:text-jitto-cyan transition-colors flex items-center"
+            >
+              <FacebookIcon className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>

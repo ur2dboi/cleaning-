@@ -1,5 +1,6 @@
 import React from 'react';
 import { Logo } from './Logo';
+import { FacebookIcon } from './FacebookIcon';
 import { COMPANY_INFO } from '../data/content';
 import type { PageRoute } from '../types';
 import { 
@@ -105,6 +106,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <div className="flex items-center gap-2 text-slate-300">
                 <MapPin className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
                 <span>Barrie & Simcoe County, Ontario</span>
+              </div>
+              <div className="flex items-center gap-2 text-slate-300">
+                <FacebookIcon className="w-3.5 h-3.5 text-jitto-cyan shrink-0" />
+                <a
+                  href="https://www.facebook.com/JITTOCleaningServices"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-jitto-cyan font-medium"
+                >
+                  Facebook
+                </a>
+                <span className="text-slate-500 text-[11px] ml-0.5">(Follow us)</span>
               </div>
             </div>
           </div>
